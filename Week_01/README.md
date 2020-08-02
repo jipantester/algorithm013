@@ -152,13 +152,59 @@ public class SeqList implements List {
 ## 链表操作函数的复杂度
 | 函数 | 功能描述 | 时间复杂度 |
 |---|---|---|
-| prepend | O(1) |
-| append | O(1) |
-| <font color=#FFA500>lookup</font> | O(n) |
-| insert | O(1) |
-| delete | O(1) |
+| prepend | 在链表前端插入元素 | O(1) |
+| append | 在链表后端插入元素 | O(1) |
+| <font color=#FFA500>lookup</font> |查找| O(n) |
+| insert | 插入 | O(1) |
+| delete | 删除 | O(1) |
+| size |链表长度 | |
+| isEmpty | 是否为空 | |
 
 ## 链表的代码实现
+要设计单链表类，需要先设计结点类。一个结点类的成员变量有两个，一是结点的数据元素，另一个是表示下一个结点的next。
+
+结点类设计如下
+```java
+public class Node {
+    Object data;//结点的数据元素
+    Node next;//表示下一个结点的对象引用
+    //用于头结点的构造函数
+    Node(Node nextval){
+        next = nextval;
+    }
+    //用于其他结点的构造函数
+    Node(Object obj, Node nextval){
+        data = obj;
+        next = nextval;
+    }
+
+    public Object getData() {
+        return data;
+    }
+
+    public Node getNext() {
+        return next;
+    }
+
+    public void setData(Object data) {
+        this.data = data;
+    }
+
+    public void setNext(Node next) {
+        this.next = next;
+    }
+    //转换data为String类型
+    public String toString() {
+        return data.toString();
+    }
+}
+```
+单链表的成员变量需要三个：一是头指针，二是单链表中数据元素个数，三是表示单链表当前结点位置的成员变量。
+
+单链表类设计如下
+```java
+
+```
 
 ## leedcode题目
 
