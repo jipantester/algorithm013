@@ -1,23 +1,44 @@
 学习笔记
-- [数组](#数组)
-  - [数组的操作函数的复杂度](#数组的操作函数的复杂度)
-  - [数组的代码实现](#数组的代码实现)
-  - [顺序表的优缺点](#顺序表的优缺点)
-  - [leedCode题目(后续补充分析和其他题目)](#leedcode题目后续补充分析和其他题目)
-  - [顺序表在实际项目中的应用](#顺序表在实际项目中的应用)
-- [链表](#链表)
-  - [链表操作函数的复杂度](#链表操作函数的复杂度)
-  - [链表的代码实现](#链表的代码实现)
-  - [leedcode题目](#leedcode题目)
-  - [链表在实际项目中的应用](#链表在实际项目中的应用)
-- [数据类型](#数据类型)
-  - [操作函数的算法复杂度](#操作函数的算法复杂度)
-  - [代码实现](#代码实现)
-  - [Leedcode题目](#leedcode题目-1)
-  - [应用](#应用)
+- [1.数据结构&算法](#1数据结构算法)
+  - [1.2.数据结构](#12数据结构)
+  - [1.3.算法](#13算法)
+- [2.数组、链表、跳表](#2数组链表跳表)
+  - [2.1数组](#21数组)
+    - [2.1.1.数组的操作函数的复杂度](#211数组的操作函数的复杂度)
+    - [2.1.2.数组的代码实现](#212数组的代码实现)
+    - [2.1.3.顺序表的优缺点](#213顺序表的优缺点)
+  - [2.2.链表](#22链表)
+    - [2.2.1.链表操作函数的复杂度](#221链表操作函数的复杂度)
+    - [2.2.2.链表的代码实现](#222链表的代码实现)
+  - [leedCode题目](#leedcode题目)
+  - [参考链接](#参考链接)
+  - [重点学习20个最常用的最基础的数据结构和算法](#重点学习20个最常用的最基础的数据结构和算法)
 - [参考](#参考)
+# 1.数据结构&算法
+## 1.2.数据结构
++ 一维：
+  + 基础：数组array(string),链表linked list
+  + 高级：栈stack，队列queue，双端队列deque，集合set，映射map（hash or map），etc
++ 二维：
+  + 基础：树tree，图graph
+  + 高级：二叉搜索树binary search tree（red-black tree，AVL），堆heap，并查集disjoint set，字典树Trie，etc
++ 特殊：
+  + 位运算 Bitwise，布隆过滤器 BloomFilter
+  + LRU Cache
+## 1.3.算法
++ if-else，switch --> branch
++ for,while loop --> Iteration
++ 递归 Recursion（Divide & Conquer,Backtrace)
++ 搜索 Search:深度优先搜索 Depth first search，广度优先搜索Br eadth first search，A*，etc
++ 动态规划 Dynamic Programming
++ 二分查找 Binary Search
++ 贪心 Greedy
++ 数学 Math，几何 Geometry
 
-# 数组
+# 2.数组、链表、跳表
+
+## 2.1数组
+
 **<font color = #FF000>数组</font>**(Array)是一种**线性表**数据结构。使用一组**连续的内存空间**，来存储一组具有**相同类型**的数据。[<sup>1</sup>](#refer-1)
 
 **<font color = #1E90FF>线性表</font>**(Linear List)就是数据排成像一条线一样的结构。每个线性表上的数据最多只有两个方向。除了数组，链表、队列、栈也是线性表结构。
@@ -27,7 +48,7 @@
 **连续的内存空间和相同的数据类型：**
 ![avatar](https://img2018.cnblogs.com/blog/1468033/201905/1468033-20190527230650537-1957403462.png)
 
-## 数组的操作函数的复杂度
+### 2.1.1.数组的操作函数的复杂度
 | 函数 | 功能描述 | 时间复杂度 |
 |---|---|---|
 | prepend | 在数组前端插入元素 | O(1) |
@@ -37,7 +58,8 @@
 | <font color=#FFA500>delete</font> | 删除 | O(n) |
 | size | 求元素个数 | |
 | isEmpty | 判空 | |
-## 数组的代码实现
+
+### 2.1.2.数组的代码实现
 先定义一个线性表抽象数据类型的Java接口[<sup>2</sup>](#refer-2)，如下
 ```java
 public interface List {
@@ -135,32 +157,35 @@ public class SeqList implements List {
     }
 }
 ```
-## 顺序表的优缺点
+### 2.1.3.顺序表的优缺点
 优点
 + 取数据元素操作的时间效率较高(即时间复杂度低)，内存空间利用效率高
 
 缺点
 + 插入和删除操作时间复杂度高
-## leedCode题目(后续补充分析和其他题目)
-+ [26.删除数组中的重复项](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array/)
-+ 
-## 顺序表在实际项目中的应用
 
-# 链表
+
+
+## 2.2.链表
 
 **<font color=#FF0000>链表</font>**(Linked List)整体看上去就像一条链子，每一个元素都有两个属性，即**该元素的值item**和**下一个元素next**。
-## 链表操作函数的复杂度
+### 2.2.1.链表操作函数的复杂度
 | 函数 | 功能描述 | 时间复杂度 |
 |---|---|---|
 | prepend | 在链表前端插入元素 | O(1) |
 | append | 在链表后端插入元素 | O(1) |
 | <font color=#FFA500>lookup</font> |查找| O(n) |
-| insert | 插入 | O(1) |
-| delete | 删除 | O(1) |
+| insert | 在链表的某个位置插入元素 | O(1) |
+| getElement| 获取链表对应位置的元素||
+| indexOf | 获取某元素在链表中的索引||
+| update | 修改链表中某个位置上的元素的值||
+| removeAt | 移除链表中某位置上的元素||
+| remove | 移除链表中的某元素| O(1) |
 | size |链表长度 | |
 | isEmpty | 是否为空 | |
+| toString | 以字符串的形式展示链表内的所有元素||
 
-## 链表的代码实现
+### 2.2.2.链表的代码实现
 要设计单链表类，需要先设计结点类。一个结点类的成员变量有两个，一是结点的数据元素，另一个是表示下一个结点的next。
 
 结点类设计如下
@@ -206,24 +231,26 @@ public class Node {
 
 ```
 
-## leedcode题目
+## leedCode题目
++ [26.删除数组中的重复项](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array/)
++ 
 
-## 链表在实际项目中的应用
 
 
-# 数据类型
-## 操作函数的算法复杂度
-## 代码实现
-## Leedcode题目
-## 应用
-
+## 参考链接
++ [Java 源码分析（ArrayList）](http://developer.classpath.org/doc/java/util/ArrayList-source.html)
++ [Linked List 的标准实现代码](https://www.geeksforgeeks.org/implementing-a-linked-list-in-java-using-class/)
++ [Linked List 示例代码](http://www.cs.cmu.edu/~adamchik/15-121/lectures/Linked%20Lists/code/LinkedList.java) 
++ [Java 源码分析（LinkedList）](http://developer.classpath.org/doc/java/util/LinkedList-source.html)
++ LRU Cache - Linked list： [LRU 缓存机制](https://leetcode-cn.com/problems/lru-cache/)
++ Redis - Skip List：[跳跃表、为啥 Redis 使用跳表（Skip List）而不是使用 Red-Black？](https://www.zhihu.com/question/20202931)
 
  
 
 
 
 
-重点学习20个最常用的最基础的数据结构和算法
+## 重点学习20个最常用的最基础的数据结构和算法
 + 10个数据结构: 数组，链表，栈，队列，散列表，二叉树，堆，跳表，图，Trie树
 + 10个算法： 递归，排序，二分查找，搜索，哈希算法，贪心算法，分治算法，回溯算法，动态规划，字符串匹配算法
 # 参考
