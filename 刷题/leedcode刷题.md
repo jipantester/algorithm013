@@ -1,11 +1,12 @@
-- [Day1 70、爬楼梯](#day1-70爬楼梯)
-- [Day11 412、Fizz Buzz](#day11-412fizz-buzz)
-- [Day12 258、各位相加](#day12-258各位相加)
-- [Day13 94、二叉树的中序遍历](#day13-94二叉树的中序遍历)
+- [Day1: 70.爬楼梯](#day1-70爬楼梯)
+- [Day11: 412.Fizz Buzz](#day11-412fizz-buzz)
+- [Day12: 258.各位相加](#day12-258各位相加)
+- [Day13: 94.二叉树的中序遍历](#day13-94二叉树的中序遍历)
+- [Day14: 590.N叉树的后序遍历](#day14-590n叉树的后序遍历)
 
 
 
-## Day1 [70、爬楼梯](https://leetcode-cn.com/problems/climbing-stairs/)
+## Day1: [70.爬楼梯](https://leetcode-cn.com/problems/climbing-stairs/)
 
 + 第一种解法：递归
 ```java
@@ -77,7 +78,7 @@ public int climbStairs3(int n){
 **复杂度**：时间复杂度：O(logn)，pow方法将会用去O(logn) 的时间。
 空间复杂度：O(1)。
 
-## Day11 [412、Fizz Buzz](https://leetcode-cn.com/problems/fizz-buzz/)
+## Day11: [412.Fizz Buzz](https://leetcode-cn.com/problems/fizz-buzz/)
 + 第一种解法：遍历
   + 思路：
   + 1、初始化一个答案列表ans
@@ -158,7 +159,7 @@ public List<String> fizzBuzz3(int n){
 ```
 **复杂度**：时间复杂度O(n) 空间复杂度O(1)
 
-## Day12 [258、各位相加](https://leetcode-cn.com/problems/add-digits/)
+## Day12: [258.各位相加](https://leetcode-cn.com/problems/add-digits/)
 + 第一种解法：递归
   + 若num小于10，可直接返回
   + 创建一个辅助空间next，通过将num mod 10 得到个位上的数，num除10得到十位上的数，加和后赋值给next，
@@ -199,7 +200,7 @@ public int addDigit3(int num){
 }
 ```
 
-## Day13 [94、二叉树的中序遍历](https://leetcode-cn.com/problems/binary-tree-inorder-traversal/)
+## Day13: [94.二叉树的中序遍历](https://leetcode-cn.com/problems/binary-tree-inorder-traversal/)
 
 + 第一种解法：递归
   + [递归的模板](https://shimo.im/docs/EICAr9lRPUIPHxsH/read)
@@ -263,3 +264,45 @@ public List<Integer> inorderTraversal2(TreeNode root){
 + 第三种解法：莫里斯遍历
   
   先了解下 [线索二叉树](https://baike.baidu.com/item/%E7%BA%BF%E7%B4%A2%E4%BA%8C%E5%8F%89%E6%A0%91/10810037?fr=aladdin) 和 [莫里斯解法](https://stackoverflow.com/questions/5502916/explain-morris-inorder-tree-traversal-without-using-stacks-or-recursion) 后再学习此解法
+
+## Day14: [590.N叉树的后序遍历](https://leetcode-cn.com/problems/n-ary-tree-postorder-traversal/)
+
++ 第一种解法：递归
+```java
+public List<Integer> postorder(Node root){
+    List<Integer> ans = new ArrayList<>();
+    if (root == null) return ans;
+    helper(root,ans);
+    return ans;
+}
+
+public void helper(Node root , List<Integer> ans){
+    if (root.children == null){
+        ans.add(root.val);
+        return;
+    }
+    for (Node n : root.children){
+        helper(root, ans);
+    }
+    ans.add(root.val);
+}
+```
++ 第二种解法：迭代
+```java
+public List<Integer> postorder(Node root){
+    List<Integer> ans = new ArrayList<>();
+    if (root == null) return ans;
+    LinkedList<Node> stack = new LinkedList<>();
+    stack.add(root);
+    while(!stack.isEmpty()){
+        Node node = stack.pollLast();
+        ans.add(node.val);
+        if (root.children == null){
+            continue;
+        }
+        stack.addAll(root.children);
+    }
+    Collections.reverse(ans);
+    return ans;
+}
+```
