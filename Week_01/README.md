@@ -10,8 +10,31 @@
   - [2.2.链表](#22链表)
     - [2.2.1.链表操作函数的复杂度](#221链表操作函数的复杂度)
     - [2.2.2.链表的代码实现](#222链表的代码实现)
-  - [leedCode题目](#leedcode题目)
-  - [参考链接](#参考链接)
+  - [2.3.跳表](#23跳表)
+  - [2.4.参考链接](#24参考链接)
+  - [2.5.实战题目](#25实战题目)
+    - [2.5.1.leedcode题目：11.盛水最多的容器](#251leedcode题目11盛水最多的容器)
+    - [2.5.2.leedcode题目：283.移动零](#252leedcode题目283移动零)
+    - [2.5.3.leedcode题目：70.爬楼梯](#253leedcode题目70爬楼梯)
+    - [2.5.4.leedcode题目：15.三数之和](#254leedcode题目15三数之和)
+    - [2.5.5.leedcode题目：26.删除数组中的重复项](#255leedcode题目26删除数组中的重复项)
+    - [2.5.6.leedcode题目：206. Reverse Linked List](#256leedcode题目206-reverse-linked-list)
+    - [2.5.7.leedcode题目：24. Swap Nodes in Pairs](#257leedcode题目24-swap-nodes-in-pairs)
+    - [2.5.8.leedcode题目：141. Linked List Cycle](#258leedcode题目141-linked-list-cycle)
+    - [2.5.9.leedcode题目：142. Linked List Cycle II](#259leedcode题目142-linked-list-cycle-ii)
+    - [2.5.10.leedcode题目：25. Reverse Nodes in k-Group](#2510leedcode题目25-reverse-nodes-in-k-group)
+- [3.栈、队列、优先队列、双端队列](#3栈队列优先队列双端队列)
+  - [3.1.栈](#31栈)
+  - [3.2.队列](#32队列)
+  - [3.3.优先队列](#33优先队列)
+  - [3.4.双端队列](#34双端队列)
+  - [3.5.实战题目](#35实战题目)
+    - [3.5.1.leedcode题目：](#351leedcode题目)
+    - [3.5.1.leedcode题目：](#351leedcode题目-1)
+    - [3.5.1.leedcode题目：](#351leedcode题目-2)
+    - [3.5.1.leedcode题目：](#351leedcode题目-3)
+    - [3.5.1.leedcode题目：](#351leedcode题目-4)
+    - [3.5.1.leedcode题目：](#351leedcode题目-5)
   - [重点学习20个最常用的最基础的数据结构和算法](#重点学习20个最常用的最基础的数据结构和算法)
 - [参考](#参考)
 # 1.数据结构&算法
@@ -188,56 +211,36 @@ public class SeqList implements List {
 ### 2.2.2.链表的代码实现
 要设计单链表类，需要先设计结点类。一个结点类的成员变量有两个，一是结点的数据元素，另一个是表示下一个结点的next。
 
-结点类设计如下
+链表有：单链表、双向链表、循环链表
+
+单链表结点类设计如下
 ```java
 public class Node {
     Object data;//结点的数据元素
     Node next;//表示下一个结点的对象引用
-    //用于头结点的构造函数
-    Node(Node nextval){
-        next = nextval;
-    }
-    //用于其他结点的构造函数
-    Node(Object obj, Node nextval){
-        data = obj;
-        next = nextval;
-    }
-
-    public Object getData() {
-        return data;
-    }
-
-    public Node getNext() {
-        return next;
-    }
-
-    public void setData(Object data) {
-        this.data = data;
-    }
-
-    public void setNext(Node next) {
+    Node(Object obj, Node next){
+        this.data = obj;
         this.next = next;
     }
-    //转换data为String类型
-    public String toString() {
-        return data.toString();
+    Node(Object obj){
+        this(obj,null);
     }
 }
 ```
-单链表的成员变量需要三个：一是头指针，二是单链表中数据元素个数，三是表示单链表当前结点位置的成员变量。
-
-单链表类设计如下
-```java
-
-```
-
-## leedCode题目
-+ [26.删除数组中的重复项](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array/)
-+ 
+链表有：单链表、双向链表、循环链表
 
 
+## 2.3.跳表
 
-## 参考链接
+**注意**：只能用于元素有序的情况
+
+所以，跳表（skip list）对标的是平衡树（AVL Tree）和二分查找，是一种 插入/删除/搜索 都是O(logn)的数据结构，1989年出现。
+
+最大的优势是原理简单，容易实现，方便扩展，效率更高，因此在一些热门的项目里用来替代平衡树，如Redis，levelDB等。
+
+升维思想+空间换时间
+
+## 2.4.参考链接
 + [Java 源码分析（ArrayList）](http://developer.classpath.org/doc/java/util/ArrayList-source.html)
 + [Linked List 的标准实现代码](https://www.geeksforgeeks.org/implementing-a-linked-list-in-java-using-class/)
 + [Linked List 示例代码](http://www.cs.cmu.edu/~adamchik/15-121/lectures/Linked%20Lists/code/LinkedList.java) 
@@ -245,7 +248,161 @@ public class Node {
 + LRU Cache - Linked list： [LRU 缓存机制](https://leetcode-cn.com/problems/lru-cache/)
 + Redis - Skip List：[跳跃表、为啥 Redis 使用跳表（Skip List）而不是使用 Red-Black？](https://www.zhihu.com/question/20202931)
 
- 
+
+## 2.5.实战题目
+
+**ARRAY 实战题目**
+
+### 2.5.1.leedcode题目：[11.盛水最多的容器](https://leetcode-cn.com/problems/container-with-most-water/)
+
++ 第一种解法：双指针法
+```java
+//双指针法
+public static int maxArea1(int[] height) {
+    int left = 0, right = height.length - 1;
+    int ans = 0;
+    while (left < right){
+        int area = Math.min(height[left],height[right]) * (right - left);
+        ans = Math.max( ans , area);
+        if (height[left] <= height[right]){
+            left++;
+        } else {
+            right--;
+        }
+    }
+    return ans;
+}
+```
+**复杂度**：时间复杂度O(n)，空间复杂度O(1)
+
+
+### 2.5.2.leedcode题目：[283.移动零](https://leetcode-cn.com/problems/move-zeroes/)
+
++ 第一种解法：暴力求解
+```java
+public void moveZeroes2(int[] nums){
+    int[] ans = new int[nums.length];
+    int j = 0;
+    for (int i = 0; i < nums.length; i++){
+        if (nums[i] != 0){
+            ans[j] = nums[i];
+            j++;
+        }
+    }
+    for (int i = 0 ; i < nums.length ; i++){
+        nums[i] = ans[i];
+    }
+}
+```
+**复杂度**：时间复杂度O(n)；空间复杂度O(n)。
++ 第一种解法：快慢指针法
+```java
+public void moveZeroes3(int[] nums){
+    if (nums.length == 0) return;
+    int j = 0;
+    for (int i = 0; i < nums.length; i++){
+        if (nums[i] != 0){
+            int temp = nums[j];
+            nums[j] = nums[i];
+            nums[i] = temp;
+            j++;
+        }
+    }
+}
+```
+**复杂度**：时间复杂度O(n)；空间复杂度O(1)
+
+### 2.5.3.leedcode题目：[70.爬楼梯](https://leetcode-cn.com/problems/climbing-stairs/?utm_source=LCUS&utm_medium=ip_redirect_q_uns&utm_campaign=transfer2china)
+
++ 第一种解法：递归
+```java
+//递归法
+public int climbStairs(int n) {
+    if (n <=2 ) return n;
+    return climbStairs(n-1)+climbStairs(n-2);
+}
+```
++ 第二种解法：动态规划
+```java
+//动态规划
+public int climbStairs2(int n){
+    int a = 0, b = 0;
+    int ans = 1;
+    for (int i = 0; i < n; i++){
+        a = b;
+        b = ans;
+        ans = a + b;
+    }
+    return ans;
+}
+```
++ 第三种解法：数学矩阵
+```java
+
+```
++ 第四种解法：通项公式
+```java
+
+```
+
+
+### 2.5.4.leedcode题目：[15.三数之和](https://leetcode-cn.com/problems/3sum/)
+
+
+
+### 2.5.5.leedcode题目：[26.删除数组中的重复项](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array/)
+
+
+**Linked List 实战题目**
+
+### 2.5.6.leedcode题目：[206. Reverse Linked List](https://leetcode.com/problems/reverse-linked-list/)
+
+
+### 2.5.7.leedcode题目：[24. Swap Nodes in Pairs](https://leetcode.com/problems/swap-nodes-in-pairs/)
+
+
+### 2.5.8.leedcode题目：[141. Linked List Cycle](https://leetcode.com/problems/linked-list-cycle/)
+
+
+### 2.5.9.leedcode题目：[142. Linked List Cycle II](https://leetcode.com/problems/linked-list-cycle-ii/)
+
+
+### 2.5.10.leedcode题目：[25. Reverse Nodes in k-Group](https://leetcode.com/problems/reverse-nodes-in-k-group/)
+
+
+
+
+# 3.栈、队列、优先队列、双端队列
+
+## 3.1.栈
+
+## 3.2.队列
+
+## 3.3.优先队列
+
+
+## 3.4.双端队列
+
+## 3.5.实战题目
+
+### 3.5.1.leedcode题目：[]()
+
+
+### 3.5.1.leedcode题目：[]()
+
+
+### 3.5.1.leedcode题目：[]()
+
+
+### 3.5.1.leedcode题目：[]()
+
+
+### 3.5.1.leedcode题目：[]()
+
+
+### 3.5.1.leedcode题目：[]()
+
+
 
 
 

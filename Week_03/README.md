@@ -1,6 +1,6 @@
 学习笔记
 - [8.递归的实现、特性以及思维要点](#8递归的实现特性以及思维要点)
-  - [8.1.](#81)
+  - [8.1.递归知识点](#81递归知识点)
   - [8.2.实战题目](#82实战题目)
     - [8.2.1.leedcode题目：70.爬楼梯](#821leedcode题目70爬楼梯)
     - [8.2.2.leedcode题目：22.括号生成](#822leedcode题目22括号生成)
@@ -15,7 +15,7 @@
     - [8.2.11.leedcode题目：46.全排列](#8211leedcode题目46全排列)
     - [8.2.12.leedcode题目：47.全排列II](#8212leedcode题目47全排列ii)
 - [9.分治、回溯的实现和特性](#9分治回溯的实现和特性)
-  - [9.1.](#91)
+  - [9.1.知识点](#91知识点)
   - [9.2.实战题目](#92实战题目)
     - [9.2.1.leedcode题目：22.括号生成问题](#921leedcode题目22括号生成问题)
     - [9.2.2.leedcode题目：50.Pow(x,n)](#922leedcode题目50powxn)
@@ -26,13 +26,39 @@
 
 # 8.递归的实现、特性以及思维要点
 
-## 8.1.
+## 8.1.递归知识点
+
+**java代码模板**
+```java
+public void recur(int level , int param){
+  //终结条件
+  if (level > MAX_LEVEL)  {
+    //程序结果
+    return;
+  }
+  //处理当前逻辑
+  process(level, param);
+  //下探到下一层
+  recur(level: level + 1, newParam);
+  //清理当前层
+} 
+```
+
+**递归的思维要点**
++ 不要人肉递归（最大误区）
++ 找到最近最简单的方法， 将其拆解成可重复解决的问题（重复子问题）找最近重复性
++ 数学归纳法思维
 
 [递归代码模板](https://shimo.im/docs/EICAr9lRPUIPHxsH/read)
 
 ## 8.2.实战题目
 
 ### 8.2.1.leedcode题目：[70.爬楼梯](https://leetcode-cn.com/problems/climbing-stairs/)
+
++ 第一个解法：递归
++ 第二个解法：动态规划
++ 第三个解法：数学矩阵解法
++ 第四个解法：通项公式 
 
 ### 8.2.2.leedcode题目：[22.括号生成](https://leetcode-cn.com/problems/generate-parentheses/)
 
@@ -59,9 +85,39 @@
 
 # 9.分治、回溯的实现和特性
 
-## 9.1.
+## 9.1.知识点
+
+分治、回溯是特殊的递归，本质上是找重复性和拆解问题
 
 [分治代码模板](https://shimo.im/docs/zvlDqLLMFvcAF79A/read)
+```java
+public int divide_conquer(Problem problem, ){
+  if (problem == NULL) {
+    int res = process_last_result();
+    return res;
+  }
+
+  subProblems = split_problem(problem);
+
+  res0 = divide_conquer(subProblems[0]);
+  res1 = divide_conquer(subProblems[1]);
+  
+  result = process_result(res0, res1);
+  return result;
+}
+```
+
+**回溯**
+
+回溯法采用试错的思想，尝试分步解决一个问题，在分步解决问题的过程中，当尝试发现现有的分步答案不能得到有效的正确的解答的时候，就会取消上一步甚至上几步的计算，再通过其他可能的分步解答再次尝试寻找问题的答案。
+
+回溯法通常用最简单的递归的方法来实现，再反复重复上述步骤后可能出现两种情况：
++ 找到一个可能存在的正确答案；
++ 在尝试了所有可能的分步方法后宣告该问题没有答案
+
+在最坏的情况下，回溯法会导致一次复杂度为指数时间的计算。
+
+**应用**：八皇后、数独
 
 [牛顿迭代法原理](http://www.matrix67.com/blog/archives/361)
 

@@ -1,12 +1,20 @@
-- [Day1: 70.爬楼梯](#day1-70爬楼梯)
-- [Day11: 412.Fizz Buzz](#day11-412fizz-buzz)
-- [Day12: 258.各位相加](#day12-258各位相加)
-- [Day13: 94.二叉树的中序遍历](#day13-94二叉树的中序遍历)
-- [Day14: 590.N叉树的后序遍历](#day14-590n叉树的后序遍历)
+- [Day1：leedcode题目：70.爬楼梯](#day1leedcode题目70爬楼梯)
+- [Day3：leedcode题目：1.两数之和](#day3leedcode题目1两数之和)
+- [Day11: leedcode题目：412.Fizz Buzz](#day11-leedcode题目412fizz-buzz)
+- [Day12: leedcode题目：258.各位相加](#day12-leedcode题目258各位相加)
+- [Day13: leedcode题目：94.二叉树的中序遍历](#day13-leedcode题目94二叉树的中序遍历)
+- [Day14：leedcode题目：590.N叉树的后序遍历](#day14leedcode题目590n叉树的后序遍历)
+- [Day15：leedcode题目：1160.拼写单词](#day15leedcode题目1160拼写单词)
+- [Day16：剑指offer：05.替换空格](#day16剑指offer05替换空格)
+- [Day17：剑指offer：06.从尾到头打印链表](#day17剑指offer06从尾到头打印链表)
+- [Day18：剑指offer： 68.II. 二叉树的最近公共祖先](#day18剑指offer-68ii-二叉树的最近公共祖先)
+- [Day19：leedcode刷题：1.两数之和](#day19leedcode刷题1两数之和)
+- [Day20：leedcode题目：77.组合](#day20leedcode题目77组合)
+- [Day21：leedcode题目：46.全排列](#day21leedcode题目46全排列)
 
 
 
-## Day1: [70.爬楼梯](https://leetcode-cn.com/problems/climbing-stairs/)
+## Day1：leedcode题目：[70.爬楼梯](https://leetcode-cn.com/problems/climbing-stairs/)
 
 + 第一种解法：递归
 ```java
@@ -78,7 +86,63 @@ public int climbStairs3(int n){
 **复杂度**：时间复杂度：O(logn)，pow方法将会用去O(logn) 的时间。
 空间复杂度：O(1)。
 
-## Day11: [412.Fizz Buzz](https://leetcode-cn.com/problems/fizz-buzz/)
+## Day3：leedcode题目：[1.两数之和](https://leetcode-cn.com/problems/two-sum/)
+
++ 第一种解法：暴力解，
+```java
+//暴力解，两边循环，时间复杂度O(n^2),空间复杂度O(1)
+public static int[] twoSum(int[] nums,int target){
+    int[] ans = new int[2];
+    for (int i = 0; i < nums.length-1; i++){
+        for (int j = i + 1; j < nums.length; j++){
+            if (nums[i] + nums[j] == target){
+                ans[0] = i;
+                ans[1] = j;
+            }
+        }
+    }
+    return ans;
+}
+```
++ 第二种解法：遍历两遍hash表
+```java
+//遍历两边哈希表法,时间复杂度O(n),空间复杂度O(n)
+public int[] twoSumHash(int[] nums, int target) {
+    if (nums == null || nums.length == 0 ) return new int[2];
+
+    Map<Integer, Integer> map = new HashMap<>();
+    for (int i = 0; i < nums.length; i++){
+        map.put(nums[i], i);
+    }
+
+    int[] ans = new int[2];
+    for (int i = 0; i < nums.length; i++){
+        if (map.containsKey(target - nums[i]) && map.get(target - nums[i]) != i){
+            ans[0] = i;
+            ans[1] = map.get(target - nums[i]);
+        }
+    }
+    return ans;
+}
+```
++ 第三种解法：一遍哈希表
+```java
+//一遍hash表,时间复杂度O(n),空间复杂度O(n)
+public int[] twoSumHash1(int[] nums, int target){
+    int[] ans = new int[2];
+    Map<Integer, Integer> map = new HashMap<>();
+    for (int i = 0; i < nums.length; i++){
+        if (map.containsKey(target - nums[i]) && map.get(target - nums[i]) != i){
+            ans[0] = i;
+            ans[1] = map.get(target - nums[i]);
+        }
+        map.put(nums[i],i);
+    }
+    return ans;
+}
+```
+
+## Day11: leedcode题目：[412.Fizz Buzz](https://leetcode-cn.com/problems/fizz-buzz/)
 + 第一种解法：遍历
   + 思路：
   + 1、初始化一个答案列表ans
@@ -159,7 +223,7 @@ public List<String> fizzBuzz3(int n){
 ```
 **复杂度**：时间复杂度O(n) 空间复杂度O(1)
 
-## Day12: [258.各位相加](https://leetcode-cn.com/problems/add-digits/)
+## Day12: leedcode题目：[258.各位相加](https://leetcode-cn.com/problems/add-digits/)
 + 第一种解法：递归
   + 若num小于10，可直接返回
   + 创建一个辅助空间next，通过将num mod 10 得到个位上的数，num除10得到十位上的数，加和后赋值给next，
@@ -200,7 +264,7 @@ public int addDigit3(int num){
 }
 ```
 
-## Day13: [94.二叉树的中序遍历](https://leetcode-cn.com/problems/binary-tree-inorder-traversal/)
+## Day13: leedcode题目：[94.二叉树的中序遍历](https://leetcode-cn.com/problems/binary-tree-inorder-traversal/)
 
 + 第一种解法：递归
   + [递归的模板](https://shimo.im/docs/EICAr9lRPUIPHxsH/read)
@@ -265,7 +329,7 @@ public List<Integer> inorderTraversal2(TreeNode root){
   
   先了解下 [线索二叉树](https://baike.baidu.com/item/%E7%BA%BF%E7%B4%A2%E4%BA%8C%E5%8F%89%E6%A0%91/10810037?fr=aladdin) 和 [莫里斯解法](https://stackoverflow.com/questions/5502916/explain-morris-inorder-tree-traversal-without-using-stacks-or-recursion) 后再学习此解法
 
-## Day14: [590.N叉树的后序遍历](https://leetcode-cn.com/problems/n-ary-tree-postorder-traversal/)
+## Day14：leedcode题目：[590.N叉树的后序遍历](https://leetcode-cn.com/problems/n-ary-tree-postorder-traversal/)
 
 + 第一种解法：递归
 ```java
@@ -304,5 +368,216 @@ public List<Integer> postorder(Node root){
     }
     Collections.reverse(ans);
     return ans;
+}
+```
+
+## Day15：leedcode题目：[1160.拼写单词](https://leetcode-cn.com/problems/find-words-that-can-be-formed-by-characters/)
+
++ 第一种解法：对chars的字符进行计数，再对words中的每一单词计数，words中每个单词的字符数都小于chars的即可
+```java
+public int countCharacters(String[] words, String chars) {
+    int[] countChars = new int[26];
+    for (char c : chars.toCharArray()){
+        countChars[c - 'a']++;
+    }
+    int ans = 0;
+    for (String word : words){
+        int[] countword = new int[26];
+        for (char c : word.toCharArray()){
+            countword[c - 'a']++;
+        }
+        boolean flag = true;
+        for (int i = 0; i < 26; i++){
+            if (countChars[i] < countword[i]){
+                flag = false;
+                break;
+            }
+        }
+        if (flag){
+            ans += word.length();
+        }
+    }
+    return ans;
+}
+```
+**复杂度**：时间复杂度O(n)，n为所有字符串的长度；空间复杂度O(S)，在本解法中S是26
+
+## Day16：剑指offer：[05.替换空格](https://leetcode-cn.com/problems/ti-huan-kong-ge-lcof/submissions/)
+
++ 第一种解法：遍历，遇到空格换成%20
+```java
+public String replaceSpace(String s) {
+    char[] chars = s.toCharArray();
+    StringBuilder sb = new StringBuilder("");
+    for (char c : chars) {
+        if (c == ' ' ){
+            sb.append('%');
+            sb.append('2');
+            sb.append('0');
+        } else {
+            sb.append(c);
+        }
+    }
+    return sb.toString();
+}
+```
+**复杂度**：时间复杂度O(n)，n为字符串s的长度；空间复杂度O(n)
+
+## Day17：剑指offer：[06.从尾到头打印链表](https://leetcode-cn.com/problems/cong-wei-dao-tou-da-yin-lian-biao-lcof/solution/)
+
++ 第一种解法：使用栈
+  + 使用栈将链表元素顺序倒置，熊链表的头结点开始，依次将每个节点压入栈内，然后再依次弹出栈内元素，并存储到数组中
+```java
+public int[] reverseprint(ListNode head){
+    Stack<ListNode> stack = new Stack<>();
+    ListNode curr = head;
+    while (curr.next != null){
+        stack.add(curr);
+        curr = curr.next;
+    }
+    int size = stack.size();
+    int[] ans = new int[size];
+    for (int i = 0; i < size; i++){
+        ans[i] = stack.pop().val;
+    }
+    return ans;
+}
+```
+**复杂度**：时间复杂度：O(n)O(n)。正向遍历一遍链表，然后从栈弹出全部节点，等于又反向遍历一遍链表。空间复杂度：O(n)O(n)。额外使用一个栈存储链表中的每个节点。
+
+## Day18：剑指offer：[ 68.II. 二叉树的最近公共祖先](https://leetcode-cn.com/problems/er-cha-shu-de-zui-jin-gong-gong-zu-xian-lcof/)
+
++ 第一种解法：
+```java
+public TreeNode lowestCommonAncestor2(TreeNode root, TreeNode p, TreeNode q) {
+    if (root == null || root == q || root == p) return root;
+    TreeNode left = lowestCommonAncestor(root.left,p,q);
+    TreeNode right = lowestCommonAncestor(root.right,p,q);
+    if (left == null) return right;
+    if (right == null) return left;
+    return root;
+}
+```
+## Day19：leedcode刷题：[1.两数之和](https://leetcode-cn.com/problems/two-sum/)
+
++ 第一种解法：暴力解，
+```java
+//暴力解，两边循环，时间复杂度O(n^2),空间复杂度O(1)
+public static int[] twoSum(int[] nums,int target){
+    int[] ans = new int[2];
+    for (int i = 0; i < nums.length-1; i++){
+        for (int j = i + 1; j < nums.length; j++){
+            if (nums[i] + nums[j] == target){
+                ans[0] = i;
+                ans[1] = j;
+            }
+        }
+    }
+    return ans;
+}
+```
++ 第二种解法：遍历两遍hash表
+```java
+//遍历两边哈希表法,时间复杂度O(n),空间复杂度O(n)
+public int[] twoSumHash(int[] nums, int target) {
+    if (nums == null || nums.length == 0 ) return new int[2];
+
+    Map<Integer, Integer> map = new HashMap<>();
+    for (int i = 0; i < nums.length; i++){
+        map.put(nums[i], i);
+    }
+
+    int[] ans = new int[2];
+    for (int i = 0; i < nums.length; i++){
+        if (map.containsKey(target - nums[i]) && map.get(target - nums[i]) != i){
+            ans[0] = i;
+            ans[1] = map.get(target - nums[i]);
+        }
+    }
+    return ans;
+}
+```
++ 第三种解法：一遍哈希表
+```java
+//一遍hash表,时间复杂度O(n),空间复杂度O(n)
+public int[] twoSumHash1(int[] nums, int target){
+    int[] ans = new int[2];
+    Map<Integer, Integer> map = new HashMap<>();
+    for (int i = 0; i < nums.length; i++){
+        if (map.containsKey(target - nums[i]) && map.get(target - nums[i]) != i){
+            ans[0] = i;
+            ans[1] = map.get(target - nums[i]);
+        }
+        map.put(nums[i],i);
+    }
+    return ans;
+}
+```
+## Day20：leedcode题目：[77.组合](https://leetcode-cn.com/problems/combinations/)
+
++ 第一种解法：
+```java
+public class Solution77 {
+    List<List<Integer>> output = new LinkedList<>();
+    int n;
+    int k;
+
+    public void bachtrack(int first, LinkedList<Integer> curr){
+        //if the combination is done
+        if (curr.size() == k){
+            output.add(new LinkedList<>(curr));
+        }
+
+        for (int i = first; i < n + 1; ++i){
+            //add i into the current combination
+            curr.add(i);
+            //use next integers to complete the combination
+            bachtrack(i + 1, curr);
+            //backtrack
+            curr.removeLast();
+        }
+    }
+
+    public List<List<Integer>> combine(int n, int k) {
+        this.n = n;
+        this.k = k;
+        bachtrack(1,new LinkedList<Integer>());
+        return output;
+    }
+}
+```
+## Day21：leedcode题目：[46.全排列](https://leetcode-cn.com/problems/permutations/)
+
++ 第一种解法：
+```java
+class Solution {
+    public List<List<Integer>> permute(int[] nums) {
+        int len = nums.length;
+        List<List<Integer>> res = new ArrayList<>();
+        if (len == 0){
+            return res;
+        }
+        Deque<Integer> path = new ArrayDeque<>();
+        boolean[] used = new boolean[len];
+        dfs(nums,len,0,path,used,res);
+        return res;
+    }
+
+    private void dfs(int[] nums, int len, int depth, Deque<Integer> path, boolean[] used, List<List<Integer>> res) {
+        if (depth == len) {
+            res.add(new ArrayList<>(path));
+            return;
+        }
+        for (int i = 0; i < len; i++){
+            if (used[i]){
+                continue;
+            }
+            path.addLast(nums[i]);
+            used[i] = true;
+            dfs(nums,len,depth+1,path,used,res);
+            path.removeLast();
+            used[i] = false;
+        }
+    }
 }
 ```
