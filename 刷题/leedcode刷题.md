@@ -1,4 +1,5 @@
 - [Day1：leedcode题目：70.爬楼梯](#day1leedcode题目70爬楼梯)
+- [Day2：leedcode题目：66.加一](#day2leedcode题目66加一)
 - [Day3：leedcode题目：1.两数之和](#day3leedcode题目1两数之和)
 - [Day11: leedcode题目：412.Fizz Buzz](#day11-leedcode题目412fizz-buzz)
 - [Day12: leedcode题目：258.各位相加](#day12-leedcode题目258各位相加)
@@ -12,6 +13,7 @@
 - [Day20：leedcode题目：77.组合](#day20leedcode题目77组合)
 - [Day21：leedcode题目：46.全排列](#day21leedcode题目46全排列)
 - [Day22：leedcode题目：104.二叉树的最大深度](#day22leedcode题目104二叉树的最大深度)
+- [Day24：leedcode题目：226.翻转二叉树](#day24leedcode题目226翻转二叉树)
 
 
 
@@ -86,6 +88,50 @@ public int climbStairs3(int n){
 ```
 **复杂度**：时间复杂度：O(logn)，pow方法将会用去O(logn) 的时间。
 空间复杂度：O(1)。
+
+## Day2：leedcode题目：[66.加一](https://leetcode-cn.com/problems/plus-one/)
++ 第一种解法：遍历数组，让最后一个数组元素加1，如果加1后大于等于10，就将这个数模10（即取个位数）后放在这个位置，只要模10后的数不为0，就可以返回数组了，如果模10后是0，那说明进位到0位是还需要进1，那就只能扩充数组了。
+```java
+public class Solution66 {
+    //数组遍历
+    public int[] plusOne1(int[] digits){
+        int len = digits.length;
+        for (int i = len - 1; i >= 0; i--){
+            digits[i]++;
+            digits[i] %= 10;
+            if (digits[i] != 0){
+                return digits;
+            }
+        }
+        digits = new int[len + 1];
+        digits[0] = 1;
+        return digits;
+    }
+}
+```
++ 第二种解法：数学方式
+```java
+public class Solution66 {
+    //数学方式
+    public int[] plusOne2(int[] digits){
+        int carry = 0;
+        int sum = 0;
+        int n = digits.length;
+        int add = 1;
+        digits[n-1] = digits[n-1] + add;
+        for (int i = n-1; i >= 0; i--){
+            sum = digits[i] + carry;
+            carry = sum / 10;
+            digits[i] = sum % 10;
+        }
+        if (digits[0] == 0){
+            digits = new int[n + 1];
+            digits[0] = carry;
+        }
+        return digits;
+    }
+}
+```
 
 ## Day3：leedcode题目：[1.两数之和](https://leetcode-cn.com/problems/two-sum/)
 
@@ -617,4 +663,20 @@ public class Solution104 {
 + 第二种解法：广度优先遍历
 ```java
 
+```
+
+## Day24：leedcode题目：[226.翻转二叉树](https://leetcode-cn.com/problems/invert-binary-tree/description/)
+
++ 第一种解法：递归
+```java
+public class Solution226 {
+    public TreeNode invertTree(TreeNode root){
+        if (root == null) return null;
+        TreeNode left = invertTree(root.left);
+        TreeNode right = invertTree(root.right);
+        root.left = right;
+        root.right = left;
+        return root;        
+    }
+}
 ```

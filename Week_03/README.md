@@ -105,6 +105,27 @@ public class Solution104 {
 
 ### 8.2.6.leedcode题目：[111.二叉树的最小深度](https://leetcode-cn.com/problems/minimum-depth-of-binary-tree/)
 
++ 第一种解法：
+```java
+public class Solution111 {
+    //递归
+    public int minDepth(TreeNode root) {
+        if (root == null) return 0;
+
+        if (root.left == null && root.right == null) return 1;
+
+        int minHeight = Integer.MAX_VALUE;
+        if (root.right != null){
+            minHeight = Math.min(minDepth(root.right),minHeight);
+        }
+        if (root.left != null){
+            minHeight = Math.min(minDepth(root.left),minHeight);
+        }
+        return minHeight+1;
+    }
+}
+```
+
 ### 8.2.7.leedcode题目：[297.二叉树的序列化和反序列化](https://leetcode-cn.com/problems/serialize-and-deserialize-binary-tree/)
 
 ### 8.2.8.leedcode题目：[236.二叉树的最近公共祖先](https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/)
