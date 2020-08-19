@@ -68,6 +68,41 @@ public void recur(int level , int param){
 
 ### 8.2.5.leedcode题目：[104.二叉树的最大深度](https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/)
 
++ 第一种解法：递归
+```java
+public class Solution104 {
+    //递归，时间复杂度O(n)，空间复杂度O(height)
+    public int maxDepth(TreeNode root) {
+        if (root == null){
+            return 0;
+        } else {
+            int leftHeight = maxDepth(root.left);
+            int rightHeight = maxDepth(root.right);
+            return Math.max(leftHeight,rightHeight) + 1;
+        }
+    }
+}
+```
+```java
+public class Solution104 {
+    //递归
+    public int maxDepth(TreeNode root) {
+
+        if (root == null) return 0;
+
+        int left_num = maxDepth(root.left);
+        int right_num = maxDepth(root.right);
+
+        return left_num>right_num ?left_num+1 : right_num+1;
+    }
+}
+```
++ 第二种解法：广度优先遍历
+```java
+
+```
+
+
 ### 8.2.6.leedcode题目：[111.二叉树的最小深度](https://leetcode-cn.com/problems/minimum-depth-of-binary-tree/)
 
 ### 8.2.7.leedcode题目：[297.二叉树的序列化和反序列化](https://leetcode-cn.com/problems/serialize-and-deserialize-binary-tree/)
