@@ -1,40 +1,40 @@
 学习笔记
-- [1.数据结构&算法](#1数据结构算法)
-  - [1.2.数据结构](#12数据结构)
-  - [1.3.算法](#13算法)
-- [2.数组、链表、跳表](#2数组链表跳表)
-  - [2.1数组](#21数组)
-    - [2.1.1.数组的操作函数的复杂度](#211数组的操作函数的复杂度)
-    - [2.1.2.数组的代码实现](#212数组的代码实现)
-    - [2.1.3.顺序表的优缺点](#213顺序表的优缺点)
-  - [2.2.链表](#22链表)
-    - [2.2.1.链表操作函数的复杂度](#221链表操作函数的复杂度)
-    - [2.2.2.链表的代码实现](#222链表的代码实现)
-  - [2.3.跳表](#23跳表)
-  - [2.4.参考链接](#24参考链接)
-  - [2.5.实战题目](#25实战题目)
-    - [2.5.1.leedcode题目：11.盛水最多的容器](#251leedcode题目11盛水最多的容器)
-    - [2.5.2.leedcode题目：283.移动零](#252leedcode题目283移动零)
-    - [2.5.3.leedcode题目：70.爬楼梯](#253leedcode题目70爬楼梯)
-    - [2.5.4.leedcode题目：15.三数之和](#254leedcode题目15三数之和)
-    - [2.5.5.leedcode题目：26.删除数组中的重复项](#255leedcode题目26删除数组中的重复项)
-    - [2.5.6.leedcode题目：206. Reverse Linked List](#256leedcode题目206-reverse-linked-list)
-    - [2.5.7.leedcode题目：24. Swap Nodes in Pairs](#257leedcode题目24-swap-nodes-in-pairs)
-    - [2.5.8.leedcode题目：141. Linked List Cycle](#258leedcode题目141-linked-list-cycle)
-    - [2.5.9.leedcode题目：142. Linked List Cycle II](#259leedcode题目142-linked-list-cycle-ii)
-    - [2.5.10.leedcode题目：25. Reverse Nodes in k-Group](#2510leedcode题目25-reverse-nodes-in-k-group)
-- [3.栈、队列、优先队列、双端队列](#3栈队列优先队列双端队列)
-  - [3.1.栈](#31栈)
-  - [3.2.队列](#32队列)
-  - [3.3.优先队列](#33优先队列)
-  - [3.4.双端队列](#34双端队列)
-  - [3.5.实战题目](#35实战题目)
-    - [3.5.1.leedcode题目：](#351leedcode题目)
-    - [3.5.1.leedcode题目：](#351leedcode题目-1)
-    - [3.5.1.leedcode题目：](#351leedcode题目-2)
-    - [3.5.1.leedcode题目：](#351leedcode题目-3)
-    - [3.5.1.leedcode题目：](#351leedcode题目-4)
-    - [3.5.1.leedcode题目：](#351leedcode题目-5)
+- [1.数据结构&算法](#1dot数据结构算法)
+  - [1.2.数据结构](#1dot2数据结构)
+  - [1.3.算法](#1dot3算法)
+- [2.数组、链表、跳表](#2dot数组链表跳表)
+  - [2.1数组](#2dot1数组)
+    - [2.1.1.数组的操作函数的复杂度](#2dot11数组的操作函数的复杂度)
+    - [2.1.2.数组的代码实现](#2dot12数组的代码实现)
+    - [2.1.3.顺序表的优缺点](#2dot13顺序表的优缺点)
+  - [2.2.链表](#2dot2链表)
+    - [2.2.1.链表操作函数的复杂度](#2dot21链表操作函数的复杂度)
+    - [2.2.2.链表的代码实现](#2dot22链表的代码实现)
+  - [2.3.跳表](#2dot3跳表)
+  - [2.4.参考链接](#2dot4参考链接)
+  - [2.5.实战题目](#2dot5实战题目)
+    - [2.5.1.leedcode题目：11.盛水最多的容器](#2dot51leedcode题目11盛水最多的容器httpsleetcode-cncomproblemscontainer-with-most-water)
+    - [2.5.2.leedcode题目：283.移动零](#2dot52leedcode题目283移动零httpsleetcode-cncomproblemsmove-zeroes)
+    - [2.5.3.leedcode题目：70.爬楼梯](#2dot53leedcode题目70爬楼梯httpsleetcode-cncomproblemsclimbing-stairsutm_sourcelcusutm_mediumip_redirect_q_unsutm_campaigntransfer2china)
+    - [2.5.4.leedcode题目：15.三数之和](#2dot54leedcode题目15三数之和httpsleetcode-cncomproblems3sum)
+    - [2.5.5.leedcode题目：26.删除数组中的重复项](#2dot55leedcode题目26删除数组中的重复项httpsleetcode-cncomproblemsremove-duplicates-from-sorted-array)
+    - [2.5.6.leedcode题目：206. Reverse Linked List](#2dot56leedcode题目206-reverse-linked-listhttpsleetcodecomproblemsreverse-linked-list)
+    - [2.5.7.leedcode题目：24. Swap Nodes in Pairs](#2dot57leedcode题目24-swap-nodes-in-pairshttpsleetcodecomproblemsswap-nodes-in-pairs)
+    - [2.5.8.leedcode题目：141. Linked List Cycle](#2dot58leedcode题目141-linked-list-cyclehttpsleetcodecomproblemslinked-list-cycle)
+    - [2.5.9.leedcode题目：142. Linked List Cycle II](#2dot59leedcode题目142-linked-list-cycle-iihttpsleetcodecomproblemslinked-list-cycle-ii)
+    - [2.5.10.leedcode题目：25. Reverse Nodes in k-Group](#2dot510leedcode题目25-reverse-nodes-in-k-grouphttpsleetcodecomproblemsreverse-nodes-in-k-group)
+- [3.栈、队列、优先队列、双端队列](#3dot栈队列优先队列双端队列)
+  - [3.1.栈(Stack)、队列(queue)、双端队列(Deque)](#3dot1栈stack队列queue双端队列deque)
+  - [3.2.优先队列(Priority Queue)](#3dot2优先队列priority-queue)
+  - [3.3.实战题目](#3dot3实战题目)
+    - [3.3.1.leedcode题目：20.有效的括号](#3dot31leedcode题目20有效的括号httpsleetcode-cncomproblemsvalid-parentheses)
+    - [3.3.2.leedcode题目：155.最小栈](#3dot32leedcode题目155最小栈httpsleetcode-cncomproblemsmin-stack)
+    - [3.3.3.leedcode题目：84.柱状图中最大的矩形](#3dot33leedcode题目84柱状图中最大的矩形httpsleetcode-cncomproblemslargest-rectangle-in-histogram)
+    - [3.3.4.leedcode题目：239.滑动窗口最大值](#3dot34leedcode题目239滑动窗口最大值httpsleetcode-cncomproblemssliding-window-maximum)
+    - [3.3.5.leedcode题目：641.设计循环双端队列](#3dot35leedcode题目641设计循环双端队列httpsleetcode-cncomproblemsdesign-circular-dequeutm_sourcelcusutm_mediumip_redirect_q_unsutm_campaigntransfer2china)
+    - [3.3.6.leedcode题目：42.Trapping Rain Water](#3dot36leedcode题目42trapping-rain-waterhttpsleetcodecomproblemstrapping-rain-water)
+    - [3.3.7.课后作业](#3dot37课后作业)
+    - [3.3.8.课后作业](#3dot38课后作业)
   - [重点学习20个最常用的最基础的数据结构和算法](#重点学习20个最常用的最基础的数据结构和算法)
 - [参考](#参考)
 # 1.数据结构&算法
@@ -374,33 +374,155 @@ public int climbStairs2(int n){
 
 # 3.栈、队列、优先队列、双端队列
 
-## 3.1.栈
 
-## 3.2.队列
+## 3.1.栈(Stack)、队列(queue)、双端队列(Deque)
 
-## 3.3.优先队列
++ *_Stack关键点：_* 先入后出；添加、删除皆为O（1）
++ *_Queue关键点：_* 先入先出；添加、删除皆为O（1）
++ *_双端队列：_* 两端可以进出的Queue--double ended queue；添加、删除皆为O（1）
+
+[高性能的 container datatyps 库](https://docs.python.org/2/library/collections.html)
+
+**栈（Stack）** [java实现](http://developer.classpath.org/doc/java/util/Stack-source.html)
+
+代码示例：
+
+Java
+```java
+Stack<Integer> stack = new Stack<>();
+stack.push(1);
+stack.push(2);
+stack.push(3);
+stack.push(4);
+stack.push(5);
+System.out.println(stack);
+System.out.println(stack.search(4));
+
+stack.pop();
+stack.pop();
+Integer topElement = stack.peek();
+System.out.println(topElement);
+System.out.println(" 3的位置 " + stack.search(3));
+```
+
+Python
+
+```python
+class Stack:
+    def __int__(self):
+        self.items=['x','y']
+
+    def push(self,item):
+        self.items.append(items)
+
+    def pop(self):
+        self.items.pop()
+
+    def lengh(self);
+        return len(self.items)
+```
+**队列（queue）**   [java实现](http://fuseyism.com/classpath/doc/java/util/Queue-source.html)，[python 的 heapq](https://docs.python.org/2/library/heapq.html)
+
+代码示例：
+
+Java
+
+```java
+Queue<String> queue = new LinkedList<>();
+queue.offer("one");
+queue.offer("two");
+queue.offer("three");
+queue.offer("four");
+
+String polledElement = queue.poll();
+System.out.println(polledElement);
+System.out.println(queue);
+
+String peekedElement = queue.peek();
+System.out.println(peekedElement);
+System.out.println(queue);
+
+while (queue.size() > 0){
+    System.out.println(queue.poll());
+}
+```
+
+python
+
+```python
+class Queue:
+    def __int__(self):
+        self.queue=[]
+
+    def enqueue(self,item):
+        self.queue.append(item)
+
+    def dequeue(self)；
+        if len(self.queue) < 1:
+            return None;
+        return self.queue.pop(0)
+
+    def size(self):
+        return len(self.queue)
+```
+
+**双端队列(Deque)**
+
+代码示例：
+```java
+Deque<String> deque = new LinkedList<>();
+
+deque.push("a");
+deque.push("b");
+deque.push("c");
+System.out.println(deque);
+
+String str = deque.peek();
+System.out.println(str);
+System.out.println(deque);
+
+while (deque.size()>0){
+    System.out.println(deque.pop());
+}
+
+System.out.println(deque);
+```
+
+## 3.2.优先队列(Priority Queue)
+
++ 1.插入操作：O(1)
++ 2.取出操作：O(logN) - 按照元素的优先级取出
++ 3.底层具体实现的数据额结构较为多样和复杂：heap、bst，treap
+  
+[Java 的 PriorityQueue](https://docs.oracle.com/javase/10/docs/api/java/util/PriorityQueue.html)
 
 
-## 3.4.双端队列
+## 3.3.实战题目
 
-## 3.5.实战题目
-
-### 3.5.1.leedcode题目：[]()
+### 3.3.1.leedcode题目：[20.有效的括号](https://leetcode-cn.com/problems/valid-parentheses/)
 
 
-### 3.5.1.leedcode题目：[]()
+### 3.3.2.leedcode题目：[155.最小栈](https://leetcode-cn.com/problems/min-stack/)
 
 
-### 3.5.1.leedcode题目：[]()
+### 3.3.3.leedcode题目：[84.柱状图中最大的矩形](https://leetcode-cn.com/problems/largest-rectangle-in-histogram/)
 
 
-### 3.5.1.leedcode题目：[]()
+### 3.3.4.leedcode题目：[239.滑动窗口最大值](https://leetcode-cn.com/problems/sliding-window-maximum/)
 
 
-### 3.5.1.leedcode题目：[]()
+### 3.3.5.leedcode题目：[641.设计循环双端队列](https://leetcode-cn.com/problems/design-circular-deque/?utm_source=LCUS&utm_medium=ip_redirect_q_uns&utm_campaign=transfer2china)
 
 
-### 3.5.1.leedcode题目：[]()
+### 3.3.6.leedcode题目：[42.Trapping Rain Water](https://leetcode.com/problems/trapping-rain-water/)
+
+
+### 3.3.7.课后作业
+用 add first 或 add last 这套新的 API 改写 Deque 的代码
+
+### 3.3.8.课后作业
+分析 Queue 和 Priority Queue 的源码
+
 
 
 

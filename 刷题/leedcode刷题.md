@@ -1,21 +1,27 @@
-- [Day1：leedcode题目：70.爬楼梯](#day1leedcode题目70爬楼梯)
-- [Day2：leedcode题目：66.加一](#day2leedcode题目66加一)
-- [Day3：leedcode题目：1.两数之和](#day3leedcode题目1两数之和)
-- [Day11: leedcode题目：412.Fizz Buzz](#day11-leedcode题目412fizz-buzz)
-- [Day12: leedcode题目：258.各位相加](#day12-leedcode题目258各位相加)
-- [Day13: leedcode题目：94.二叉树的中序遍历](#day13-leedcode题目94二叉树的中序遍历)
-- [Day14：leedcode题目：590.N叉树的后序遍历](#day14leedcode题目590n叉树的后序遍历)
-- [Day15：leedcode题目：1160.拼写单词](#day15leedcode题目1160拼写单词)
-- [Day16：剑指offer：05.替换空格](#day16剑指offer05替换空格)
-- [Day17：剑指offer：06.从尾到头打印链表](#day17剑指offer06从尾到头打印链表)
-- [Day18：剑指offer： 68.II. 二叉树的最近公共祖先](#day18剑指offer-68ii-二叉树的最近公共祖先)
-- [Day19：leedcode刷题：1.两数之和](#day19leedcode刷题1两数之和)
-- [Day20：leedcode题目：77.组合](#day20leedcode题目77组合)
-- [Day21：leedcode题目：46.全排列](#day21leedcode题目46全排列)
-- [Day22：leedcode题目：104.二叉树的最大深度](#day22leedcode题目104二叉树的最大深度)
-- [Day24：leedcode题目：226.翻转二叉树](#day24leedcode题目226翻转二叉树)
+- [每日刷题](#每日刷题)
+  - [Day1：leedcode题目：70.爬楼梯](#day1leedcode题目70爬楼梯httpsleetcode-cncomproblemsclimbing-stairs)
+  - [Day2：leedcode题目：66.加一](#day2leedcode题目66加一httpsleetcode-cncomproblemsplus-one)
+  - [Day3：leedcode题目：1.两数之和](#day3leedcode题目1两数之和httpsleetcode-cncomproblemstwo-sum)
+  - [Day4：leedcode题目：24.两两交换链表中的节点](#day4leedcode题目24两两交换链表中的节点httpsleetcode-cncomproblemsswap-nodes-in-pairs)
+  - [Day11: leedcode题目：412.Fizz Buzz](#day11-leedcode题目412fizz-buzzhttpsleetcode-cncomproblemsfizz-buzz)
+  - [Day12: leedcode题目：258.各位相加](#day12-leedcode题目258各位相加httpsleetcode-cncomproblemsadd-digits)
+  - [Day13: leedcode题目：94.二叉树的中序遍历](#day13-leedcode题目94二叉树的中序遍历httpsleetcode-cncomproblemsbinary-tree-inorder-traversal)
+  - [Day14：leedcode题目：590.N叉树的后序遍历](#day14leedcode题目590n叉树的后序遍历httpsleetcode-cncomproblemsn-ary-tree-postorder-traversal)
+  - [Day15：leedcode题目：1160.拼写单词](#day15leedcode题目1160拼写单词httpsleetcode-cncomproblemsfind-words-that-can-be-formed-by-characters)
+  - [Day16：剑指offer：05.替换空格](#day16剑指offer05替换空格httpsleetcode-cncomproblemsti-huan-kong-ge-lcofsubmissions)
+  - [Day17：剑指offer：06.从尾到头打印链表](#day17剑指offer06从尾到头打印链表httpsleetcode-cncomproblemscong-wei-dao-tou-da-yin-lian-biao-lcofsolution)
+  - [Day18：剑指offer： 68.II. 二叉树的最近公共祖先](#day18剑指offer-68ii-二叉树的最近公共祖先httpsleetcode-cncomproblemser-cha-shu-de-zui-jin-gong-gong-zu-xian-lcof)
+  - [Day19：leedcode刷题：1.两数之和](#day19leedcode刷题1两数之和httpsleetcode-cncomproblemstwo-sum)
+  - [Day20：leedcode题目：77.组合](#day20leedcode题目77组合httpsleetcode-cncomproblemscombinations)
+  - [Day21：leedcode题目：46.全排列](#day21leedcode题目46全排列httpsleetcode-cncomproblemspermutations)
+  - [Day22：leedcode题目：104.二叉树的最大深度](#day22leedcode题目104二叉树的最大深度httpsleetcode-cncomproblemsmaximum-depth-of-binary-tree)
+  - [Day24：leedcode题目：226.翻转二叉树](#day24leedcode题目226翻转二叉树httpsleetcode-cncomproblemsinvert-binary-treedescription)
+  - [Day25：leedcode题目：860.柠檬水找零](#day25leedcode题目860柠檬水找零httpsleetcode-cncomproblemslemonade-changesolution)
+  - [Day26：leedcode题目：200.岛屿数量](#day26leedcode题目200岛屿数量httpsleetcode-cncomproblemsnumber-of-islands)
 
+# 每日刷题
 
+  **_开始时间：2020 年 7 月 27号_**
 
 ## Day1：leedcode题目：[70.爬楼梯](https://leetcode-cn.com/problems/climbing-stairs/)
 
@@ -138,7 +144,7 @@ public class Solution66 {
 + 第一种解法：暴力解，
 ```java
 //暴力解，两边循环，时间复杂度O(n^2),空间复杂度O(1)
-public static int[] twoSum(int[] nums,int target){
+public int[] twoSum(int[] nums,int target){
     int[] ans = new int[2];
     for (int i = 0; i < nums.length-1; i++){
         for (int j = i + 1; j < nums.length; j++){
@@ -186,6 +192,60 @@ public int[] twoSumHash1(int[] nums, int target){
         map.put(nums[i],i);
     }
     return ans;
+}
+```
+## Day4：leedcode题目：[24.两两交换链表中的节点](https://leetcode-cn.com/problems/swap-nodes-in-pairs/)
++ 第一种解法：递归，时间复杂度O（n），空间复杂度O（n)
+```java
+public class Solution24 {
+    public ListNode swapPairs(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode next = head.next;
+        head.next = swapPairs(next.next);
+        next.next = head;
+        return next;
+    }
+
+    public ListNode swapPairs1(ListNode head){
+        //递归结束条件
+        if (head == null || head.next == null){
+            return head;
+        }
+        //执行本层程序，交换节点
+        ListNode firstNode = head;
+        ListNode secNode = head.next;
+        firstNode.next = swapPairs1(secNode.next);
+        secNode.next = firstNode;
+        
+        return secNode;
+    }
+}
+```
++ 第二种解法：迭代
+```java
+public class Solution24 {
+    //迭代法
+    public ListNode swapPairs2(ListNode head){
+        if (head == null || head.next == null){
+            return head;
+        }
+        ListNode newhead = new ListNode(-1);
+        ListNode pre = newhead;
+        while (head != null && head.next != null){
+            ListNode FN = head;
+            ListNode SN = head.next;
+
+            pre.next = SN;
+            FN.next = SN.next;
+            SN.next = FN;
+
+            pre = FN;
+            head = FN.next;
+        }
+        return newhead.next;
+    }
 }
 ```
 
@@ -677,6 +737,78 @@ public class Solution226 {
         root.left = right;
         root.right = left;
         return root;        
+    }
+}
+```
+
+## Day25：leedcode题目：[860.柠檬水找零](https://leetcode-cn.com/problems/lemonade-change/solution/)
+
++ 第一种解法：模拟现实
+```java
+public class Solution860 {
+    public boolean lemonadeChange(int[] bills) {
+        int five = 0;
+        int ten = 0;
+        for (int bill : bills){
+            if (bill == 5){
+                five++;
+            } else if (bill == 10){
+                if(five > 0){
+                    five--;
+                    ten++;
+                } else return false;
+            } else {
+                if (five > 0 && ten > 0){
+                    five--;
+                    ten--;
+                } else if (five >= 3){
+                    five -= 3;
+                } else return false;
+            }
+        }
+        return true;
+    }
+}
+```
+
+## Day26：leedcode题目：[200.岛屿数量](https://leetcode-cn.com/problems/number-of-islands/)
+
++ 第一种解法：深度优先遍历，时间复杂度O(MN)，空间复杂度O(MN)，M/N为行数和列数
+```java
+public class Solution200 {
+    //深度优先遍历
+    public int numIslands(char[][] grid) {
+        if (grid == null || grid.length == 0){
+            return 0;
+        }
+
+        int nr = grid.length;
+        int nc = grid[0].length;
+        int num_islands = 0;
+        for (int r = 0; r < nr; r++){
+            for (int c = 0; c < nc; c++){
+                if (grid[r][c] == '1'){
+                    ++num_islands;
+                    dfs(grid,r,c);
+                }
+            }
+        }
+        return num_islands;
+    }
+
+    void dfs(char[][] grid, int r, int c){
+        int nr = grid.length;
+        int nc = grid[0].length;
+
+        if (r < 0 || c < 0 || r >= nr || c >=nc || grid[r][c] == '0'){
+            return;
+        }
+
+        grid[r][c] = '0';
+        dfs(grid, r - 1, c);;
+        dfs(grid, r + 1, c);
+        dfs(grid, r, c - 1);
+        dfs(grid, r, c + 1);
     }
 }
 ```
