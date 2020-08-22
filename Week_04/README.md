@@ -1,35 +1,35 @@
-- [10.深度优先搜索和广度优先搜索](#10dot深度优先搜索和广度优先搜索)
-  - [10.1.遍历](#10dot1遍历)
-  - [10.2.深度优先搜索（Depth-First-Search)](#10dot2深度优先搜索depth-first-search)
-  - [10.3.广度优先搜索（Breadth-First-Search）](#10dot3广度优先搜索breadth-first-search)
-  - [10.4.实战题目](#10dot4实战题目)
-    - [10.4.1.leedcode题目：102.二叉树的层序遍历](#10dot41leedcode题目102二叉树的层序遍历httpsleetcode-cncomproblemsbinary-tree-level-order-traversaldescription)
-    - [10.4.2.leedcode题目：433.最小基因变化](#10dot42leedcode题目433最小基因变化httpsleetcode-cncomproblemsminimum-genetic-mutationdescription)
-    - [10.4.3.leedcode题目：22.括号生成](#10dot43leedcode题目22括号生成httpsleetcode-cncomproblemsgenerate-parenthesesdescription)
-    - [10.4.4.leedcode题目：515.在每个树行中找最大值](#10dot44leedcode题目515在每个树行中找最大值httpsleetcode-cncomproblemsfind-largest-value-in-each-tree-rowdescription)
-    - [10.4.5.leedcode题目：127.单词接龙](#10dot45leedcode题目127单词接龙httpsleetcode-cncomproblemsword-ladderdescription)
-    - [10.4.6.leedcode题目：126.单词接龙 II](#10dot46leedcode题目126单词接龙-iihttpsleetcode-cncomproblemsword-ladder-iidescription)
-    - [10.4.7.leedcode题目：200.岛屿数量](#10dot47leedcode题目200岛屿数量httpsleetcode-cncomproblemsnumber-of-islands)
-    - [10.4.8.leedcode题目：529.扫雷游戏](#10dot48leedcode题目529扫雷游戏httpsleetcode-cncomproblemsminesweeperdescription)
-- [11.贪心算法](#11dot贪心算法)
-  - [11.1.](#11dot1)
-  - [11.2.实战题目](#11dot2实战题目)
-    - [11.2.1.leedcode题目：322.零钱兑换](#11dot21leedcode题目322零钱兑换httpsleetcode-cncomproblemscoin-change)
-    - [11.2.2.leedcode题目：860.柠檬水找零](#11dot22leedcode题目860柠檬水找零httpsleetcode-cncomproblemslemonade-changedescription)
-    - [11.2.3.leedcode题目：122.买卖股票的最佳时机 II](#11dot23leedcode题目122买卖股票的最佳时机-iihttpsleetcode-cncomproblemsbest-time-to-buy-and-sell-stock-iidescription)
-    - [11.2.4.leedcode题目：455.分发饼干](#11dot24leedcode题目455分发饼干httpsleetcode-cncomproblemsassign-cookiesdescription)
-    - [11.2.5.leedcode题目：874.模拟行走机器人](#11dot25leedcode题目874模拟行走机器人httpsleetcode-cncomproblemswalking-robot-simulationdescription)
-    - [11.2.6.leedcode题目：55.跳跃游戏](#11dot26leedcode题目55跳跃游戏httpsleetcode-cncomproblemsjump-game)
-    - [11.2.7.leedcode题目：45.跳跃游戏 II](#11dot27leedcode题目45跳跃游戏-iihttpsleetcode-cncomproblemsjump-game-ii)
-- [12.二分查找](#12dot二分查找)
-  - [12.1.](#12dot1)
-  - [12.2.实战题目](#12dot2实战题目)
-    - [12.2.1.leedcode题目：69. x 的平方根](#12dot21leedcode题目69-x-的平方根httpsleetcode-cncomproblemssqrtx)
-    - [12.2.2.leedcode题目：367. 有效的完全平方数](#12dot22leedcode题目367-有效的完全平方数httpsleetcode-cncomproblemsvalid-perfect-square)
-    - [12.2.3.leedcode题目：33. 搜索旋转排序数组](#12dot23leedcode题目33-搜索旋转排序数组httpsleetcode-cncomproblemssearch-in-rotated-sorted-array)
-    - [12.2.4.leedcode题目：74. 搜索二维矩阵](#12dot24leedcode题目74-搜索二维矩阵httpsleetcode-cncomproblemssearch-a-2d-matrix)
-    - [12.2.5.leedcode题目：153. 寻找旋转排序数组中的最小值](#12dot25leedcode题目153-寻找旋转排序数组中的最小值httpsleetcode-cncomproblemsfind-minimum-in-rotated-sorted-array)
-    - [12.2.6.课后作业](#12dot26课后作业)
+- [10.深度优先搜索和广度优先搜索](#10深度优先搜索和广度优先搜索)
+  - [10.1.遍历](#101遍历)
+  - [10.2.深度优先搜索（Depth-First-Search)](#102深度优先搜索depth-first-search)
+  - [10.3.广度优先搜索（Breadth-First-Search）](#103广度优先搜索breadth-first-search)
+  - [10.4.实战题目](#104实战题目)
+    - [10.4.1.leedcode题目：102.二叉树的层序遍历](#1041leedcode题目102二叉树的层序遍历)
+    - [10.4.2.leedcode题目：433.最小基因变化](#1042leedcode题目433最小基因变化)
+    - [10.4.3.leedcode题目：22.括号生成](#1043leedcode题目22括号生成)
+    - [10.4.4.leedcode题目：515.在每个树行中找最大值](#1044leedcode题目515在每个树行中找最大值)
+    - [10.4.5.leedcode题目：127.单词接龙](#1045leedcode题目127单词接龙)
+    - [10.4.6.leedcode题目：126.单词接龙 II](#1046leedcode题目126单词接龙-ii)
+    - [10.4.7.leedcode题目：200.岛屿数量](#1047leedcode题目200岛屿数量)
+    - [10.4.8.leedcode题目：529.扫雷游戏](#1048leedcode题目529扫雷游戏)
+- [11.贪心算法 Greedy](#11贪心算法-greedy)
+  - [11.1.知识点](#111知识点)
+  - [11.2.实战题目](#112实战题目)
+    - [11.2.1.leedcode题目：322.零钱兑换](#1121leedcode题目322零钱兑换)
+    - [11.2.2.leedcode题目：860.柠檬水找零](#1122leedcode题目860柠檬水找零)
+    - [11.2.3.leedcode题目：122.买卖股票的最佳时机 II](#1123leedcode题目122买卖股票的最佳时机-ii)
+    - [11.2.4.leedcode题目：455.分发饼干](#1124leedcode题目455分发饼干)
+    - [11.2.5.leedcode题目：874.模拟行走机器人](#1125leedcode题目874模拟行走机器人)
+    - [11.2.6.leedcode题目：55.跳跃游戏](#1126leedcode题目55跳跃游戏)
+    - [11.2.7.leedcode题目：45.跳跃游戏 II](#1127leedcode题目45跳跃游戏-ii)
+- [12.二分查找](#12二分查找)
+  - [12.1.知识点](#121知识点)
+  - [12.2.实战题目](#122实战题目)
+    - [12.2.1.leedcode题目：69.x 的平方根](#1221leedcode题目69x-的平方根)
+    - [12.2.2.leedcode题目：367.有效的完全平方数](#1222leedcode题目367有效的完全平方数)
+    - [12.2.3.leedcode题目：33.搜索旋转排序数组](#1223leedcode题目33搜索旋转排序数组)
+    - [12.2.4.leedcode题目：74.搜索二维矩阵](#1224leedcode题目74搜索二维矩阵)
+    - [12.2.5.leedcode题目：153.寻找旋转排序数组中的最小值](#1225leedcode题目153寻找旋转排序数组中的最小值)
+    - [12.2.6.课后作业](#1226课后作业)
 
 
 
@@ -274,9 +274,17 @@ public List<List<Integer>> levelorder(TreeNode root){
 
 
 
-# 11.贪心算法
+# 11.贪心算法 Greedy
 
-## 11.1.
+## 11.1.知识点
+
+**贪心算法概念**：是以一种在每一步选择中都采取当下状态最好的或最优（即最有利）的选择，从而希望导致结果是全局最好或最优的算法。
+
+**贪心算法、动态规划的区别**：贪心算法对每个子问题的解决方案都做出选择，不能回退。动态规划则会保存以前的运算结果，并根据以前的结果对当前进行选择，有回退功能。
+
+**贪心算法用处**：解决一些最优化问题，如：求图中的最小生成树，求哈夫曼编码等，然而对于工程和生活中的问题，贪心算法一般不能得到我们所要求的答案，原因是：局部最优不是全局最优。一旦一个问题可以通过贪心法来解决，那么贪心法一般是解决这个问题的最好办法。由于贪心算法的高效性以及其所求得的答案比较接近最优结果，贪心法也可以用作辅助算法或者直接解决一些要求结果不特别精确的问题。
+
+**贪心算法应用场景**：简单来说，问题能够分解成子问题来解决，子问题的最优解能递归推到最终问题的最优解。这种子问题最优解称为最优子结构。
 
 [动态规划定义](https://zh.wikipedia.org/wiki/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92)
 
@@ -298,12 +306,66 @@ public List<List<Integer>> levelorder(TreeNode root){
 
 ### 11.2.6.leedcode题目：[55.跳跃游戏](https://leetcode-cn.com/problems/jump-game/)
 
++ 第一种解法：从后往前的贪心算法
+```java
+public class Solution55 {
+    public boolean canJump(int[] nums) {
+        int n = nums.length - 1;
+        for (int i = n; i >= 0 ; i--){
+            if (nums[i] + i >= n){
+                n = i;
+            }
+        }
+        if (n == 0) return true;
+        return false;
+    }
+}
+```
+
 ### 11.2.7.leedcode题目：[45.跳跃游戏 II](https://leetcode-cn.com/problems/jump-game-ii/)
 
 
 # 12.二分查找
 
-## 12.1.
+## 12.1.知识点
+
+**二分查找的前提**：
++ 目标函数单调性（单调递增或者递减）
++ 存在上下界（bounded）
++ 能够通过索引访问（index accessible）
+
+**代码模板**
+
+```python
+left, right = 0, len(array)-1
+while left <= right:
+    mid = (left + right) / 2
+    if array[mid] == target:
+        #find the target
+        break or return result
+    elif array[mid] < target:
+        left = mid + 1
+    else:
+        right = mid - 1
+```
+
+```java
+public int binarySearch(int[] array, int target) {
+    int left = 0;
+    int right = array.lenght - 1;
+    int mid = (left + right) / 2;
+    while(left <= right){
+        if (array[mid] == target){
+            return mid;
+        } else if (array[mid] < target){
+            left = mid + 1;
+        } else {
+            right = mid - 1;
+        }
+    }
+    return -1;
+}
+```
 
 [二分查找代码模板](https://shimo.im/docs/xvIIfeEzWYEUdBPD/read)
 
@@ -311,19 +373,19 @@ public List<List<Integer>> levelorder(TreeNode root){
 
 ## 12.2.实战题目
 
-### 12.2.1.leedcode题目：[69. x 的平方根](https://leetcode-cn.com/problems/sqrtx/)
+### 12.2.1.leedcode题目：[69.x 的平方根](https://leetcode-cn.com/problems/sqrtx/)
 
 
-### 12.2.2.leedcode题目：[367. 有效的完全平方数](https://leetcode-cn.com/problems/valid-perfect-square/)
+### 12.2.2.leedcode题目：[367.有效的完全平方数](https://leetcode-cn.com/problems/valid-perfect-square/)
 
 
-### 12.2.3.leedcode题目：[33. 搜索旋转排序数组](https://leetcode-cn.com/problems/search-in-rotated-sorted-array/)
+### 12.2.3.leedcode题目：[33.搜索旋转排序数组](https://leetcode-cn.com/problems/search-in-rotated-sorted-array/)
 
 
-### 12.2.4.leedcode题目：[74. 搜索二维矩阵](https://leetcode-cn.com/problems/search-a-2d-matrix/)
+### 12.2.4.leedcode题目：[74.搜索二维矩阵](https://leetcode-cn.com/problems/search-a-2d-matrix/)
 
 
-### 12.2.5.leedcode题目：[153. 寻找旋转排序数组中的最小值](https://leetcode-cn.com/problems/find-minimum-in-rotated-sorted-array/)
+### 12.2.5.leedcode题目：[153.寻找旋转排序数组中的最小值](https://leetcode-cn.com/problems/find-minimum-in-rotated-sorted-array/)
 
 
 ### 12.2.6.课后作业
