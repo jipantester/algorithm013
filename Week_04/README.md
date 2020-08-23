@@ -232,7 +232,7 @@ public List<List<Integer>> levelorder(TreeNode root){
         int size = nodes.size();
         List<Integer> results = new ArrayList<>();
         for(int i = 0; i < size; i++){
-            TreeNOde node = nodes.poll();
+            TreeNode node = nodes.poll();
             results.add(node.val);
             if(node.left != null){
                 nodes.add(node.left);

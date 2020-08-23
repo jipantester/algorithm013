@@ -1,23 +1,25 @@
 - [每日刷题](#每日刷题)
-  - [Day1：leedcode题目：70.爬楼梯](#day1leedcode题目70爬楼梯httpsleetcode-cncomproblemsclimbing-stairs)
-  - [Day2：leedcode题目：66.加一](#day2leedcode题目66加一httpsleetcode-cncomproblemsplus-one)
-  - [Day3：leedcode题目：1.两数之和](#day3leedcode题目1两数之和httpsleetcode-cncomproblemstwo-sum)
-  - [Day4：leedcode题目：24.两两交换链表中的节点](#day4leedcode题目24两两交换链表中的节点httpsleetcode-cncomproblemsswap-nodes-in-pairs)
-  - [Day11: leedcode题目：412.Fizz Buzz](#day11-leedcode题目412fizz-buzzhttpsleetcode-cncomproblemsfizz-buzz)
-  - [Day12: leedcode题目：258.各位相加](#day12-leedcode题目258各位相加httpsleetcode-cncomproblemsadd-digits)
-  - [Day13: leedcode题目：94.二叉树的中序遍历](#day13-leedcode题目94二叉树的中序遍历httpsleetcode-cncomproblemsbinary-tree-inorder-traversal)
-  - [Day14：leedcode题目：590.N叉树的后序遍历](#day14leedcode题目590n叉树的后序遍历httpsleetcode-cncomproblemsn-ary-tree-postorder-traversal)
-  - [Day15：leedcode题目：1160.拼写单词](#day15leedcode题目1160拼写单词httpsleetcode-cncomproblemsfind-words-that-can-be-formed-by-characters)
-  - [Day16：剑指offer：05.替换空格](#day16剑指offer05替换空格httpsleetcode-cncomproblemsti-huan-kong-ge-lcofsubmissions)
-  - [Day17：剑指offer：06.从尾到头打印链表](#day17剑指offer06从尾到头打印链表httpsleetcode-cncomproblemscong-wei-dao-tou-da-yin-lian-biao-lcofsolution)
-  - [Day18：剑指offer： 68.II. 二叉树的最近公共祖先](#day18剑指offer-68ii-二叉树的最近公共祖先httpsleetcode-cncomproblemser-cha-shu-de-zui-jin-gong-gong-zu-xian-lcof)
-  - [Day19：leedcode刷题：1.两数之和](#day19leedcode刷题1两数之和httpsleetcode-cncomproblemstwo-sum)
-  - [Day20：leedcode题目：77.组合](#day20leedcode题目77组合httpsleetcode-cncomproblemscombinations)
-  - [Day21：leedcode题目：46.全排列](#day21leedcode题目46全排列httpsleetcode-cncomproblemspermutations)
-  - [Day22：leedcode题目：104.二叉树的最大深度](#day22leedcode题目104二叉树的最大深度httpsleetcode-cncomproblemsmaximum-depth-of-binary-tree)
-  - [Day24：leedcode题目：226.翻转二叉树](#day24leedcode题目226翻转二叉树httpsleetcode-cncomproblemsinvert-binary-treedescription)
-  - [Day25：leedcode题目：860.柠檬水找零](#day25leedcode题目860柠檬水找零httpsleetcode-cncomproblemslemonade-changesolution)
-  - [Day26：leedcode题目：200.岛屿数量](#day26leedcode题目200岛屿数量httpsleetcode-cncomproblemsnumber-of-islands)
+  - [Day1：leedcode题目：70.爬楼梯](#day1leedcode题目70爬楼梯)
+  - [Day2：leedcode题目：66.加一](#day2leedcode题目66加一)
+  - [Day3：leedcode题目：1.两数之和](#day3leedcode题目1两数之和)
+  - [Day4：leedcode题目：24.两两交换链表中的节点](#day4leedcode题目24两两交换链表中的节点)
+  - [Day11: leedcode题目：412.Fizz Buzz](#day11-leedcode题目412fizz-buzz)
+  - [Day12: leedcode题目：258.各位相加](#day12-leedcode题目258各位相加)
+  - [Day13: leedcode题目：94.二叉树的中序遍历](#day13-leedcode题目94二叉树的中序遍历)
+  - [Day14：leedcode题目：590.N叉树的后序遍历](#day14leedcode题目590n叉树的后序遍历)
+  - [Day15：leedcode题目：1160.拼写单词](#day15leedcode题目1160拼写单词)
+  - [Day16：剑指offer：05.替换空格](#day16剑指offer05替换空格)
+  - [Day17：剑指offer：06.从尾到头打印链表](#day17剑指offer06从尾到头打印链表)
+  - [Day18：剑指offer： 68.II. 二叉树的最近公共祖先](#day18剑指offer-68ii-二叉树的最近公共祖先)
+  - [Day19：leedcode刷题：1.两数之和](#day19leedcode刷题1两数之和)
+  - [Day20：leedcode题目：77.组合](#day20leedcode题目77组合)
+  - [Day21：leedcode题目：46.全排列](#day21leedcode题目46全排列)
+  - [Day22：leedcode题目：104.二叉树的最大深度](#day22leedcode题目104二叉树的最大深度)
+  - [Day24：leedcode题目：226.翻转二叉树](#day24leedcode题目226翻转二叉树)
+  - [Day25：leedcode题目：860.柠檬水找零](#day25leedcode题目860柠檬水找零)
+  - [Day26：leedcode题目：200.岛屿数量](#day26leedcode题目200岛屿数量)
+  - [Day27：leedcode题目：55.跳跃游戏](#day27leedcode题目55跳跃游戏)
+  - [Day28：leedcode题目：102.二叉树的层序遍历](#day28leedcode题目102二叉树的层序遍历)
 
 # 每日刷题
 
@@ -809,6 +811,57 @@ public class Solution200 {
         dfs(grid, r + 1, c);
         dfs(grid, r, c - 1);
         dfs(grid, r, c + 1);
+    }
+}
+```
+
+## Day27：leedcode题目：[55.跳跃游戏](https://leetcode-cn.com/problems/jump-game/)
+
++ 第一种解法：从后向前的贪心算法
+```java
+public class Solution55 {
+    public boolean canJump(int[] nums) {
+        int n = nums.length - 1;
+        for (int i = n; i >= 0 ; i--){
+            if (nums[i] + i >= n){
+                n = i;
+            }
+        }
+        if (n == 0) return true;
+        return false;
+    }
+}
+```
+
+## Day28：leedcode题目：[102.二叉树的层序遍历](https://leetcode-cn.com/problems/binary-tree-level-order-traversal/submissions/)
+
++ 第一种解法：广度优先遍历
+```java
+public class Solution102 {
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        List<List<Integer>> ans = new ArrayList<>();
+        if (root == null){
+            return ans;
+        }
+
+        Queue<TreeNode> nodes = new LinkedList<>();
+        nodes.add(root);
+        while (!nodes.isEmpty()){
+            int size = nodes.size();
+            List<Integer> result = new ArrayList<>();
+            for (int i = 0; i < size; i++){
+                TreeNode node = nodes.poll();
+                result.add(node.val);
+                if (node.left != null){
+                    nodes.add(node.left);
+                }
+                if (node.right != null){
+                    nodes.add(node.right);
+                }
+            }
+            ans.add(result);
+        }
+        return ans;
     }
 }
 ```

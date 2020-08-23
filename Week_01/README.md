@@ -1,40 +1,36 @@
 学习笔记
-- [1.数据结构&算法](#1dot数据结构算法)
-  - [1.2.数据结构](#1dot2数据结构)
-  - [1.3.算法](#1dot3算法)
-- [2.数组、链表、跳表](#2dot数组链表跳表)
-  - [2.1数组](#2dot1数组)
-    - [2.1.1.数组的操作函数的复杂度](#2dot11数组的操作函数的复杂度)
-    - [2.1.2.数组的代码实现](#2dot12数组的代码实现)
-    - [2.1.3.顺序表的优缺点](#2dot13顺序表的优缺点)
-  - [2.2.链表](#2dot2链表)
-    - [2.2.1.链表操作函数的复杂度](#2dot21链表操作函数的复杂度)
-    - [2.2.2.链表的代码实现](#2dot22链表的代码实现)
-  - [2.3.跳表](#2dot3跳表)
-  - [2.4.参考链接](#2dot4参考链接)
-  - [2.5.实战题目](#2dot5实战题目)
-    - [2.5.1.leedcode题目：11.盛水最多的容器](#2dot51leedcode题目11盛水最多的容器httpsleetcode-cncomproblemscontainer-with-most-water)
-    - [2.5.2.leedcode题目：283.移动零](#2dot52leedcode题目283移动零httpsleetcode-cncomproblemsmove-zeroes)
-    - [2.5.3.leedcode题目：70.爬楼梯](#2dot53leedcode题目70爬楼梯httpsleetcode-cncomproblemsclimbing-stairsutm_sourcelcusutm_mediumip_redirect_q_unsutm_campaigntransfer2china)
-    - [2.5.4.leedcode题目：15.三数之和](#2dot54leedcode题目15三数之和httpsleetcode-cncomproblems3sum)
-    - [2.5.5.leedcode题目：26.删除数组中的重复项](#2dot55leedcode题目26删除数组中的重复项httpsleetcode-cncomproblemsremove-duplicates-from-sorted-array)
-    - [2.5.6.leedcode题目：206. Reverse Linked List](#2dot56leedcode题目206-reverse-linked-listhttpsleetcodecomproblemsreverse-linked-list)
-    - [2.5.7.leedcode题目：24. Swap Nodes in Pairs](#2dot57leedcode题目24-swap-nodes-in-pairshttpsleetcodecomproblemsswap-nodes-in-pairs)
-    - [2.5.8.leedcode题目：141. Linked List Cycle](#2dot58leedcode题目141-linked-list-cyclehttpsleetcodecomproblemslinked-list-cycle)
-    - [2.5.9.leedcode题目：142. Linked List Cycle II](#2dot59leedcode题目142-linked-list-cycle-iihttpsleetcodecomproblemslinked-list-cycle-ii)
-    - [2.5.10.leedcode题目：25. Reverse Nodes in k-Group](#2dot510leedcode题目25-reverse-nodes-in-k-grouphttpsleetcodecomproblemsreverse-nodes-in-k-group)
-- [3.栈、队列、优先队列、双端队列](#3dot栈队列优先队列双端队列)
-  - [3.1.栈(Stack)、队列(queue)、双端队列(Deque)](#3dot1栈stack队列queue双端队列deque)
-  - [3.2.优先队列(Priority Queue)](#3dot2优先队列priority-queue)
-  - [3.3.实战题目](#3dot3实战题目)
-    - [3.3.1.leedcode题目：20.有效的括号](#3dot31leedcode题目20有效的括号httpsleetcode-cncomproblemsvalid-parentheses)
-    - [3.3.2.leedcode题目：155.最小栈](#3dot32leedcode题目155最小栈httpsleetcode-cncomproblemsmin-stack)
-    - [3.3.3.leedcode题目：84.柱状图中最大的矩形](#3dot33leedcode题目84柱状图中最大的矩形httpsleetcode-cncomproblemslargest-rectangle-in-histogram)
-    - [3.3.4.leedcode题目：239.滑动窗口最大值](#3dot34leedcode题目239滑动窗口最大值httpsleetcode-cncomproblemssliding-window-maximum)
-    - [3.3.5.leedcode题目：641.设计循环双端队列](#3dot35leedcode题目641设计循环双端队列httpsleetcode-cncomproblemsdesign-circular-dequeutm_sourcelcusutm_mediumip_redirect_q_unsutm_campaigntransfer2china)
-    - [3.3.6.leedcode题目：42.Trapping Rain Water](#3dot36leedcode题目42trapping-rain-waterhttpsleetcodecomproblemstrapping-rain-water)
-    - [3.3.7.课后作业](#3dot37课后作业)
-    - [3.3.8.课后作业](#3dot38课后作业)
+- [1.数据结构&算法](#1数据结构算法)
+  - [1.2.数据结构](#12数据结构)
+  - [1.3.算法](#13算法)
+- [2.数组、链表、跳表](#2数组链表跳表)
+  - [2.1.数组(Array)、链表(Linked List)、跳表(skip List)](#21数组array链表linked-list跳表skip-list)
+    - [2.1.1.数组（Array）](#211数组array)
+  - [2.1.2.链表(Linked List)](#212链表linked-list)
+  - [2.3.跳表](#23跳表)
+  - [2.4.参考链接](#24参考链接)
+  - [2.5.实战题目](#25实战题目)
+    - [2.5.1.leedcode题目：11.盛水最多的容器](#251leedcode题目11盛水最多的容器)
+    - [2.5.2.leedcode题目：283.移动零](#252leedcode题目283移动零)
+    - [2.5.3.leedcode题目：70.爬楼梯](#253leedcode题目70爬楼梯)
+    - [2.5.4.leedcode题目：15.三数之和](#254leedcode题目15三数之和)
+    - [2.5.5.leedcode题目：26.删除数组中的重复项](#255leedcode题目26删除数组中的重复项)
+    - [2.5.6.leedcode题目：206. Reverse Linked List](#256leedcode题目206-reverse-linked-list)
+    - [2.5.7.leedcode题目：24. Swap Nodes in Pairs](#257leedcode题目24-swap-nodes-in-pairs)
+    - [2.5.8.leedcode题目：141. Linked List Cycle](#258leedcode题目141-linked-list-cycle)
+    - [2.5.9.leedcode题目：142. Linked List Cycle II](#259leedcode题目142-linked-list-cycle-ii)
+    - [2.5.10.leedcode题目：25. Reverse Nodes in k-Group](#2510leedcode题目25-reverse-nodes-in-k-group)
+- [3.栈、队列、优先队列、双端队列](#3栈队列优先队列双端队列)
+  - [3.1.栈(Stack)、队列(queue)、双端队列(Deque)](#31栈stack队列queue双端队列deque)
+  - [3.2.优先队列(Priority Queue)](#32优先队列priority-queue)
+  - [3.3.实战题目](#33实战题目)
+    - [3.3.1.leedcode题目：20.有效的括号](#331leedcode题目20有效的括号)
+    - [3.3.2.leedcode题目：155.最小栈](#332leedcode题目155最小栈)
+    - [3.3.3.leedcode题目：84.柱状图中最大的矩形](#333leedcode题目84柱状图中最大的矩形)
+    - [3.3.4.leedcode题目：239.滑动窗口最大值](#334leedcode题目239滑动窗口最大值)
+    - [3.3.5.leedcode题目：641.设计循环双端队列](#335leedcode题目641设计循环双端队列)
+    - [3.3.6.leedcode题目：42.Trapping Rain Water](#336leedcode题目42trapping-rain-water)
+    - [3.3.7.课后作业](#337课后作业)
+    - [3.3.8.课后作业](#338课后作业)
   - [重点学习20个最常用的最基础的数据结构和算法](#重点学习20个最常用的最基础的数据结构和算法)
 - [参考](#参考)
 # 1.数据结构&算法
@@ -60,7 +56,9 @@
 
 # 2.数组、链表、跳表
 
-## 2.1数组
+## 2.1.数组(Array)、链表(Linked List)、跳表(skip List)
+
+### 2.1.1.数组（Array）
 
 **<font color = #FF000>数组</font>**(Array)是一种**线性表**数据结构。使用一组**连续的内存空间**，来存储一组具有**相同类型**的数据。[<sup>1</sup>](#refer-1)
 
@@ -71,7 +69,8 @@
 **连续的内存空间和相同的数据类型：**
 ![avatar](https://img2018.cnblogs.com/blog/1468033/201905/1468033-20190527230650537-1957403462.png)
 
-### 2.1.1.数组的操作函数的复杂度
+**数组的操作函数的复杂度**
+
 | 函数 | 功能描述 | 时间复杂度 |
 |---|---|---|
 | prepend | 在数组前端插入元素 | O(1) |
@@ -82,105 +81,49 @@
 | size | 求元素个数 | |
 | isEmpty | 判空 | |
 
-### 2.1.2.数组的代码实现
-先定义一个线性表抽象数据类型的Java接口[<sup>2</sup>](#refer-2)，如下
+
+**数组的创建**
 ```java
-public interface List {
-    public boolean prepend(Object obj) throws Exception;//在数组前端插入元素，成功后返回true
-    public boolean append(Object obj) throws Exception;//在数组后端插入元素，成功后返回true
-    public Object lookup(int index) throws Exception;//查找，找到后返回这个元素
-    public void insert(int index, Object obj) throws Exception;//在下标为index的位置插入元素
-    public boolean delete(int index) throws Exception;//删除下标为index的元素，成功后返回true
-    public int size();//求元素个数
-    public boolean isEmpty();//是否为空
-}
+ArrayList<Integer> array = new ArrayList<Integer>();
 ```
-数组类设计如下
+**Source for java.util.ArrayList**
+|函数|返回值|作用|
+|--|--|--|
+|add(Object element)|boolean| |
+|add(int index, Object element)|void| |
+|addAll(Collection c)|boolean| |
+|addAll(int index, Collection c)|boolean| |
+|clear()|void||
+|clone()|Object||
+|contains(Object o)|boolean||
+|ensureCapacity(int minCapacity)|void||
+|equals(Object o)|boolean||
+|forEach(Consumer action)|void||
+|get(int index)|Object||
+|hashCode()|int||
+|indexOf(Object o)|int||
+|isEmpty()|boolean||
+|iterator()|Iterator||
+|lastIndexOf(Object o)|int||
+|listIterator()|ListInterator||
+|listIterator(int index)|ListInterator||
+|remove(Object o)|boolean||
+|remove(int index)|Object||
+|removeAll(Collection<?> c|boolean||
+|removeIf(Predicate filter)|boolean||
+|replaceAll(Collection<?> c)|boolean||
+|retainAll(Collection<?> c)|boolean||
+|set(int index, Object element)|Object||
+|size()|int||
+|sort(Comparator c)|Spliterator||
+|spliterator()|Spliterator||
+|subList(int fromIndex,int toIndex)|List||
+|toArray()|Object[]||
+|toArray(Object[] a)|Object[]||
+|trimToSize()|void||
 
-**<font color=#FF0000>遗留：prepend函数没有写</font>**
-```java
-public class SeqList implements List {
+**顺序表的优缺点**
 
-    final  int defaultSize = 10;
-    int maxSize;
-    int size;
-    Object[] listArray;
-
-    //构造函数
-    public SeqList(int len){
-        maxSize = len;
-        listArray = new Object[maxSize];
-        size = 0;
-    }
-    public SeqList(){
-        maxSize = defaultSize;
-        listArray = new Object[defaultSize];
-        size = 0;
-    }
-    //在数组前端插入元素,没有写
-    @Override
-    public boolean prepend(Object obj) throws Exception {
-
-        return false;
-    }
-    //在数组后端添加元素，时间复杂度O(n)
-    @Override
-    public boolean append(Object obj) throws Exception {
-        insert(size,obj);
-        return true;
-    }
-    //查找元素，时间复杂度O(1)
-    @Override
-    public Object lookup(int index) throws Exception {
-        if (index < 0 || index >= size) {
-            throw new Exception("参数错误");
-        }
-        return listArray[index];
-    }
-
-    @Override
-    //在index位置插入元素，时间复杂度为O(n)
-    public void insert(int index, Object obj) throws Exception {
-        if (size == maxSize){
-            throw new Exception("数组已满，无法插入");
-        }
-        if (index < 0 || index > size) {
-            throw new Exception("参数错误");
-        }
-        //此处采用倒序，listArray[size]位置为空的,将index位置后的元素向后移动一个位置，空出index的位置
-        for (int i = size; i > index; i--) {
-            listArray[i] = listArray[i-1];
-        }
-        //将obj元素赋值到index的位置
-        listArray[index] = obj;
-        //赋值后将数组总长加一
-        size++;
-    }
-    //删除index位置的元素，时间复杂度O(n)
-    @Override
-    public boolean delete(int index) throws Exception {
-        if (index < 0 || index >= size) {
-            throw new Exception("参数错误");
-        }
-        for (int i = index; i < size-1; i++) {
-            listArray[i] = listArray[i+1];
-        }
-        size--;
-        return true;
-    }
-    //返回数组长度
-    @Override
-    public int size() {
-        return size;
-    }
-    //是否为空
-    @Override
-    public boolean isEmpty() {
-        return size == 0;
-    }
-}
-```
-### 2.1.3.顺序表的优缺点
 优点
 + 取数据元素操作的时间效率较高(即时间复杂度低)，内存空间利用效率高
 
@@ -188,11 +131,12 @@ public class SeqList implements List {
 + 插入和删除操作时间复杂度高
 
 
-
-## 2.2.链表
+## 2.1.2.链表(Linked List)
 
 **<font color=#FF0000>链表</font>**(Linked List)整体看上去就像一条链子，每一个元素都有两个属性，即**该元素的值item**和**下一个元素next**。
-### 2.2.1.链表操作函数的复杂度
+
+**链表操作函数的复杂度**
+
 | 函数 | 功能描述 | 时间复杂度 |
 |---|---|---|
 | prepend | 在链表前端插入元素 | O(1) |
@@ -208,7 +152,8 @@ public class SeqList implements List {
 | isEmpty | 是否为空 | |
 | toString | 以字符串的形式展示链表内的所有元素||
 
-### 2.2.2.链表的代码实现
+**链表的实现**
+
 要设计单链表类，需要先设计结点类。一个结点类的成员变量有两个，一是结点的数据元素，另一个是表示下一个结点的next。
 
 链表有：单链表、双向链表、循环链表
@@ -228,6 +173,68 @@ public class Node {
 }
 ```
 链表有：单链表、双向链表、循环链表
+
+**链表的创建**
+```java
+LinkedList<Integer> linkedList = new LinkedList<>();
+```
+**Source for java.util.LinkedList**
+
+|函数|返回值|作用|
+|--|--|--|
+|add(Object element)|boolean| |
+|add(int index, Object element)|void| |
+|addAll(Collection c)|boolean| |
+|addAll(int index, Collection c)|boolean| |
+|addFirst(Object e)|void||
+|addLast(Object e|void||
+|clear()|void||
+|clone()|Object||
+|contains(Object o)|boolean||
+|descendingIterator()|Iterator||
+|element()|Object||
+|get(int index)|Object||
+|getFirst()|Object||
+|getLast()|Object||
+|IndexOf(Object o)|int||
+|lastIndexOf(Object o)|int||
+|listIterator(int index)|ListIterator||
+|offer(Object e)|boolean||
+|offerFirst(Object e)|boolean||
+|offerLast(Object e)|boolean||
+|peek()|Object||
+|peekFirst()|Object||
+|peekLast()|Object||
+|poll()|Object||
+|pollFirast()|Object||
+|pollLast()|Object||
+|pop()|Object||
+|push(Object e)|void||
+|remove()|Object||
+|remove(Object o|boolean||
+|remove(int index)|Object||
+|removeFirst()|Object||
+|removeFirstOccurrence(Object o)|Object||
+|removeLast()|Object||
+|removeLastOccurrence(Object o)|Object||
+|equals(Object o)|boolean||
+|hashCode()|int||
+|isEmpty()|boolean||
+|iterator()|Iterator||
+|listIterator()|ListInterator||
+|set(int index, Object element)|Object||
+|size()|int||
+|sort(Comparator c)|Spliterator||
+|spliterator()|Spliterator||
+|toArray()|Object[]||
+|toArray(Object[] a)|Object[]||
+|subList(int fromIndex,int toIndex)|List||
+|toArray(IntFunction generator)|Object[]||
+|toString()|String||
+|forEach(Consumer action)|void||
+
+
+
 
 
 ## 2.3.跳表
