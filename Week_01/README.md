@@ -234,9 +234,6 @@ LinkedList<Integer> linkedList = new LinkedList<>();
 |forEach(Consumer action)|void||
 
 
-
-
-
 ## 2.3.跳表
 
 **注意**：只能用于元素有序的情况
@@ -255,10 +252,145 @@ LinkedList<Integer> linkedList = new LinkedList<>();
 + LRU Cache - Linked list： [LRU 缓存机制](https://leetcode-cn.com/problems/lru-cache/)
 + Redis - Skip List：[跳跃表、为啥 Redis 使用跳表（Skip List）而不是使用 Red-Black？](https://www.zhihu.com/question/20202931)
 
+**leedcode题目：**
+**[146. LRU缓存机制](https://leetcode-cn.com/problems/lru-cache/)**
+
++ 使用java语音中自带的数据结构LinkedHashMap实现
+```java
+/*
+java自带的数据结构 LinkedHashMap,可以完成本题
+ */
+class LRUCache extends LinkedHashMap<Integer, Integer>{
+    private int capacity;
+
+    public LRUCache(int capacity){
+        super(capacity, 0.75F, true);
+        this.capacity = capacity;
+    }
+
+    public int get(int key){
+        return super.getOrDefault(key, -1);
+    }
+
+    public void put(int key, int value){
+        super.put(key, value);
+    }
+
+    protected boolean removeEldesEntry(Map.Entry<Integer, Integer> eldest){
+        return size() > capacity;
+    }
+}
+
+```
++ 使用哈希表和双向链表实现
+
+哈希表用于定位，便于找到缓存项在双向链表中的位置。
+
+(1) 对于get操作，首先判断ke是否存在：
+-- 如果key不存在，则返回-1；
+-- 如果key存在，则key对应的节点是最近被使用的节点。通过哈希表定位到该节点在双向表中的位置，并将其移动到双向表的头部，最后返回该节点的值。
+(2) 对于put操作，首先判断key是否存在：
+-- 如果key不存在，使用key和value创建一个新的节点，在双向链表的头部添加该节点，并将key和该节点添加进哈希表中。然后判断双向链表的节点数是否超出容量，如果超出容量，则删除双向链表的尾部节点，并删除哈希表中对应的项；
+-- 如果key存在，则与get操作类似，先通过哈希表定位，再将对应的节点的值更新为value，并将该节点移到双向链表的头部。
+
+```java
+/*
+使用哈希表和双向链表实现
+ */
+public class LRUCache {
+    //建立一个双向链表类
+    class DLinkedNode{
+        int key;
+        int value;
+        DLinkedNode prev;
+        DLinkedNode next;
+        public DLinkedNode(){}
+        public DLinkedNode(int _key, int _value){
+            key = _key;
+            value = _value;
+
+        }
+    }
+
+    private Map<Integer, DLinkedNode> cache = new HashMap<>();
+    private int size;
+    private int capacity;
+    private DLinkedNode head, tail;
+
+    public LRUCache(int capacity) {
+        this.size = 0;
+        this.capacity = capacity;
+        //使用伪头部和伪尾部节点
+        head = new DLinkedNode();
+        tail = new DLinkedNode();
+        head.next = tail;
+        tail.prev = head;
+    }
+
+    public int get(int key) {
+        DLinkedNode node = cache.get(key);
+        if (node == null){
+            return -1;
+        }
+        //如果key存在，先通过哈希表定位，再移动到头部
+        moveToHead(node);
+        return node.value;
+    }
+
+    public void put(int key, int value) {
+        DLinkedNode node = cache.get(key);
+        if (node == null){
+            //如果key不存在，创建一个新节点
+            DLinkedNode newNode = new DLinkedNode(key,value);
+            //添加进哈希表
+            cache.put(key,newNode);
+            //添加至双向链表的头部
+            addToHead(newNode);
+            size++;
+            if (size > capacity){
+                //如果超出容量，删除双向链表的尾部节点
+                DLinkedNode tail = removeTail();
+                //删除哈希表中对应的项
+                cache.remove(tail.key);
+                size--;
+            }
+        } else {
+            //如果key存在，先通过哈希表定位，在修改value,并移到头部
+            node.value = value;
+            moveToHead(node);
+        }
+    }
+
+    private void addToHead(DLinkedNode node) {
+        node.prev = head;
+        node.next = head.next;
+        head.next.prev = node;
+        head.next = node;
+    }
+    
+    private void removeNode(DLinkedNode node){
+        node.prev.next = node.next;
+        node.next.prev = node.prev;
+    }
+
+    private DLinkedNode removeTail() {
+        DLinkedNode res = tail.prev;
+        removeNode(res);
+        return res;
+    }
+    
+    private void moveToHead(DLinkedNode node) {
+        removeNode(node);
+        addToHead(node);
+    }
+}
+
+```
+
 
 ## 2.5.实战题目
 
-**ARRAY 实战题目**
+**Array 实战题目**
 
 ### 2.5.1.leedcode题目：[11.盛水最多的容器](https://leetcode-cn.com/problems/container-with-most-water/)
 
