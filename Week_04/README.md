@@ -375,6 +375,39 @@ public int binarySearch(int[] array, int target) {
 
 ### 12.2.1.leedcode题目：[69.x 的平方根](https://leetcode-cn.com/problems/sqrtx/)
 
++ 第一种解法：袖珍计算器算法
+```java
+public class Solution69 {
+    //袖珍计算器算法
+    public int mySqrt(int x) {
+        if (x == 0){
+            return 0;
+        }
+        int ans = (int)Math.exp(0.5 * Math.log(x));
+        return (long)(ans + 1) * (ans + 1) <= x ? ans + 1 : ans;
+    }
+}
+```
++ 第二种解法：二分查找
+```java
+public class Solution69 {
+    //二分查找
+    public int mySqrt2(int x){
+        int left = 0, right = x, ans = -1;
+        while (left < right){
+            int mid = left + (right - left) / 2;
+            if ((long)mid * mid <= x){
+                ans = mid;
+                left = mid + 1;
+            }else {
+                right = mid - 1;
+            }
+        }
+        return ans;
+    }
+}
+
+```
 
 ### 12.2.2.leedcode题目：[367.有效的完全平方数](https://leetcode-cn.com/problems/valid-perfect-square/)
 
