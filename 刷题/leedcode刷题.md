@@ -869,5 +869,3 @@ public class Solution102 {
 
 
 ## Day31：leedcode题目：[](https://leetcode-cn.com/problems/walking-robot-simulation/description/)
-
-
