@@ -21,6 +21,8 @@
     - [2.5.10.leedcode题目：25. Reverse Nodes in k-Group](#2510leedcode题目25-reverse-nodes-in-k-group)
 - [3.栈、队列、优先队列、双端队列](#3栈队列优先队列双端队列)
   - [3.1.栈(Stack)、队列(queue)、双端队列(Deque)](#31栈stack队列queue双端队列deque)
+  - [3.2.循环队列（CircularQueue）](#32循环队列circularqueue)
+  - [3.3.循环双端队列（CircularDeque）](#33循环双端队列circulardeque)
   - [3.2.优先队列(Priority Queue)](#32优先队列priority-queue)
   - [3.3.实战题目](#33实战题目)
     - [3.3.1.leedcode题目：20.有效的括号](#331leedcode题目20有效的括号)
@@ -655,6 +657,229 @@ while (deque.size()>0){
 System.out.println(deque);
 ```
 
+## 3.2.循环队列（CircularQueue）
+
+
+leedcode题目：[622.设计循环队列](https://leetcode-cn.com/problems/design-circular-queue/solution/)
+
+**数组实现**
+
+```java
+//数组实现
+class ARRMyCircularQueue {
+    private int[] queue;//一个固定大小的数组，用于保存循环队列的元素
+    private int headIndex;//一个整数，保存对首head的索引
+    private int count; //循环队列的长度，即循环队列中的元素数量，使用headIndex和count可以计算出队尾元素的索引，因此不需要队尾属性,tailIndex = （headIndex + count - 1） mod capacity
+    private int capacity;//循环队列的容量，即队列中最多可以容纳的元素数量。java中可以用queue.length表述
+
+    /** Initialize your data structure here. Set the size of the queue to be k. */
+    public ARRMyCircularQueue(int k) {
+        this.capacity = k;
+        this.queue = new int[k];
+        this.headIndex = 0;
+        this.count = 0;
+    }
+
+    /** Insert an element into the circular queue. Return true if the operation is successful. */
+    public boolean enQueue(int value) {
+        if (this.count == this.capacity) return false;
+        this.queue[(this.headIndex + this.count) % this.capacity] = value;
+        this.count += 1;
+        return true;
+    }
+
+    /** Delete an element from the circular queue. Return true if the operation is successful. */
+    public boolean deQueue() {
+        if (this.count == 0) return false;
+        this.headIndex = (this.headIndex + 1) % this.capacity;
+        this.count -= 1;
+        return true;
+    }
+
+    /** Get the front item from the queue. */
+    public int Front() {
+        if (this.count == 0) return -1;
+        return this.queue[this.headIndex];
+
+    }
+
+    /** Get the last item from the queue. */
+    public int Rear() {
+        if (this.count == 0) return -1;
+        int tailIndex = (this.headIndex + this.count - 1) % this.capacity;
+        return this.queue[tailIndex];
+    }
+
+    /** Checks whether the circular queue is empty or not. */
+    public boolean isEmpty() {
+        return (this.count == 0);
+    }
+
+    /** Checks whether the circular queue is full or not. */
+    public boolean isFull() {
+        return (this.count == this.capacity);
+    }
+}
+```
+
+**单链表实现**
+
+```java
+//单链表实现
+class LINKMyCircularQueue{
+    private Node head, tail;//对首、队尾索引
+    private int count;//当前队列长度
+    private int capacity;//循环队列可容纳的最大元素数量
+
+    /** Initialize your data structure here. Set the size of the queue to be k. */
+    public LINKMyCircularQueue(int k) {
+        this.capacity = k;
+    }
+
+    /** Insert an element into the circular queue. Return true if the operation is successful. */
+    public boolean enQueue(int value) {
+        if (this.count == this.capacity) return false;
+        Node newNode = new Node(value);
+        if (this.count == 0){
+            head = tail = newNode;
+        } else {
+            tail.next = newNode;
+            tail = newNode;
+        }
+        this.count++;
+        return true;
+    }
+
+    /** Delete an element from the circular queue. Return true if the operation is successful. */
+    public boolean deQueue() {
+        if (this.count == 0) return false;
+        this.head = this.head.next;
+        this.count--;
+        return true;
+    }
+
+    /** Get the front item from the queue. */
+    public int Front() {
+        if (this.count == 0) return -1;
+        else
+            return this.head.val;
+    }
+
+    /** Get the last item from the queue. */
+    public int Rear() {
+        if (this.count == 0) return -1;
+        else
+            return this.tail.val;
+    }
+
+    /** Checks whether the circular queue is empty or not. */
+    public boolean isEmpty() {
+        return (this.count == 0);
+    }
+
+    /** Checks whether the circular queue is full or not. */
+    public boolean isFull() {
+        return (this.count == this.capacity);
+    }
+}
+```
+
+## 3.3.循环双端队列（CircularDeque）
+
+leedcode题目：[641.设计循环双端队列](https://leetcode-cn.com/problems/design-circular-deque/)
+
+
+**使用数组实现**
+
+```java
+class MyCircularDeque {
+
+    //1、不用设计成动态数组，使用静态数组即可
+    //2、设计head 和 tail 指针变量
+    //3.head == tail 成立的时候表示队列为空
+    //4、tail + 1 == head
+
+    private int capacity;
+    private int[] arr;
+    private int front;//指向队列头部第一个有效数据位置
+    private int rear;//指向队列尾部（即最后一个有效数据）的下一个位置，即下一个从队尾入队的元素的位置
+
+    /** Initialize your data structure here. Set the size of the deque to be k. */
+    public MyCircularDeque(int k) {
+        capacity = k + 1;
+        arr = new int[capacity];
+
+        //头部指向第一个存放元素的位置
+        //插入时，先减，再赋值
+        //删除时，索引 +1 （注意取模）
+        front = 0;
+        //尾部指向下一个插入元素的位置
+        //插入时，先赋值，再加
+        //删除时，索引-1（注意取模）
+        rear = 0;
+    }
+
+    /** Adds an item at the front of Deque. Return true if the operation is successful. */
+    public boolean insertFront(int value) {
+        if (isFull()) return false;
+        front = (front - 1 + capacity) % capacity;
+        arr[front] = value;
+        return true;
+    }
+
+    /** Adds an item at the rear of Deque. Return true if the operation is successful. */
+    public boolean insertLast(int value) {
+        if (isFull()) return false;
+        arr[rear] = value;
+        rear = (rear + 1) % capacity;
+        return true;
+    }
+
+    /** Deletes an item from the front of Deque. Return true if the operation is successful. */
+    public boolean deleteFront() {
+        if (isEmpty()) return false;
+
+        //front 被设计在数组的开头，所以是+1
+        front = (front + 1) % capacity;
+        return true;
+    }
+
+    /** Deletes an item from the rear of Deque. Return true if the operation is successful. */
+    public boolean deleteLast() {
+        if (isEmpty()) return false;
+
+        //rear被设计数组的末尾，所以是-1
+        rear = (rear - 1 + capacity) % capacity;
+        return true;
+    }
+
+    /** Get the front item from the deque. */
+    public int getFront() {
+        if (isEmpty()) return -1;
+        return arr[front];
+    }
+
+    /** Get the last item from the deque. */
+    public int getRear() {
+        if (isEmpty()) return -1;
+        //当rear为0是防止数组越界
+        return arr[(rear - 1 + capacity) % capacity];
+    }
+
+    /** Checks whether the circular deque is empty or not. */
+    public boolean isEmpty() {
+        return front == rear;
+    }
+
+    /** Checks whether the circular deque is full or not. */
+    public boolean isFull() {
+        //注意，这个设计是非常经典的做法
+        return (rear + 1) % capacity == front;
+    }
+}
+```
+
+
 ## 3.2.优先队列(Priority Queue)
 
 + 1.插入操作：O(1)
@@ -662,6 +887,17 @@ System.out.println(deque);
 + 3.底层具体实现的数据额结构较为多样和复杂：heap、bst，treap
   
 [Java 的 PriorityQueue](https://docs.oracle.com/javase/10/docs/api/java/util/PriorityQueue.html)
+
+**优先队列的实现**
+|方法|含义|
+|--|--|
+|enqueue()|向队列添加元素|
+|dequeue()|删除队列最前端的一个元素，并返回该元素|
+|front()|返回队列前端的元素，但不会移除该元素|
+|isEmpty()|查看队列是否为空|
+|size()|返回队列内元素的个数|
+|toString()|以字符串的形式展示队列内的所有元素|
+
 
 
 ## 3.3.实战题目

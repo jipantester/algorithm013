@@ -1,3 +1,4 @@
+- [- Day31：leedcode题目：](#ulliday31leedcode题目liul)
 - [每日刷题](#每日刷题)
   - [Day1：leedcode题目：70.爬楼梯](#day1leedcode题目70爬楼梯)
   - [Day2：leedcode题目：66.加一](#day2leedcode题目66加一)
@@ -20,7 +21,13 @@
   - [Day26：leedcode题目：200.岛屿数量](#day26leedcode题目200岛屿数量)
   - [Day27：leedcode题目：55.跳跃游戏](#day27leedcode题目55跳跃游戏)
   - [Day28：leedcode题目：102.二叉树的层序遍历](#day28leedcode题目102二叉树的层序遍历)
+  - [Day31：leedcode题目：874.模拟行走机器人](#day31leedcode题目874模拟行走机器人)
+  - [Day32：leedcode题目：53.最大子序和](#day32leedcode题目53最大子序和)
+<<<<<<< HEAD
   - [Day31：leedcode题目：](#day31leedcode题目)
+=======
+  - [Day31：leedcode题目：874.模拟行走机器人](#day31leedcode题目874模拟行走机器人)
+>>>>>>> temp
 
 # 每日刷题
 
@@ -867,5 +874,120 @@ public class Solution102 {
 }
 ```
 
+## Day31：leedcode题目：[874.模拟行走机器人](https://leetcode-cn.com/problems/walking-robot-simulation/description/)
 
-## Day31：leedcode题目：[](https://leetcode-cn.com/problems/walking-robot-simulation/description/)
++ 第一种解法：
+```java
+public class Solution874 {
+    public int robotSim2(int[] commands, int[][] obstacles){
+        //定义初始变量
+        int ans = 0;
+        int direction = 0;//0123代表北东南西
+        int x = 0, y = 0;
+
+        //记录每个朝向的变化，比较向北，为Direction[1]-->{0,1},x轴的变化为x+0；y轴的变化为y+1
+        int[][] Direction = {{0,1},{1,0},{0,-1},{-1,0}};
+
+        //创建障碍物Set表
+        HashSet<String> set = new HashSet<>();
+        for (int[] obs : obstacles){
+            set.add(obs[0] + "," + obs[1]);
+        }
+        for (int com : commands){
+            int next_x = 0;
+            int next_y = 0;
+            if (com >= 0) {
+                for (int i = 0; i < com; i++) {
+                    next_x = x + Direction[direction][0];
+                    next_y = y + Direction[direction][1];
+                    //如果遇到障碍物，返回
+                    if (set.contains(next_x + "," + next_y)) break;
+                    x = next_x;
+                    y = next_y;
+                    ans = Math.max(ans, x*x+y*y);
+                }
+            } else {
+                direction = com == -1 ? (direction + 1) % 4 : (direction + 3) % 4;
+            }
+        }
+        return ans;
+    }
+}
+
+```
+
++ 第二种解法：
+
+## Day32：leedcode题目：[53.最大子序和](https://leetcode-cn.com/problems/maximum-subarray/)
+
++ 第一种解法:暴力解法
+```java
+public class Solution32 {
+    //暴力求解,会超出时间限制
+    public int maxSubArray(int[] nums) {
+        int len = nums.length;
+        int res = Integer.MIN_VALUE;
+        for (int i = 0; i < len; i++){
+            for (int j = 0 ; j <= i ; j++){
+                int sum = sumOfSubArray(nums, j , i);
+                res = Math.max(res , sum);
+            }
+        }
+        return res;
+    }
+
+    private int sumOfSubArray(int[] nums, int left, int right) {
+        int res = 0;
+        for (int k = left; k <= right; k++){
+            res += nums[k];
+        }
+        return res;
+    }
+}
+```
+
++ 第二种解法：
+```java
+public class Solution32 {
+    //分治
+    public int maxSubArray2(int[] nums) {
+        return maxSubArrayDivideWithBorder(nums, 0, nums.length-1);
+    }
+
+    private int maxSubArrayDivideWithBorder(int[] nums, int left, int right) {
+        //只有一个元素，也就是递归结束的情况
+        if (left == right) return nums[left];
+
+        //计算中间值
+        int center = (left + right) / 2;
+        int leftMax = maxSubArrayDivideWithBorder(nums, left, center); //计算左侧子序列最大值
+        int rightMax = maxSubArrayDivideWithBorder(nums, center + 1, right); //计算右侧子序列最大值
+
+        //下面计算横跨两个子序列的最大值
+
+        //计算包含左侧子序列最后一个元素的子序列最大值
+        int leftCrossMax = Integer.MIN_VALUE;
+        int leftCrossSum = 0;
+        for (int i = center; i >= left; i--){
+            leftCrossSum += nums[i];
+            leftCrossMax = Math.max(leftCrossSum,leftCrossMax);
+        }
+
+        //计算包含右侧子序列最后一个元素的子序列最大值
+        int rightCrossMax = nums[center + 1];
+        int rightCrossSum = 0;
+        for (int i = center + 1; i <= right; i++) {
+            rightCrossSum += nums[i];
+            rightCrossMax = Math.max(rightCrossSum, rightCrossMax);
+        }
+
+        //计算跨中心的子序列的最大值
+        int crossMax = leftCrossMax + rightCrossMax;
+
+        //比较三者，返回最大值
+        return Math.max(crossMax, Math.max(leftMax, rightMax));
+    }
+}
+```
+
+
