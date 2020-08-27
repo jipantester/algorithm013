@@ -20,6 +20,7 @@
   - [Day26：leedcode题目：200.岛屿数量](#day26leedcode题目200岛屿数量)
   - [Day27：leedcode题目：55.跳跃游戏](#day27leedcode题目55跳跃游戏)
   - [Day28：leedcode题目：102.二叉树的层序遍历](#day28leedcode题目102二叉树的层序遍历)
+  - [Day31：leedcode题目：](#day31leedcode题目)
 
 # 每日刷题
 
@@ -865,3 +866,8 @@ public class Solution102 {
     }
 }
 ```
+
+
+## Day31：leedcode题目：[](https://leetcode-cn.com/problems/walking-robot-simulation/description/)
+
+
