@@ -7,7 +7,7 @@
     - [4.2.3.leedcode题目: 1.两数之和](#423leedcode题目-1两数之和)
 - [5.树、二叉树、二叉搜索树](#5树二叉树二叉搜索树)
   - [5.1.树（Tree）](#51树tree)
-    - [5.1.1.二叉树遍历Pre-order/In-order/Post-order](#511二叉树遍历pre-orderin-orderpost-order)
+    - [5.1.1.二叉树遍历 Pre-order / In-order / Post-order](#511二叉树遍历-pre-order--in-order--post-order)
     - [5.1.2.二叉搜索树(Binary Search Tree)](#512二叉搜索树binary-search-tree)
   - [5.2.实战题目](#52实战题目)
     - [5.2.1.leedccde题目：94.二叉树的中序遍历](#521leedccde题目94二叉树的中序遍历)
@@ -94,7 +94,7 @@ public boolean isAnagram(String s, String t) {
    }
    for (int c:count){
       if (c != 0){
-            return false;
+         return false;
       }
    }
    return true;
@@ -103,8 +103,8 @@ public boolean isAnagram(String s, String t) {
 ```java
 public boolean isAnagram2(String s, String t){
    if (s.length() != t.length()) return false;
-   Map<Character, Integer> map = new HashMap<>();
 
+   Map<Character, Integer> map = new HashMap<>();
    for (int i = 0; i < s.length(); i++){
       int count = map.getOrDefault(s.charAt(i),0)+1;
       map.put(s.charAt(i),count);
@@ -112,18 +112,18 @@ public boolean isAnagram2(String s, String t){
    for (int j = 0; j < t.length(); j++){
       int count = map.getOrDefault(t.charAt(j),0);
       if (count > 0){
-            count--;
+         count--;
       }
       if (count > 0){
-            map.put(t.charAt(j),count);
-      }else {
-            map.remove(t.charAt(j));
+         map.put(t.charAt(j),count);
+      } else {
+         map.remove(t.charAt(j));
       }
    }
    boolean flag = true;
    for (Character c : map.keySet()){
       if (map.get(c) != 0){
-            flag = false;
+         flag = false;
       }
    }
    return flag;
@@ -136,13 +136,14 @@ public boolean isAnagram2(String s, String t){
 ```java
 public List<List<String>> groupAnagrams(String[] strs) {
    if (strs.length == 0) return new ArrayList<>();
+
    Map<String, List> map = new HashMap<>();
    for (String s : strs){
       char[] arr = s.toCharArray();
       Arrays.sort(arr);
       String key = String.valueOf(arr);
       if (!map.containsKey(key)) {
-            map.put(key, new ArrayList());
+         map.put(key, new ArrayList());
       }
       map.get(key).add(s);
    }
@@ -155,20 +156,21 @@ public List<List<String>> groupAnagrams(String[] strs) {
 ```java
 public List<List<String>> groupAnagram2(String[] strs) {
    if (strs.length == 0) return new ArrayList<>();
+
    Map<String, List> map = new HashMap<>();
    int[] count = new int[26];
    for (String s : strs){
       Arrays.fill(count,0);
       for (int i = 0; i < s.length(); i++){
-            count[s.charAt(i)-'a']++;
+         count[s.charAt(i)-'a']++;
       }
       StringBuilder sb = new StringBuilder("");
       for (int i = 0; i < 26; i++){
-            sb.append(count[i]);
+         sb.append(count[i]);
       }
       String key = sb.toString();
       if (!map.containsKey(key)) {
-            map.put(key, new ArrayList());
+         map.put(key, new ArrayList());
       }
       map.get(key).add(s);
    }
@@ -246,7 +248,7 @@ public int[] twoSum3(int[] nums,  int target){
 
 很多工程需要解决二维的问题
 
-### 5.1.1.二叉树遍历Pre-order/In-order/Post-order
+### 5.1.1.二叉树遍历 Pre-order / In-order / Post-order
 
 示例代码
 ```java
@@ -263,6 +265,11 @@ public class TreeNode{
 + 1.前序（Pre-order）：根-左-右
 + 2.中序（In-order）：左-根-右
 + 3.后序（Post-order）：左-右-根
+
+**[二叉树的遍历：使用递归和栈分别实现二叉树的前中后三种遍历](theOrderOfBinaryTree.md)**
+
+**python 模板**
+
 ```python
 def preorder(self,root):
    if root:
@@ -290,20 +297,19 @@ def postorder(self.root):
 + 2.右子树上<font color=#FF8C00>所有节点</font>的值均大于它的根节点的值
 + 3.以此类推：左、右子树也分别为二叉查找树。（这就是**重复性**）
 
-中序遍历：升序排列
+**中序遍历：升序排列**
 
 常见操作：
 + 1、查询
 + 2、插入新节点（创建）
 + 3、删除
   
-  [二叉搜索树demo](https://visualgo.net/zh/bst?slide=1)  
 
-## 5.2.实战题目
+**[二叉搜索树demo](https://visualgo.net/zh/bst?slide=1)**
 
-### 5.2.1.leedccde题目：[94.二叉树的中序遍历](https://leetcode-cn.com/problems/binary-tree-inorder-traversal/)
-+ 第一种解法：递归
-  + [递归的模板](https://shimo.im/docs/EICAr9lRPUIPHxsH/read)
+
+
++ [递归的模板](https://shimo.im/docs/EICAr9lRPUIPHxsH/read)
 ```java
 public void recur(int level, int param) {
    //termintor（终止条件）
@@ -318,7 +324,11 @@ public void recur(int level, int param) {
    //restore current status
 }
 ```
- 
+
+## 5.2.实战题目
+
+### 5.2.1.leedccde题目：[94.二叉树的中序遍历](https://leetcode-cn.com/problems/binary-tree-inorder-traversal/)
++ 第一种解法：递归 
 借助一个辅助函数实现递归
 ```java
 public List<Integer> inorderTraversal(TreeNode root) {
@@ -328,13 +338,9 @@ public List<Integer> inorderTraversal(TreeNode root) {
 }
 private void helper(TreeNode root, List<Integer> ans) {
    if (root != null){
-      if (root.left != null){
-            helper(root.left,ans);
-      }
+      if (root.left != null) helper(root.left,ans);
       ans.add(root.val);
-      if (root.right != null){
-            helper(root.right,ans);
-      }
+      if (root.right != null) helper(root.right,ans);
    }
 }
 ```
@@ -349,8 +355,8 @@ public List<Integer> inorderTraversal2(TreeNode root){
    TreeNode curr = root;
    while (curr != null || !stack.isEmpty()){
       while (curr != null){
-            stack.push(curr);
-            curr = curr.left;
+         stack.push(curr);
+         curr = curr.left;
       }
       curr = stack.pop();
       ans.add(curr.val);
@@ -389,19 +395,13 @@ public void helper(TreeNode root, List<Integer> ans){
 public List<Integer> preorderTraversal_stack(TreeNode root){
    List<Integer> ans = new ArrayList<>();
    Stack<TreeNode> stack = new Stack<>();
-   if (root == null){
-      return ans;
-   }
+   if (root == null) return ans;
    stack.add(root);
    while (!stack.isEmpty()){
       TreeNode node = stack.pop();
       ans.add(node.val);
-      if (node.right != null){
-            stack.add(node.right);
-      }
-      if (node.left != null){
-            stack.add(node.left);
-      }
+      if (node.right != null) stack.add(node.right);
+      if (node.left != null) stack.add(node.left);
    }
    return ans;
 }
@@ -509,14 +509,14 @@ public List<Integer> preoder1(Node root){
 
 Heap: 可以迅速找到一堆数中**最大**或者**最小**的数据结构。
 
-将根节点最大的堆叫做大顶堆或者大根堆，根节点最小的堆叫做小顶堆或小根堆。常见的堆有二叉堆、斐波那契堆等。
+将根节点最大的堆叫做**大顶堆**或者**大根堆**，根节点最小的堆叫做**小顶堆**或**小根堆**。常见的堆有二叉堆、斐波那契堆等。
 
 假设是大顶堆，则常见操作（API）：
 + find-max：O(1)
 + delete-max：O(logn)
 + insert(create): O(logn) or O(1)
 
-不同实现的比较:[Heap的维基百科](https://en.wikipedia.org/wiki/Heap_(data_structure))
+不同实现的比较: [Heap的维基百科](https://en.wikipedia.org/wiki/Heap_(data_structure))
 
 ## 6.2.二叉堆 Binary Heap
 

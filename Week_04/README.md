@@ -411,6 +411,44 @@ public class Solution69 {
 
 ### 12.2.2.leedcode题目：[367.有效的完全平方数](https://leetcode-cn.com/problems/valid-perfect-square/)
 
++ 第一种解法：二分查找
+```java
+public class Solution367 {
+    public boolean isPerfectSquare(int num) {
+        if (num < 2) return true;
+        long left = 2;
+        long right = num / 2;
+        long x,guessSquared;
+        while (left <= right){
+            x = left + (right - left) / 2;
+            guessSquared = x * x;
+            if (guessSquared == num){
+                return true;
+            }
+            if (guessSquared > num){
+                right = x - 1;
+            } else {
+                left = x + 1;
+            }
+        }
+        return false;
+    }
+}
+```
++ 第二种解法：
+```java
+public class Solution367 {
+    //牛顿迭代法
+    public boolean isPerfectSquare2(int num){
+        if (num < 2) return true;
+        long  x = num / 2;
+        while (x * x > num){
+            x = (x + num / x) / 2;
+        }
+        return (x * x == num);
+    }
+}
+```
 
 ### 12.2.3.leedcode题目：[33.搜索旋转排序数组](https://leetcode-cn.com/problems/search-in-rotated-sorted-array/)
 
