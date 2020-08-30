@@ -145,7 +145,7 @@ public class Solution111 {
 
 分治、回溯是特殊的递归，本质上是找重复性和拆解问题
 
-[分治代码模板](https://shimo.im/docs/zvlDqLLMFvcAF79A/read)
+**[分治代码模板](https://shimo.im/docs/zvlDqLLMFvcAF79A/read)**
 ```java
 public int divide_conquer(Problem problem, ){
   if (problem == NULL) {
@@ -183,7 +183,154 @@ public int divide_conquer(Problem problem, ){
 
 ### 9.2.1.leedcode题目：[22.括号生成问题](https://leetcode-cn.com/problems/generate-parentheses/)
 
++ 第一种解法：暴力求解
+```java
+class Solution22 {
+    //暴力法
+    public List<String> generateParenthesis1(int n){
+        List<String> combinations = new ArrayList<>();
+        generateAll(new char[2 * n], 0, combinations);
+        return combinations;
+    }
+    private void generateAll(char[] current, int pos, List<String> result) {
+        if (pos == current.length){
+            if (valid(current)) result.add(new String(current));
+        } else {
+            current[pos] = '(';
+            generateAll(current,pos + 1,result);
+            current[pos] = ')';
+            generateAll(current,pos+1,result);
+        }
+    }
+
+    private boolean valid(char[] current) {
+        int balance = 0;
+        for (char c:current){
+            if (c == '(') balance++;
+            else  balance--;
+            if (balance < 0) return false;
+        }
+        return (balance == 0);
+    }
+}
+```
++ 第二种解法：回溯法
+```java
+class Solution22{
+    //回溯法
+    public List<String> generateParenthesis3(int n){
+        List<String> ans = new ArrayList<>();
+        backtrack(ans , new StringBuilder(), 0 ,0 ,n);
+        return ans;
+    }
+
+    private void backtrack(List<String> ans, StringBuilder curr, int open, int close, int max) {
+        if (curr.length() == max * 2){
+            ans.add(curr.toString());
+            return;
+        }
+        if (open < max){
+            curr.append('(');
+            backtrack(ans,curr,open+1,close,max);
+            curr.deleteCharAt(curr.length() - 1);
+        }
+        if (close < open){
+            curr.append(')');
+            backtrack(ans, curr, open, close+1, max);
+            curr.deleteCharAt(curr.length() - 1);
+        }
+    }
+    //回溯法
+    public List<String> generateParenthesis2(int n) {
+        List<String>  res = new ArrayList<>();
+        StringBuilder s = new StringBuilder("");
+        generate(res, s, 0, 0, n);
+        return res;
+    }
+
+    private void generate(List<String> res, StringBuilder s, int left, int right, int n) {
+        if (s.length() == n*2) {
+            res.add(s.toString());
+            return;
+        }
+
+        if (left < n){
+            s.append("(");
+            generate(res,s,left+1,right,n);
+            s.deleteCharAt(s.length()-1);
+        }
+        if (right < left){
+            s.append(")");
+            generate(res,s,left,right+1,n);
+            s.deleteCharAt(s.length()-1);
+        }
+    }
+
+    //回溯法
+    private List<String> res;
+    public List<String> generateParenthesis(int n) {
+        res = new ArrayList<>();
+        _generate(0, 0, n, "");
+        return res;
+    }
+    private void  _generate(int left, int right, int n, String s) {
+        if (left == n && right == n) {
+            res.add(s);
+            return;
+        }
+        if (left < n)  _generate(left + 1, right, n, s + "(");
+        if (left > right && right < n) _generate(left , right + 1, n, s + ")");
+    }
+}
+```
++ 
+
 ### 9.2.2.leedcode题目：[50.Pow(x,n)](https://leetcode-cn.com/problems/powx-n/)
+
++ 第一种解法：快速幂+递归
+```java
+public class Solution50 {
+    //快速幂+递归
+    public double quickMul(double x, long N){
+        if (N == 0) return 1.0;
+        double y = quickMul(x , N / 2);
+        return N % 2 == 0 ? y * y : y * y * x;
+    }
+
+    public double myPow(double x, int n){
+        long N = n;
+        return N >= 0 ? quickMul(x, N) : 1.0 / quickMul(x, -N);
+    }
+}
+```
+
++ 第二种解法：快速幂+迭代
+```java
+class Solution50{
+   //快速幂+迭代
+    public double quickMul2(double x, long N){
+        double ans = 1.0;
+        //贡献的初始值为x
+        double x_contribute = x;
+        //在对N进行二进制拆分的同时计算答案
+        while (N > 0){
+            if (N % 2 == 1){
+                //如果N二进制表示的最低位为1，那么需要计入贡献
+                ans *= x_contribute;
+            }
+            //将贡献不断平方
+            x_contribute *= x_contribute;
+            //舍弃N二进制表示的最低位，这样我们每次只要判断最低位即可
+            N /= 2;
+        }
+        return ans;
+    }
+    public double myPow2(double x, int n){
+        long N = n;
+        return N >= 0 ? quickMul2(x, N) : 1.0 / quickMul2(x , -N);
+    }
+}
+```
 
 ### 9.2.3.leedcode题目：[78.子集](https://leetcode-cn.com/problems/subsets/)
 

@@ -544,6 +544,7 @@ Heap: 可以迅速找到一堆数中**最大**或者**最小**的数据结构。
 注意：二叉堆是堆（优先队列 priority_queue)的一种常见且简单的实现；但是并不是最优的实现。
 
 [堆的实现代码](https://shimo.im/docs/Lw86vJzOGOMpWZz2/read)
+[使用数组实现二叉堆](BinaryHeap.java)
 
 [HeapSort](https://www.geeksforgeeks.org/heap-sort/)
 
@@ -553,9 +554,29 @@ Heap: 可以迅速找到一堆数中**最大**或者**最小**的数据结构。
 ### 6.2.1.剑指offer：[40.最小的k个数](https://leetcode-cn.com/problems/zui-xiao-de-kge-shu-lcof/)
 
 + 第一种解法：sort；nlogn
+```java
+public class SolutionO40 {
+    //sort 后取前k个数
+   public int[] getLeastNumbers(int[] arr, int k) {
+      int[] ans = new int[k];
+      Arrays.sort(arr);
+      for (int i = 0; i < k; i++){
+         ans[i] = arr[i];
+      }
+      return ans;
+   }
+}
+```
 + 第二种解法：heap：nlogk
+```java
+
+```
 
 + 第三种解法：quick-sort
+```java
+
+
+```
 
 ### 6.2.2.leedcode题目：[239.滑动窗口最大值](https://leetcode-cn.com/problems/sliding-window-maximum/)
 
@@ -599,6 +620,44 @@ Heap: 可以迅速找到一堆数中**最大**或者**最小**的数据结构。
 
 **图的高级算法**
 + [连通图个数](https://leetcode-cn.com/problems/number-of-islands/)
+```java
+public class Solution200 {
+    //深度优先遍历
+    public int numIslands(char[][] grid) {
+        if (grid == null || grid.length == 0){
+            return 0;
+        }
+
+        int nr = grid.length;
+        int nc = grid[0].length;
+        int num_islands = 0;
+        for (int r = 0; r < nr; r++){
+            for (int c = 0; c < nc; c++){
+                if (grid[r][c] == '1'){
+                    ++num_islands;
+                    dfs(grid,r,c);
+                }
+            }
+        }
+        return num_islands;
+    }
+
+    void dfs(char[][] grid, int r, int c){
+        int nr = grid.length;
+        int nc = grid[0].length;
+
+        if (r < 0 || c < 0 || r >= nr || c >=nc || grid[r][c] == '0'){
+            return;
+        }
+
+        grid[r][c] = '0';
+        dfs(grid, r - 1, c);;
+        dfs(grid, r + 1, c);
+        dfs(grid, r, c - 1);
+        dfs(grid, r, c + 1);
+    }
+}
+```
 + [拓扑排序(Topological Sorting)](https://zhuanlan.zhihu.com/p/34871092)
 + [最短路径(Shortest Path Dijkstra)](https://www.bilibili.com/video/av25829980?from=search&seid=13391343514095937158)
 + [最小生成树(Minimum Spanning Tree)](https://www.bilibili.com/video/av84820276?from=search&seid=17476598104352152051)
