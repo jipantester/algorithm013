@@ -23,6 +23,7 @@
   - [Day28：leedcode题目：102.二叉树的层序遍历](#day28leedcode题目102二叉树的层序遍历)
   - [Day31：leedcode题目：874.模拟行走机器人](#day31leedcode题目874模拟行走机器人)
   - [Day32：leedcode题目：53.最大子序和](#day32leedcode题目53最大子序和)
+  - [Day64：leedcode题目：64.最小路径和](#day64leedcode题目64最小路径和)
 <<<<<<< HEAD
   - [Day31：leedcode题目：](#day31leedcode题目)
 =======
@@ -990,4 +991,32 @@ public class Solution32 {
 }
 ```
 
+## Day64：leedcode题目：[64.最小路径和](https://leetcode-cn.com/problems/minimum-path-sum/)
 
++ 第一种解法：动态规划
+
+```java
+public class Solution64 {
+    public int minPathSum(int[][] grid) {
+        if (grid == null || grid.length == 0 || grid[0].length == 0){
+            return 0;
+        }
+        int rows = grid.length;
+        int columns = grid[0].length;
+        int[][] dp = new int[rows][columns];
+        dp[0][0] = grid[0][0];
+        for (int i = 1; i < rows; i++){
+            dp[i][0] = dp[i - 1][0] + grid[i][0];
+        }
+        for (int j = 1; j < columns; j++){
+            dp[0][j] = dp[0][j - 1] + grid[0][j];
+        }
+        for (int i = 1; i < rows; i++){
+            for (int j = 1; j < columns; j++){
+                dp[i][j] = Math.min(dp[i-1][j], dp[i][j-1]) + grid[i][j];
+            }
+        }
+        return dp[rows - 1][columns - 1];
+    }
+}
+```
