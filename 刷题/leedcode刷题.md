@@ -1,4 +1,3 @@
-- [- Day31：leedcode题目：](#ulliday31leedcode题目liul)
 - [每日刷题](#每日刷题)
   - [Day1：leedcode题目：70.爬楼梯](#day1leedcode题目70爬楼梯)
   - [Day2：leedcode题目：66.加一](#day2leedcode题目66加一)
@@ -23,12 +22,8 @@
   - [Day28：leedcode题目：102.二叉树的层序遍历](#day28leedcode题目102二叉树的层序遍历)
   - [Day31：leedcode题目：874.模拟行走机器人](#day31leedcode题目874模拟行走机器人)
   - [Day32：leedcode题目：53.最大子序和](#day32leedcode题目53最大子序和)
-  - [Day64：leedcode题目：64.最小路径和](#day64leedcode题目64最小路径和)
-<<<<<<< HEAD
-  - [Day31：leedcode题目：](#day31leedcode题目)
-=======
-  - [Day31：leedcode题目：874.模拟行走机器人](#day31leedcode题目874模拟行走机器人)
->>>>>>> temp
+  - [Day36：leedcode题目：64.最小路径和](#day36leedcode题目64最小路径和)
+  - [Day37：leedcode题目：322.零钱兑换](#day37leedcode题目322零钱兑换)
 
 # 每日刷题
 
@@ -991,7 +986,7 @@ public class Solution32 {
 }
 ```
 
-## Day64：leedcode题目：[64.最小路径和](https://leetcode-cn.com/problems/minimum-path-sum/)
+## Day36：leedcode题目：[64.最小路径和](https://leetcode-cn.com/problems/minimum-path-sum/)
 
 + 第一种解法：动态规划
 
@@ -1017,6 +1012,31 @@ public class Solution64 {
             }
         }
         return dp[rows - 1][columns - 1];
+    }
+}
+```
+
+## Day37：leedcode题目：[322.零钱兑换](https://leetcode-cn.com/problems/coin-change/)
+
++ 第一种解法：动态规划，自底向上
+```java
+class Solution322{
+    public int coinChange2(int[] coins, int amount) {
+        //自底向上的动态规划
+        if (coins.length == 0) return -1;
+        //memo[n]的值：表示的凑成总金额为n所需的最少硬币个数
+        int[] memo = new int[amount+1];
+        memo[0] = 0;
+        for (int i = 1; i <= amount; i++){
+            int min = Integer.MAX_VALUE;
+            for (int j = 0; j < coins.length; j++){
+                if (i - coins[j] >= 0 && memo[i - coins[j]] < min){
+                    min = memo[i - coins[j]] + 1;
+                }
+            }
+            memo[i] = min;
+        }
+        return memo[amount] == Integer.MAX_VALUE ? -1 : memo[amount];
     }
 }
 ```
