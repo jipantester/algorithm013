@@ -452,6 +452,32 @@ public class Solution367 {
 
 ### 12.2.3.leedcode题目：[33.搜索旋转排序数组](https://leetcode-cn.com/problems/search-in-rotated-sorted-array/)
 
++ 第一种解法
+```java
+class Solution33{
+    public int search2(int[] nums, int target){
+        int low = 0, high = nums.length - 1, mid = 0;
+        while (low <= high){
+            mid = low + (high - low) / 2;
+            if (nums[mid] == target) return mid;
+            if (nums[mid] >= nums[low]){
+                if (target >= nums[low] && target < nums[mid]){
+                    high = mid - 1;
+                } else {
+                    low = mid + 1;
+                }
+            } else {
+                if (target > nums[mid] && target <= nums[high]){
+                    low = mid + 1;
+                } else {
+                    high = mid - 1;
+                }
+            }
+        }
+        return -1;
+    }
+}
+```
 
 ### 12.2.4.leedcode题目：[74.搜索二维矩阵](https://leetcode-cn.com/problems/search-a-2d-matrix/)
 
