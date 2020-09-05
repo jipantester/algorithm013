@@ -99,6 +99,71 @@ public int divide_conquer(Problem problem,){
 ## 13.2.实战题目
 
 ### 13.2.1.leedcode题目：[斐波拉契数列]()
+写一个函数，输入 n ，求斐波那契（Fibonacci）数列的第 n 项。斐波那契数列的定义如下：
+```java
+F(0) = 0,   F(1) = 1
+F(N) = F(N - 1) + F(N - 2), 其中 N > 1.
+```
+斐波那契数列由 0 和 1 开始，之后的斐波那契数就是由之前的两数相加而得出。
+
+答案需要取模 1e9+7（1000000007），如计算初始结果为：1000000008，请返回 1。
+```java
+示例 1：
+输入：n = 2
+输出：1
+
+示例 2：
+输入：n = 5
+输出：5
+```
+**题解**
+**第一种解法：递归**
+显然递归的时间复杂度有些高
+```java
+public int fib(int n){
+    if(n <= 1) return n;
+    return fib(n-1)+fib(n-2);
+}
+```
+**第二种解法：记忆化递归法**
+在递归的基础上，新建一个长度为n的数组，用于在递归是存储<kbd>f(0)</kbd>至<kbd>f(n)</kbd>数字值，重复遇到的某数字则直接从数组取用，避免了重复递归计算
+缺点：记忆化存储需要使用O(N)的额外空间
+```java
+class Solution {
+    public int fib(int n) {
+        int con = 1000000007;
+        if(n <= 1) return n;
+        int[] a = new int[n+1];
+        a[0] = 0;
+        a[1] = 1;
+        for(int i = 2; i < n+1; i++){
+            a[i] = (a[i-1] % con) + (a[i-2] % con); 
+        }
+        return a[n] % con;
+    }
+}
+```
+**第三种解法：动态规划**
+以斐波那契数列性质<kbd>f(n+1)=f(n)+f(n-1)</kbd>为转移方程
+解析：
++ 状态定义：设<kbd>dp</kbd>为一维数组，其中<kbd>dp[i]</kbd>的值代表斐波那契数列第i个数字
++ 转移方程：<kbd>dp[i+1]=dp[i]+dp[i-1]</kbd>，即对应数列定义<kbd>f(n+1)=f(n)+f(n-1)</kbd>
++ 初始状态：<kbd>dp[0]=0</kbd>,<kbd>dp[1]=1</kbd>，即初始化前两个数字；
++ 返回值：<kdb>dp[n]</kbd>，即斐波那契数列的第n个数字。
+复杂度分析：时间复杂度为O(N)，计算<kbd>f(n)</kbd>需要循环n次。空间复杂度为O(1)
+```java
+class Solution{
+    public int fib(int n){
+        int a = 0, b = 1, sum ;
+        for (int i = 0; i < n; i++){
+            sum = (a + b) % 1000000007;
+            a = b;
+            b = sum;
+        }
+        return a;
+    }
+}
+```
 
 
 ### 13.2.2.leedcode题目：[路径计数]()
