@@ -116,7 +116,7 @@ F(N) = F(N - 1) + F(N - 2), 其中 N > 1.
 输入：n = 5
 输出：5
 ```
-**题解**
+**题解**  [题解](SolutionOfFib.java)
 **第一种解法：递归**
 显然递归的时间复杂度有些高
 ```java
@@ -165,18 +165,213 @@ class Solution{
 }
 ```
 
-
 ### 13.2.2.leedcode题目：[路径计数]()
 
-### 13.2.3.leedcode题目：[62.不同路径](https://leetcode-cn.com/problems/unique-paths/)
+![avatar](路径计数.jpg)
 
+**题解**
+**第一种解法：递归**
+
+```java
+int countPaths(boolean[][] grid, int row, int col){
+    if (!validSquare(grid,row,col)) return 0;
+    if (isAtEnd(grid, row, col)) return 1;
+    return countPaths(grid, row+1,col) + countPaths(grid, row, col+1);
+}
+```
+**第二种解法：动态规划**
+状态转移方程（DP方程）
+$$
+opt[i,j] = opt[i+1,j] + opt[i,j+1]
+$$
+完整逻辑：
+```java
+if a[i,j] = '空地':
+    opt[i,j] = opt[i+1,j] + opt[i,j+1]
+else:
+    opt[i,j]=0
+```
+**动态规划关键点**
++ 最优子结构 opt[n] = best_of(opt[n-1],opt[n-2],...)
++ 储存中间状态：opt[i]
++ 递推公式（美其名曰：状态转移方程或者DP方程）
+  + Fib：opt[i] = opt[i-1] + opt[i-2]
+  + 二维路径：opt[i,j] = opt[i+1][j] + opt[i][j+1](且判断a[i,j]是否为空地)
+
+
+### 13.2.3.leedcode题目：[62.不同路径](https://leetcode-cn.com/problems/unique-paths/)
+一个机器人位于一个 m x n 网格的左上角 （起始点在下图中标记为“Start” ）。
+
+机器人每次只能向下或者向右移动一步。机器人试图达到网格的右下角（在下图中标记为“Finish”）。
+
+问总共有多少条不同的路径？
+![avatar](不同路径1.jpg)
+
+例如，上图是一个7 x 3 的网格。有多少可能的路径？
+```java
+示例 1:
+输入: m = 3, n = 2
+输出: 3
+解释:
+从左上角开始，总共有 3 条路径可以到达右下角。
+1. 向右 -> 向右 -> 向下
+2. 向右 -> 向下 -> 向右
+3. 向下 -> 向右 -> 向右
+
+示例 2:
+输入: m = 7, n = 3
+输出: 28
+```
+提示：
+1 <= m, n <= 100
+题目数据保证答案小于等于 2 * 10 ^ 9
+
+**题解**
+**第一种解法：动态规划**
+假设dp[i][j]是达到(i,j)最多的路径
+动态方程为：dp[i][j] = dp[i-1][j] + dp[i][j-1]
+其中，对于第一行dp[0][j]，第一列dp[i][0]，由于都在边界，所以都为1
+时间复杂度O(m*n)
+空间复杂度O(m*n)
+```java
+class Solution62 {
+    //动态规划
+    public int uniquePaths(int m, int n){
+        int[][] dp = new int[m][n];
+        for (int j = 0; j < n; j++) dp[0][j] = 1;
+        for (int i = 0; i < m; i++) dp[i][0] = 1;
+        for (int i = 1; i < m; i++){
+            for (int j = 1; j < n; j++){
+                dp[i][j] = dp[i-1][j] + dp[i][j-1];
+
+            }
+        }
+        return dp[m-1][n-1];
+    }
+}
+```
 
 ### 13.2.4.leedcode题目：[63.不同路径 II](https://leetcode-cn.com/problems/unique-paths-ii/)
+一个机器人位于一个 m x n 网格的左上角 （起始点在下图中标记为“Start” ）。
+机器人每次只能向下或者向右移动一步。机器人试图达到网格的右下角（在下图中标记为“Finish”）。
+现在考虑网格中有障碍物。那么从左上角到右下角将会有多少条不同的路径？
+![avatar](不同路径1.jpg)
+网格中的障碍物和空位置分别用 1 和 0 来表示。
 
+说明：m 和 n 的值均不超过 100。
+```java
+示例 1:
+输入:
+[
+  [0,0,0],
+  [0,1,0],
+  [0,0,0]
+]
+输出: 2
+解释:
+3x3 网格的正中间有一个障碍物。
+从左上角到右下角一共有 2 条不同的路径：
+1. 向右 -> 向右 -> 向下 -> 向下
+2. 向下 -> 向下 -> 向右 -> 向右
+```
+
+**题解** [题解](SolutionOfUniquePathsWithObstacles.java)
+**第一种解法：动态规划**
+用f(i,j)表示从坐标（0，0）到坐标（i，j）的路径总数，u(i,j)表示(i,j)是否可行，u(i,j)=0表示可行，u(i,j)=1表示有障碍物。
+由于机器人只能向右或向下移动一步，所有从坐标(0,0)到(i,j)的路径总和的值取决于从(0,0)到(i-1,j)的路径总数和从(0,0)到(i,j-1)的路径总数，即f(i,j)只能通过f(i-1,j)和f(i,j-1)移动得到。
+当坐标(i,j)本身有障碍物时，任何路径都到不了(i,j)，此时f(i,j)=0。
+当坐标(i,j)没有障碍物时，如果坐标(i-1,j)没有障碍物，那就说明，从(i-1,j)可以走到(i,j)，即(i-1,j)对f(i,j)的贡献为f(i-1,j),同理，若(i,j-1)没有障碍物时，对f(i,j)的贡献为f(i,j-1)。综上，状态转移方程为：
+$$ f(i,j)= \begin{cases} 0, & \text {u(i,j) = 0} \\ f(i-1,j)+f(i,j-1), & \text{u(i,j) != 0} \end{cases} $$
+复杂度分析：时间复杂度O(nm)，空间复杂度O(nm)
+```java
+public class Solution63 {
+    public int uniquePathsWithObstacles(int[][] obstacleGrid) {
+        int m = obstacleGrid[0].length;
+        int n = obstacleGrid.length;
+        int[] f = new int[m];
+        f[0] = obstacleGrid[0][0] == 0 ? 1 : 0;
+        for (int i = 0; i < n; i++){
+            for (int j = 0; j < m; j++){
+                if (obstacleGrid[i][j] == 1){
+                    f[j] = 0;
+                    continue;
+                }
+                if (j - 1 >= 0 && obstacleGrid[i][j-1] == 0){
+                    f[j] += f[j-1];
+                }
+            }
+        }
+        return f[m-1];
+    }
+}
+```
 
 ### 13.2.5.leedcode题目：[1143.最长公共子序列](https://leetcode-cn.com/problems/longest-common-subsequence/)
+给定两个字符串 text1 和 text2，返回这两个字符串的最长公共子序列的长度。
 
+一个字符串的 子序列 是指这样一个新的字符串：它是由原字符串在不改变字符的相对顺序的情况下删除某些字符（也可以不删除任何字符）后组成的新字符串。
+例如，"ace" 是 "abcde" 的子序列，但 "aec" 不是 "abcde" 的子序列。两个字符串的「公共子序列」是这两个字符串所共同拥有的子序列。
 
+若这两个字符串没有公共子序列，则返回 0。
+```java
+示例 1:
+输入：text1 = "abcde", text2 = "ace" 
+输出：3  
+解释：最长公共子序列是 "ace"，它的长度为 3。
+
+示例 2:
+输入：text1 = "abc", text2 = "abc"
+输出：3
+解释：最长公共子序列是 "abc"，它的长度为 3。
+
+示例 3:
+输入：text1 = "abc", text2 = "def"
+输出：0
+解释：两个字符串没有公共子序列，返回 0。
+
+提示:
+1 <= text1.length <= 1000
+1 <= text2.length <= 1000
+输入的字符串只含有小写英文字符。
+```
+**题解**
+**第一种题解：动态规划**
+
+```java
+if S1[-1] != S2[-1] : LCS[s1,s2] = Max(LCS[s1-1,s2],LCS[s1,s2-1])
+LCS[s1,s2] = Max(LCS[s1-1,s2],LCS[s1,s2-1],LCS[s1-1,s2-1])
+if S1[-1] == S2[-1]: LCS[s1,s2] = LCS[s1-1,s2-1]+1
+LCS[s1,s2] = Max(LCS[s1-1,s2], LCS[s1,s2-1], LCS[s1-1,s2-1], LCS[s1-1,s2-1]+1)
+```
+动态转移方程：
+```java
+if s1[-1] != s2[-1] : dp[i][j] = Math.max(dp[i-1][j],dp[i][j-1])
+if s1[-1] == s2[-1] : dp[i][j] = dp[i-1][j-1] + 1
+```
+```java
+public class Solution1143 {
+    public int longestCommonSubsequence(String text1, String text2) {
+        int m = text1.length();
+        int n = text2.length();
+        int[][] dp = new int[m+1][n+1];
+        for (int i = 0; i < m; i++){
+            for (int j = 0; j < n; j++){
+                //获取两个字符串
+                char c1 = text1.charAt(i);
+                char c2 = text2.charAt(j);
+                if (c1 == c2){
+                    //各退一个加1
+                    dp[i+1][j+1] = dp[i][j] + 1;
+                } else {
+                    //text1或text2往前退一格，取两者最大值
+                    dp[i+1][j+1] = Math.max(dp[i+1][j], dp[i][j+1]);
+                }
+            }
+        }
+        return dp[m][n];
+    }
+}
+```
 
 ### 13.2.6.leedcode题目：[70.爬楼梯](https://leetcode-cn.com/problems/climbing-stairs/description/)
 
