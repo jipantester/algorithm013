@@ -375,9 +375,38 @@ public class Solution1143 {
 
 ### 13.2.6.leedcode题目：[70.爬楼梯](https://leetcode-cn.com/problems/climbing-stairs/description/)
 
-
+**思考**
++ 1.可以上1,2,3级台阶怎么做？（easy）
++ 2.相邻两步的步伐不能相同，（medium）
 
 ### 13.2.7.leedcode题目：[120.三角形最小路径和](https://leetcode-cn.com/problems/triangle/description/)
+给定一个三角形，找出自顶向下的最小路径和。每一步只能移动到下一行中相邻的结点上。
+
+相邻的结点 在这里指的是 下标 与 上一层结点下标 相同或者等于 上一层结点下标 + 1 的两个结点。
+
+例如，给定三角形：
+```java
+[
+     [2],
+    [3,4],
+   [6,5,7],
+  [4,1,8,3]
+]
+自顶向下的最小路径和为 11（即，2 + 3 + 5 + 1 = 11）。
+```
+
+说明：
+如果你可以只使用 O(n) 的额外空间（n 为三角形的总行数）来解决这个问题，那么你的算法会很加分。
+
+**题解**
+暴力解法：（自顶向下）brute-force，递归，n层：left or right 2^n
+DP:
++ a、重复性（分治）problem(i,j) = min(subproblem(i+1,j),subproblem(i+1,j+1)) + a(i,j)
++ b、定义状态数组 f[i,j]
++ c、DP方程 f[i,j] = min(f[i+1,j],f[i+1,j+1]) + a[i,j]
+**第一种解法：递归**
+**第二种解法：记忆化搜索**
+**第三种解法：动态规划**
 
 
 **[三角形最小路径和高票回答](https://leetcode.com/problems/triangle/discuss/38735/Python-easy-to-understand-solutions-(top-down-bottom-up))**
