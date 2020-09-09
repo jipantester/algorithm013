@@ -126,7 +126,7 @@ public int fib(int n){
 }
 ```
 **第二种解法：记忆化递归法**
-在递归的基础上，新建一个长度为n的数组，用于在递归是存储<kbd>f(0)</kbd>至<kbd>f(n)</kbd>数字值，重复遇到的某数字则直接从数组取用，避免了重复递归计算
+在递归的基础上，新建一个长度为n的数组，用于在递归是存储$f(0)$至$f(n)$数字值，重复遇到的某数字则直接从数组取用，避免了重复递归计算
 缺点：记忆化存储需要使用O(N)的额外空间
 ```java
 class Solution {
@@ -144,13 +144,13 @@ class Solution {
 }
 ```
 **第三种解法：动态规划**
-以斐波那契数列性质<kbd>f(n+1)=f(n)+f(n-1)</kbd>为转移方程
+以斐波那契数列性质$f(n+1)=f(n)+f(n-1)$为转移方程
 解析：
-+ 状态定义：设<kbd>dp</kbd>为一维数组，其中<kbd>dp[i]</kbd>的值代表斐波那契数列第i个数字
-+ 转移方程：<kbd>dp[i+1]=dp[i]+dp[i-1]</kbd>，即对应数列定义<kbd>f(n+1)=f(n)+f(n-1)</kbd>
-+ 初始状态：<kbd>dp[0]=0</kbd>,<kbd>dp[1]=1</kbd>，即初始化前两个数字；
-+ 返回值：<kdb>dp[n]</kbd>，即斐波那契数列的第n个数字。
-复杂度分析：时间复杂度为O(N)，计算<kbd>f(n)</kbd>需要循环n次。空间复杂度为O(1)
++ 状态定义：设$dp$为一维数组，其中$dp[i]$的值代表斐波那契数列第$i$个数字
++ 转移方程：$dp[i+1]=dp[i]+dp[i-1]$，即对应数列定义$f(n+1)=f(n)+f(n-1)$
++ 初始状态：$dp[0]=0$,$dp[1]=1$，即初始化前两个数字；
++ 返回值：$dp[n]$，即斐波那契数列的第n个数字。
+复杂度分析：时间复杂度为O(N)，计算$f(n)$需要循环n次。空间复杂度为O(1)
 ```java
 class Solution{
     public int fib(int n){
@@ -192,11 +192,11 @@ else:
     opt[i,j]=0
 ```
 **动态规划关键点**
-+ 最优子结构 opt[n] = best_of(opt[n-1],opt[n-2],...)
-+ 储存中间状态：opt[i]
++ 最优子结构 $opt[n] = best(opt[n-1],opt[n-2],...)$
++ 储存中间状态：$opt[i]$
 + 递推公式（美其名曰：状态转移方程或者DP方程）
-  + Fib：opt[i] = opt[i-1] + opt[i-2]
-  + 二维路径：opt[i,j] = opt[i+1][j] + opt[i][j+1](且判断a[i,j]是否为空地)
+  + Fib：$opt[i] = opt[i-1] + opt[i-2]$
+  + 二维路径：$opt[i,j] = opt[i+1][j] + opt[i][j+1]$(且判断$a[i,j]$是否为空地)
 
 
 ### 13.2.3.leedcode题目：[62.不同路径](https://leetcode-cn.com/problems/unique-paths/)
@@ -221,18 +221,19 @@ else:
 示例 2:
 输入: m = 7, n = 3
 输出: 28
-```
+
 提示：
 1 <= m, n <= 100
 题目数据保证答案小于等于 2 * 10 ^ 9
-
+```
 **题解**
 **第一种解法：动态规划**
-假设dp[i][j]是达到(i,j)最多的路径
-动态方程为：dp[i][j] = dp[i-1][j] + dp[i][j-1]
-其中，对于第一行dp[0][j]，第一列dp[i][0]，由于都在边界，所以都为1
-时间复杂度O(m*n)
-空间复杂度O(m*n)
+假设$dp[i][j]$是达到$(i,j)$最多的路径
+动态方程为：$dp[i][j] = dp[i-1][j] + dp[i][j-1]$
+其中，对于第一行$dp[0][j]$，第一列$dp[i][0]%，由于都在边界，所以都为1
+
+时间复杂度$O(m*n)$
+空间复杂度$O(m*n)$
 ```java
 class Solution62 {
     //动态规划
@@ -277,10 +278,10 @@ class Solution62 {
 
 **题解** [题解](SolutionOfUniquePathsWithObstacles.java)
 **第一种解法：动态规划**
-用f(i,j)表示从坐标（0，0）到坐标（i，j）的路径总数，u(i,j)表示(i,j)是否可行，u(i,j)=0表示可行，u(i,j)=1表示有障碍物。
-由于机器人只能向右或向下移动一步，所有从坐标(0,0)到(i,j)的路径总和的值取决于从(0,0)到(i-1,j)的路径总数和从(0,0)到(i,j-1)的路径总数，即f(i,j)只能通过f(i-1,j)和f(i,j-1)移动得到。
-当坐标(i,j)本身有障碍物时，任何路径都到不了(i,j)，此时f(i,j)=0。
-当坐标(i,j)没有障碍物时，如果坐标(i-1,j)没有障碍物，那就说明，从(i-1,j)可以走到(i,j)，即(i-1,j)对f(i,j)的贡献为f(i-1,j),同理，若(i,j-1)没有障碍物时，对f(i,j)的贡献为f(i,j-1)。综上，状态转移方程为：
+用$f(i,j)$表示从坐标$(0,0)$到坐标$(i,j)$的路径总数，$u(i,j)$表示$(i,j)$是否可行，$u(i,j)=0$表示可行，$u(i,j)=1$表示有障碍物。
+由于机器人只能向右或向下移动一步，所有从坐标$(0,0)$到$(i,j)$的路径总和的值取决于从$(0,0)$到$(i-1,j)$的路径总数和从$(0,0)$到$(i,j-1)$的路径总数，即$f(i,j)$只能通过$f(i-1,j)$和$f(i,j-1)$移动得到。
+当坐标$(i,j)$本身有障碍物时，任何路径都到不了$(i,j)$，此时$f(i,j)=0$。
+当坐标$(i,j)$没有障碍物时，如果坐标$(i-1,j)$没有障碍物，那就说明，从$(i-1,j)$可以走到$(i,j)$，即$(i-1,j)$对$f(i,j)$的贡献为$f(i-1,j)$,同理，若$(i,j-1)$没有障碍物时，$对f(i,j)$的贡献为$f(i,j-1)$。综上，状态转移方程为：
 $$ f(i,j)= \begin{cases} 0, & \text {u(i,j) = 0} \\ f(i-1,j)+f(i,j-1), & \text{u(i,j) != 0} \end{cases} $$
 复杂度分析：时间复杂度O(nm)，空间复杂度O(nm)
 ```java
@@ -401,12 +402,104 @@ public class Solution1143 {
 **题解**
 暴力解法：（自顶向下）brute-force，递归，n层：left or right 2^n
 DP:
-+ a、重复性（分治）problem(i,j) = min(subproblem(i+1,j),subproblem(i+1,j+1)) + a(i,j)
-+ b、定义状态数组 f[i,j]
-+ c、DP方程 f[i,j] = min(f[i+1,j],f[i+1,j+1]) + a[i,j]
-**第一种解法：递归**
++ a、重复性（分治）$problem(i,j) = min(subproblem(i+1,j),subproblem(i+1,j+1)) + a(i,j)$
++ b、定义状态数组 $f[i,j]$
++ c、DP方程  $f[i,j] = min(f[i+1,j],f[i+1,j+1]) + a[i,j]$
+**第一种解法：递归（自顶向下）**
+```java
+public class Solution120 {
+    //递归，自顶向下
+    public int minimumTotal(List<List<Integer>> triangle) {
+        return helper(0,0,triangle);
+
+    }
+    private int helper(int i, int j, List<List<Integer>> triangle) {
+        if (i == triangle.size() - 1) return triangle.get(i).get(j);
+        int left = helper(i+1,j,triangle);
+        int right = helper(i+1,j+1,triangle);
+        return Math.min(left,right)+triangle.get(i).get(j);
+    }
+}
+```
 **第二种解法：记忆化搜索**
+在递归的基础上，定义二维数组进行记忆化，时间复杂度O(N^2)，空间复杂度O(N^2)
+```java
+public class Solution120 {
+    //记忆化搜索
+    Integer[][] memo3;
+    public int minmumTotal3(List<List<Integer>> triangle){
+        memo3 = new Integer[triangle.size()][triangle.size()];
+        return helper3(0,0,triangle);
+    }
+
+    private int helper3(int i, int j, List<List<Integer>> triangle) {
+        if (memo3[i][j] != null) return memo3[i][j];
+        if (i == triangle.size() - 1) return 0;
+        return memo3[i][j] = Math.min(helper3(i+1,j,triangle),helper3(i+1,j+1,triangle)) + triangle.get(i).get(j);
+    }
+}
+```
 **第三种解法：动态规划**
+我们用<kbd>f[i][j]</kbd>表示从三角形顶部走到位置$(i，j)$的最小路径和，$(i，j)$指三角形中第i行第j列（均从0开始编号）的位置。
+由于每一步只能移动到下一行“相邻的节点”上，因此要想走到位置（i，j），上一步就只能在位置（i-1，j-1）或者位置（i-1,j）。我们在这两个位置中选择一个路径和较小的来进行转移，状态转移方程：
+$$ f[i][j] = min(f[i-1][j-1],f[i-1][j]) + c[i][j] $$
+其中$c[i][j]$表示位置（i，j）对应的元素值。
+注意第i行有i+1个元素，它们对应的j的范围为[0,i]。当j=0或j=i时，上述转移方程中有一些项时没有意义的，例如当j=0时，f[i-1][j-1]没有意义，因此状态转移方程为：
+$$ f[i][0] = f[i-1][0] + c[i][0] $$
+即在第i行的最左侧时，只能从第i-1行的最左侧移动过来。当j=i时，f[i-1][j]没有意义，因此状态转移方程为：
+$$f[i][i]=f[i-1][i-1]+c[i][i]$$
+即当在第i行的最右侧时，只能从第i-1行的最右侧移动过来。
+综上，$f[i][j]$的状态转移方程为：
+$$ f(i,j)= \begin{cases} f[i-1][0]+c[i][0], & \text {j = 0} \\ f[i-1][i-1]+c[i][i], & \text{j = i} \\ min(f[i-1][j-1],f[i-1][j]+c[i][j], & \text{otherwise}\end{cases} $$
+
+最终答案为：$f[n-1][0]$到$f[n-1][n-1]$中最小值，n是三角形的行数。
+
+```java
+class Solution{
+    public int minimumTotal3(List<List<Integer>> triangle){
+        int n = triangle.size();
+        int[][] f = new int[n][n];
+        f[0][0] = triangle.get(0).get(0);
+        for (int i = 1; i < n;i++){
+            f[i][0] = f[i-1][0]+triangle.get(i).get(0);
+            for (int j = 1; j < i; j++){
+                f[i][j] = Math.min(f[i-1][j-1],f[i-1][j])+triangle.get(i).get(j);
+            }
+            f[i][i] = f[i-1][i-1] + triangle.get(i).get(i);
+        }
+        int minTotal = f[n-1][0];
+        for (int i = 1; i < n; i++){
+            minTotal = Math.min(minTotal,f[n-1][i]);
+        }
+        return minTotal;
+    }
+}
+```
+**空间优化**
+从状态转移方程上看，$f[i][j]$只与$f[i-1][..]$有关，而与$f[i-2][..]$及之前的状态无关，因此不必储存这些无关的状态。
+```java
+class Solution{
+    public int minimumTotal4(List<List<Integer>> triangle){
+        int n = triangle.size();
+        int[] f = new int[n];
+        f[0] = triangle.get(0).get(0);
+        for (int i = 0; i < n ; i++){
+            f[i] = f[i-1] + triangle.get(i).get(i);
+            for (int j = i - 1; j > 0; j--){
+                f[j] = Math.min(f[j-1],f[j]) + triangle.get(i).get(j);
+            }
+            f[0] += triangle.get(i).get(0);
+        }
+        int minTotal = f[0];
+        for (int i = 1; i < n; i++){
+            minTotal = Math.min(minTotal,f[i]);
+        }
+        return minTotal;
+    }
+}
+```
+
+
 
 
 **[三角形最小路径和高票回答](https://leetcode.com/problems/triangle/discuss/38735/Python-easy-to-understand-solutions-(top-down-bottom-up))**
