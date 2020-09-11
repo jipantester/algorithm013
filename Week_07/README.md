@@ -156,6 +156,42 @@ class Trie{
 }
 ```
 
+**并查集**
+适用于组团配对问题（Group or not？）
+
+**基本操作**
++ makeSet(s):建立一个新的并查集，其中包含s个单元素集合
++ unionSet(x,y)：把元素x和元素y所在的集合合并，要求x和y所在的几个不想交，如果相交则不合并。
++ find(x)：找到元素x所在的集合的代表，该操作也可以用于判断两个元素是否位于同一个集合，只要将它们各自的代表比较一下就可以了
+
+```java
+class UnionFind{
+    private int count = 0;
+    private int[] parent;
+    public UnionFind(int n){
+        count = n;
+        parent = new int[n];
+        for(int i = 0; i < n ; i++){
+            parent[i] = i;
+        }
+    }
+
+    public int find(int p){
+        while (p != parent[p]){
+            parent[p] = parent[parent[p]];
+            p = parent[p];
+        }
+        return p;
+    }
+    public void union(int p, int q){
+        int rootP = find(p);
+        int rootQ = find(q);
+        if(rootP == rootQ) return;
+        parent[rootP] = rootQ;
+        count--;
+    }
+}
+```
 
 ### 14.2.3.leedcode题目：[212.单词搜索 II](https://leetcode-cn.com/problems/word-search-ii/)
 
@@ -164,9 +200,136 @@ class Trie{
 分析单词搜索 2 用 Tire 树方式实现的时间复杂度，请同学们提交在学习总结中。
 
 ### 14.2.5.leedcode题目：[547.朋友圈](https://leetcode-cn.com/problems/friend-circles/)
+班上有 N 名学生。其中有些人是朋友，有些则不是。他们的友谊具有是传递性。如果已知 A 是 B 的朋友，B 是 C 的朋友，那么我们可以认为 A 也是 C 的朋友。所谓的朋友圈，是指所有朋友的集合。
+
+给定一个 N * N 的矩阵 M，表示班级中学生之间的朋友关系。如果M[i][j] = 1，表示已知第 i 个和 j 个学生互为朋友关系，否则为不知道。你必须输出所有学生中的已知的朋友圈总数。
+```java
+示例 1：
+输入：
+[[1,1,0],
+ [1,1,0],
+ [0,0,1]]
+输出：2 
+解释：已知学生 0 和学生 1 互为朋友，他们在一个朋友圈。
+第2个学生自己在一个朋友圈。所以返回 2 。
+
+示例 2：
+输入：
+[[1,1,0],
+ [1,1,1],
+ [0,1,1]]
+输出：1
+解释：已知学生 0 和学生 1 互为朋友，学生 1 和学生 2 互为朋友，所以学生 0 和学生 2 也是朋友，所以他们三个在一个朋友圈，返回 1 。
+
+提示：
+1 <= N <= 200
+M[i][i] == 1
+M[i][j] == M[j][i]
+```
+
 
 
 ### 14.2.6.leedcode题目：[200.岛屿数量](https://leetcode-cn.com/problems/number-of-islands/)
+给你一个由 '1'（陆地）和 '0'（水）组成的的二维网格，请你计算网格中岛屿的数量。
+岛屿总是被水包围，并且每座岛屿只能由水平方向或竖直方向上相邻的陆地连接形成。
+此外，你可以假设该网格的四条边均被水包围。
+```java
+示例 1:
+输入:
+[
+['1','1','1','1','0'],
+['1','1','0','1','0'],
+['1','1','0','0','0'],
+['0','0','0','0','0']
+]
+输出: 1
+
+示例 2:
+输入:
+[
+['1','1','0','0','0'],
+['1','1','0','0','0'],
+['0','0','1','0','0'],
+['0','0','0','1','1']
+]
+输出: 3
+解释: 每座岛屿只能由水平和/或竖直方向上相邻的陆地连接而成。
+```
+**题解**
+**并查集**
+```java
+package com.company;
+
+/**
+ * @author jipan
+ * @version 1.0
+ * @date 2020/9/11 21:22
+ */
+
+class UnionFind2 {
+
+    private int[] id; // access to component id(site indexed)
+    private int count; // number of components
+    private int[] size; //每个组的大小
+
+    public UnionFind2(int N) {
+        // Initialize component id array
+        count = N;   //初始组的数目为节点个数
+        id = new int[N];
+        size = new int[N];
+        for (int i = 0; i < N; i++) {
+            id[i] = i;  //初始情况每个节点的组号都是数组的索引
+            size[i] = 1; // 初始情况每个组大小都是1
+        }
+    }
+
+    public int count() {
+        return count;
+    }
+
+    public int find(int p) {
+        while (p != id[p]) {
+            // 将p节点的父节点设置为它的爷爷节点(路径压缩)
+            id[p] = id[id[p]];
+            p = id[p];
+        }
+        return p;
+    }
+
+    public void union(int p, int q) {
+        int pRoot = find(p);
+        int qRoot = find(q);
+        if (pRoot == qRoot) {
+            return;
+        }
+        // 将小树作为大树的子树(合成树更扁平，减少树的深度)
+        if (size[pRoot] < size[qRoot]) {
+            id[pRoot] = qRoot;
+            size[qRoot] += size[pRoot];
+        } else {
+            id[qRoot] = pRoot;
+            size[pRoot] += size[qRoot];
+        }
+        count--;
+
+    }
+
+}
+
+public class Solution547_2 {
+    public int findCircleNum(int[][] M) {
+        UnionFind2 unionFind2 = new UnionFind2(M.length);
+        for (int i = 0; i < M.length; i++){
+            for (int j = 0; j < i ; j++){
+                if (M[i][j] == 1){
+                    unionFind2.union(i,j);
+                }
+            }
+        }
+        return unionFind2.count();
+    }
+}
+```
 
 
 ### 14.2.7.leedcode题目：[130.被围绕的区域](https://leetcode-cn.com/problems/surrounded-regions/)
