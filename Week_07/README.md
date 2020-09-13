@@ -1,4 +1,31 @@
 
+- [14.字典树和并查集](#14字典树和并查集)
+  - [14.1.知识点](#141知识点)
+  - [14.2.实战题目](#142实战题目)
+    - [14.2.1.leedcode题目：102.二叉树的层序遍历](#1421leedcode题目102二叉树的层序遍历)
+    - [14.2.2.leedcode题目：208.实现 Trie (前缀树)](#1422leedcode题目208实现-trie-前缀树)
+    - [14.2.3.leedcode题目：212.单词搜索 II](#1423leedcode题目212单词搜索-ii)
+    - [14.2.4.课后作业](#1424课后作业)
+    - [14.2.5.leedcode题目：547.朋友圈](#1425leedcode题目547朋友圈)
+    - [14.2.6.leedcode题目：200.岛屿数量](#1426leedcode题目200岛屿数量)
+    - [14.2.7.leedcode题目：130.被围绕的区域](#1427leedcode题目130被围绕的区域)
+- [15.高级搜索](#15高级搜索)
+  - [15.1.知识点](#151知识点)
+  - [15.2.实战题目](#152实战题目)
+    - [15.2.1.leedcode题目：70.爬楼梯](#1521leedcode题目70爬楼梯)
+    - [15.2.2.leedcode题目：22.括号生成](#1522leedcode题目22括号生成)
+    - [15.2.3.leedcode题目：51.N 皇后](#1523leedcode题目51n-皇后)
+    - [15.2.4.leedcode题目：36.有效的数独](#1524leedcode题目36有效的数独)
+    - [15.2.5.leedcode题目：127.单词接龙](#1525leedcode题目127单词接龙)
+    - [15.2.6.leedcode题目：433.最小基因变化](#1526leedcode题目433最小基因变化)
+    - [15.2.7.课后作业](#1527课后作业)
+    - [15.2.8.leedcode题目：1091.二进制矩阵中的最短路径](#1528leedcode题目1091二进制矩阵中的最短路径)
+    - [15.2.9.leedcode题目：773.滑动谜题](#1529leedcode题目773滑动谜题)
+    - [15.2.9.leedcode题目：37.解数独](#1529leedcode题目37解数独)
+- [16.红黑树和AVL树](#16红黑树和avl树)
+  - [16.1.知识点](#161知识点)
+
+
 # 14.字典树和并查集
 
 ## 14.1.知识点
@@ -20,6 +47,8 @@
 [Trie树代码模板](https://shimo.im/docs/DP53Y6rOwN8MTCQH/read)
 
 [并查集代码模板](https://shimo.im/docs/VtcxL0kyp04OBHak/read)
+
+[并查集总结](并查集总结.md)
 
 ## 14.2.实战题目
 
@@ -158,6 +187,7 @@ class Trie{
 
 **并查集**
 适用于组团配对问题（Group or not？）
+详细请看 [并查集总结](并查集总结.md) 或 CSDN文章[并查集总结](https://blog.csdn.net/weixin_40403059/article/details/108546622)
 
 **基本操作**
 + makeSet(s):建立一个新的并查集，其中包含s个单元素集合
@@ -227,6 +257,82 @@ M[i][i] == 1
 M[i][j] == M[j][i]
 ```
 
+**题解**
+
+首先，我们获取并查集的节点数n，使用代码int n = M.length;
+
+其次，使用节点数n创建并查集，UnionFind unionFind = new UnionFind(n);
+
+接下来就是重点了，遍历二位数组M，因为朋友关系矩阵是主对角线全为1的对称矩阵，只需遍历不包含对角线的左下角的部分即可。当两个节点是朋友关系，即M[i][j] == 1时，就调用unionFind.union(i,j)，将 i 和 j 连接起来。遍历结束后，具有连通关系的节点已经都连接完毕，最后的连通分量count就是朋友圈数，返回这个数即可。
+```java
+class UnionFind{
+    private int count;
+    private int[] parent;
+    private int[] size;
+
+    public UnionFind(int n){
+        this.count = n;
+        parent = new int[n];
+        size = new int[n];
+        for (int i = 0; i < n; i++){
+            parent[i] = i;
+            size[i] = 1;
+        }
+    }
+
+    private int find(int x){
+        while (parent[x] != x ){
+            x = parent[x];
+        }
+        return x;
+    }
+
+    public void union(int p, int q){
+        int rootP = find(p);
+        int rootQ = find(q);
+        if (rootP == rootQ) return;
+
+        if (size[rootP] > size[rootQ]){
+            parent[rootQ] = rootP;
+            size[rootP] += size[rootQ];
+
+        } else {
+            parent[rootP] = rootQ;
+            size[rootQ] += size[rootP];
+        }
+        count--;
+    }
+
+    public int count(){
+        return count;
+    }
+
+    public boolean connented(int p , int q){
+        int rootP = find(p);
+        int rootQ = find(q);
+        return rootP == rootQ;
+    }
+}
+class Solution{
+    public int findCircleNum(int[][] M) {
+        //获取节点数
+        int n = M.length;
+        //创建节点数为n的并查集
+        UnionFind unionFind = new UnionFind(n);
+
+        //遍历二位数组，M[i][j]
+        for (int i = 0; i < n; i++){
+            for (int j = 0; j < i; j++){
+                if (M[i][j] == 1) {
+                    unionFind.union(i,j);
+                }
+            }
+        }
+        return unionFind.count();
+    }
+}
+```
+
 
 
 ### 14.2.6.leedcode题目：[200.岛屿数量](https://leetcode-cn.com/problems/number-of-islands/)
@@ -256,77 +362,84 @@ M[i][j] == M[j][i]
 解释: 每座岛屿只能由水平和/或竖直方向上相邻的陆地连接而成。
 ```
 **题解**
-**并查集**
+**并查集的解法**
 ```java
-package com.company;
-
-/**
- * @author jipan
- * @version 1.0
- * @date 2020/9/11 21:22
- */
-
-class UnionFind2 {
-
-    private int[] id; // access to component id(site indexed)
-    private int count; // number of components
-    private int[] size; //每个组的大小
-
-    public UnionFind2(int N) {
-        // Initialize component id array
-        count = N;   //初始组的数目为节点个数
-        id = new int[N];
-        size = new int[N];
-        for (int i = 0; i < N; i++) {
-            id[i] = i;  //初始情况每个节点的组号都是数组的索引
-            size[i] = 1; // 初始情况每个组大小都是1
+class UnionFind_2{
+    private int count;
+    private int[] parent;
+    private int[] size;
+    public UnionFind_2(char[][] grid){
+        int m = grid.length;
+        int n = grid[0].length;
+        this.count = 0;
+        parent = new int[m * n];
+        size = new int[m * n];
+        for (int i = 0; i < m; i++){
+            for (int j = 0; j < n; j++) {
+                if (grid[i][j] == '1'){
+                    parent[i * n + j] = i * n + j;
+                    count++;
+                }
+                size[i * n + j] = 1;
+            }
         }
     }
 
-    public int count() {
-        return count;
+    private int find(int p){
+        int x = p;
+        while (parent[x] != x){
+            parent[x] = parent[parent[x]];
+            x = parent[x];
+        }
+        return x;
     }
 
-    public int find(int p) {
-        while (p != id[p]) {
-            // 将p节点的父节点设置为它的爷爷节点(路径压缩)
-            id[p] = id[id[p]];
-            p = id[p];
-        }
-        return p;
-    }
-
-    public void union(int p, int q) {
-        int pRoot = find(p);
-        int qRoot = find(q);
-        if (pRoot == qRoot) {
-            return;
-        }
-        // 将小树作为大树的子树(合成树更扁平，减少树的深度)
-        if (size[pRoot] < size[qRoot]) {
-            id[pRoot] = qRoot;
-            size[qRoot] += size[pRoot];
+    public void union(int p, int q){
+        int rootP = find(p);
+        int rootQ = find(q);
+        if (rootP == rootQ) return;
+        if (size[rootP] > size[rootQ]){
+            parent[rootQ] = rootP;
+            size[rootP] += size[rootQ];
         } else {
-            id[qRoot] = pRoot;
-            size[pRoot] += size[qRoot];
+            parent[rootP] = rootQ;
+            size[rootQ] += size[rootP];
         }
         count--;
-
     }
 
+    public boolean connected(int p,int q){
+        int rootP = find(p);
+        int rootQ = find(q);
+        return rootP == rootQ;
+    }
+
+    public int getCount(){
+        return count;
+    }
 }
 
-public class Solution547_2 {
-    public int findCircleNum(int[][] M) {
-        UnionFind2 unionFind2 = new UnionFind2(M.length);
-        for (int i = 0; i < M.length; i++){
-            for (int j = 0; j < i ; j++){
-                if (M[i][j] == 1){
-                    unionFind2.union(i,j);
+public class Solution {
+    public int numIslands(char[][] grid) {
+        if (grid == null || grid.length == 0){
+            return 0;
+        }
+        int m = grid.length;
+        int n = grid[0].length;
+        //System.out.println(n);
+        UnionFind_2 unionFind_2 = new UnionFind_2(grid);
+        for (int i = 0; i < m; i++){
+            for (int j = 0; j < n; j++){
+                if (grid[i][j] == '1'){
+                    grid[i][j] = '0';
+                    if (i - 1 >= 0 && grid[i-1][j] == '1') unionFind_2.union(i*n+j, (i-1)*n+j);
+                    if (i + 1 < m && grid[i+1][j] == '1') unionFind_2.union(i*n+j, (i+1)*n+j);
+                    if (j - 1 >= 0 && grid[i][j-1] == '1') unionFind_2.union(i*n+j, i*n+(j-1));
+                    if (j + 1 < n && grid[i][j+1] == '1') unionFind_2.union(i*n+j, i*n+(j+1));
                 }
             }
         }
-        return unionFind2.count();
+        return unionFind_2.getCount();
     }
 }
 ```
@@ -337,6 +450,30 @@ public class Solution547_2 {
 # 15.高级搜索
 
 ## 15.1.知识点
+
+**初级搜索**
+
++ 1、朴素搜索
++ 2、优化方式：不重复（fibonacci）、剪枝（生成括号问题）
++ 3、搜索方向
+  + DFS：depth first search 深度优先搜索
+  + BFS：breadth first search 广度优先搜索
+  + 双向搜索、启发式搜索
+
+**剪枝**
+**回溯法**
+回溯法采用试错的思想，它尝试分步的去解决一个问题。在分步解决问题的过程中，当它通过尝试发现现有的分步答案不能得到有效的额正确的解答的时候，它将取消上一步甚至上几步的计算，在通过其他的可能的分步解答再次尝试寻找问题的答案。
+
+回溯法通常用最简单的递归方式来实现，在反复重复上述的步骤后，可能出现两种情况：
++ 找到一个可能存在的正确的答案
++ 在尝试了所有可能的分步方法后，宣告该问题没有答案
+
+最坏的情况下，回溯法会导致一次复杂度为指数时间的计算
+
+回溯法的模板
+```java
+
+```
 
 [DFS代码模板](https://shimo.im/docs/UdY2UUKtliYXmk8t/read)
 [BFS代码模板](https://shimo.im/docs/ZBghMEZWix0Lc2jQ/read)
@@ -357,8 +494,70 @@ public class Solution547_2 {
 
 
 ### 15.2.3.leedcode题目：[51.N 皇后](https://leetcode-cn.com/problems/n-queens/)
+n 皇后问题研究的是如何将 n 个皇后放置在 n×n 的棋盘上，并且使皇后彼此之间不能相互攻击。
+![avatar](N皇后.jpg)
+上图为 8 皇后问题的一种解法。
+
+给定一个整数 n，返回所有不同的 n 皇后问题的解决方案。
+
+每一种解法包含一个明确的 n 皇后问题的棋子放置方案，该方案中 'Q' 和 '.' 分别代表了皇后和空位。
+```java
+示例：
+输入：4
+输出：[
+ [".Q..",  // 解法 1
+  "...Q",
+  "Q...",
+  "..Q."],
+
+ ["..Q.",  // 解法 2
+  "Q...",
+  "...Q",
+  ".Q.."]
+]
+解释: 4 皇后问题存在两个不同的解法。
+
+提示：
+皇后彼此不能相互攻击，也就是说：任何两个皇后都不能处于同一条横行、纵行或斜线上。
+```
+**题解**
+
+```python
+def solveNQueens(self,n):
+    if n < 1: return [];
+    self.restult = []
+    self.cols = set()
+    self.pie = set()
+    self.na = set()
+    self.DFS(n,0,[])
+    return self._generate_result(n)
+
+def DFS(self,n,row,cur_state):
+    # recurasion terminator
+    if row >= n:
+        self.result.append(cur_state)
+        return 
+    
+    for col in range(n):
+        if col in self.cols or row + col in self.pie or row - col in self.na:
+        # go die
+        continue
+    
+    # updata the flags
+    self.cols.add(col)
+    self.pie.add(row + col)
+    self.na.add(roe - col)
+
+    self.DFS(n, row + 1, cur_state + [col])
+
+    self.cols.remove(col)
+    self.pie.remove(row + col)
+    self.na.remove(row - col)
+
+```
 
 ### 15.2.4.leedcode题目：[36.有效的数独](https://leetcode-cn.com/problems/valid-sudoku/description/)
+
 
 
 ### 15.2.5.leedcode题目：[127.单词接龙](https://leetcode-cn.com/problems/word-ladder/)
@@ -383,4 +582,69 @@ public class Solution547_2 {
 
 ## 16.1.知识点
 
+**树 Tree** 
+**二叉树 Binary Tree**
+**二叉树的遍历**
++ 1、前序（Pre-order）：根-左-右
++ 2、中序（In-order）：左-根-右
++ 3、后续（Post-order）：左-右-根
+
+**二叉搜索树 Binary Search Tree**
+
+**保证性能的关键**
++ 1.保证二维维度！—>   左右子树结点平衡（recursively）
++ 2.Balanced
++ 3.https://en.wikipedia.org/wiki/Self-balancing_binary_search_tree
+
 [维基百科：平衡树](https://en.wikipedia.org/wiki/Self-balancing_binary_search_tree)
+
+
+**AVL树**
++ 1、发明者G. M. Adelson 和 Evgenii Landis
++ 2、Balance Factor（平衡因子）
+  + 是它的左子树的高度减去它的右子树的高度（有时相反）
+  + balance factor = {-1，0，1}
+  + 通过旋转操作来进行平衡（四种）
+
+**旋转操作**
++ 左旋
++ 右旋
++ 左右旋
++ 右左旋
+
+子树形态：右右子树 --> 左旋
+子树形态：左左子树 --> 右旋
+子树形态：左右子树 --> 左右旋
+子树形态：右左子树 --> 右左旋
+
+带子树的旋转
+
+**AVL总结**
++ 1、平衡二叉搜索树
++ 2、每个结点存 balance factor = {-1，0，1}
++ 3、四种旋转操作
+
+不足：结点需要存储额外的信息，且调整次数频繁
+
+
+**红黑树(Red-Black Tree)**
+
+红黑树是一种**近似平衡**的二叉搜索树（BinarySearch Tree），它能够确保任何一个结点的左右子树的**高度差小于两倍**。具体来说，红黑树是满足如下条件的二叉搜索树：
++ 每个结点要么是红色，要么是黑色
++ 根结点是黑色
++ 每个叶结点（NIL结点，空结点）是黑色的。
++ 不能有相邻接的两个红色结点
++ 从任一结点到其每个叶子的所有路径都包含相同数目的黑色结点
+
+**关键性质**
+从根到叶子的最长的可能路径不多于最短的可能路径的两倍长。关键性质
+
+**红黑树和AVL对比**
++ AVL trees provide **faster lookups** than Red Black Trees because they are **more strictly balanced**.
++ Red Black Trees provide **faster insertion and removal** operations than AVL trees as fewer rotations are done due to relatively relaxed balancing.
++ AVL trees store balance **factors or heights** with each node, thus requires storage for an integer per node whereas Red Black Tree requires only 1 bit of information per node.
++ Red Black Trees are used in most of the **language libraries likemap,multimap,multisetin C++** whereas AVL trees are used in **databases** where faster retrievals are required.
+
+
+
+
