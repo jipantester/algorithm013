@@ -61,6 +61,75 @@ public void recur(int level , int param){
 + 第四个解法：通项公式 
 
 ### 8.2.2.leedcode题目：[22.括号生成](https://leetcode-cn.com/problems/generate-parentheses/)
+数字 n 代表生成括号的对数，请你设计一个函数，用于能够生成所有可能的并且 有效的 括号组合。
+```java
+示例：
+输入：n = 3
+输出：[
+       "((()))",
+       "(()())",
+       "(())()",
+       "()(())",
+       "()()()"
+     ]
+```
+**题解**
+
+**第一种解法：暴力递归法**
+建立一个2 * n的char数组，生成$2^{2n}$的包含 '(' ，')' 的序列，然后检查每一个是否有效，
+
+考虑到递归的模板：
++ 1、递归终止的条件
++ 2、处理当前层
++ 3、深入到下一层
++ 4、恢复原来状态
+
+暴力递归，生成2*n的char数组，可以设置一个数组长度指针pos，当指针到到达数组长度就终止递归
+```java
+public class Solution22_2 {
+    //暴力递归法
+    public List<String> generateParenthesis(int n) {
+        List<String> result = new ArrayList<>();
+        generateParenthesishelpr(new char[2*n],0,result);
+        return result;
+    }
+
+    private void generateParenthesishelpr(char[] current, int pos, List<String> result) {
+        if (pos == current.length){
+            if (valid(current)) {
+                result.add(new String(current));
+                return;
+            }
+        } else {
+            current[pos] = '(';
+            generateParenthesishelpr(current, pos + 1, result);
+            current[pos] = ')';
+            generateParenthesishelpr(current, pos + 1, result);
+        }
+    }
+
+    private boolean valid(char[] current) {
+        int balance = 0;
+        for (char c : current){
+            if (c == '(') balance++;
+            if (c == ')') balance--;
+            if (balance < 0) return false;
+        }
+        return balance == 0;
+    }
+}
+
+```
+**第二种解法：分治**
+
+```java
+class Solution {
+    public List<String> generateParenthesis(int n) {
+
+    }
+}
+```
+
 
 ### 8.2.3.leedcode题目：[226.翻转二叉树](https://leetcode-cn.com/problems/generate-parentheses/)
 
@@ -148,18 +217,20 @@ public class Solution111 {
 **[分治代码模板](https://shimo.im/docs/zvlDqLLMFvcAF79A/read)**
 ```java
 public int divide_conquer(Problem problem, ){
-  if (problem == NULL) {
+    // 递归终止条件
+    if (problem == NULL) {
     int res = process_last_result();
     return res;
-  }
-
-  subProblems = split_problem(problem);
-
-  res0 = divide_conquer(subProblems[0]);
-  res1 = divide_conquer(subProblems[1]);
-  
-  result = process_result(res0, res1);
-  return result;
+    }
+    //准备数据
+    subProblems = split_problem(problem);
+    //处理子问题
+    res0 = divide_conquer(subProblems[0]);
+    res1 = divide_conquer(subProblems[1]);
+    //处理并生成最终结果
+    result = process_result(res0, res1);
+    return result;
+    //恢复当前级别状态
 }
 ```
 
