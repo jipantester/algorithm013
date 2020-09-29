@@ -26,7 +26,7 @@
     - [20.2.4.leedcode题目：字符串中的第一个唯一字符](#2024leedcode题目字符串中的第一个唯一字符)
     - [20.2.5.leedcode题目：字符串转换整数 (atoi) ](#2025leedcode题目字符串转换整数-atoi-)
     - [20.2.6.leedcode题目：最长公共前缀](#2026leedcode题目最长公共前缀)
-    - [20.2.7.leedcode题目：[反转字符串](https://leetcode-cn.com/problems/reverse-string](#2027leedcode题目反转字符串httpsleetcode-cncomproblemsreverse-string)
+    - [20.2.7.leedcode题目：反转字符串](#2027leedcode题目反转字符串)
     - [20.2.8.leedcode题目：反转字符串 II ](#2028leedcode题目反转字符串-ii-)
     - [20.2.9.leedcode题目：翻转字符串里的单词](#2029leedcode题目翻转字符串里的单词)
     - [20.2.10.leedcode题目：反转字符串中的单词 III ](#20210leedcode题目反转字符串中的单词-iii-)
@@ -155,6 +155,60 @@ $dp[i][k][1] = max(dp[i-1][k][1], dp[i-1][k-1][0] - prices[i])$
 
 ### 20.3.6.leedcode题目：在学习总结中，写出[不同路径 2](https://leetcode-cn.com/problems/unique-paths-ii/) 这道题目的状态转移方程
 
+一个机器人位于一个 m x n 网格的左上角 （起始点在下图中标记为“Start” ）。
+机器人每次只能向下或者向右移动一步。机器人试图达到网格的右下角（在下图中标记为“Finish”）。
+现在考虑网格中有障碍物。那么从左上角到右下角将会有多少条不同的路径？
+![avatar](不同路径1.jpg)
+网格中的障碍物和空位置分别用 1 和 0 来表示。
+
+说明：m 和 n 的值均不超过 100。
+```java
+示例 1:
+输入:
+[
+  [0,0,0],
+  [0,1,0],
+  [0,0,0]
+]
+输出: 2
+解释:
+3x3 网格的正中间有一个障碍物。
+从左上角到右下角一共有 2 条不同的路径：
+1. 向右 -> 向右 -> 向下 -> 向下
+2. 向下 -> 向下 -> 向右 -> 向右
+```
+
+**题解** [题解](SolutionOfUniquePathsWithObstacles.java)
+**第一种解法：动态规划**
+用$f(i,j)$表示从坐标$(0,0)$到坐标$(i,j)$的路径总数，$u(i,j)$表示$(i,j)$是否可行，$u(i,j)=0$表示可行，$u(i,j)=1$表示有障碍物。
+由于机器人只能向右或向下移动一步，所有从坐标$(0,0)$到$(i,j)$的路径总和的值取决于从$(0,0)$到$(i-1,j)$的路径总数和从$(0,0)$到$(i,j-1)$的路径总数，即$f(i,j)$只能通过$f(i-1,j)$和$f(i,j-1)$移动得到。
+当坐标$(i,j)$本身有障碍物时，任何路径都到不了$(i,j)$，此时$f(i,j)=0$。
+当坐标$(i,j)$没有障碍物时，如果坐标$(i-1,j)$没有障碍物，那就说明，从$(i-1,j)$可以走到$(i,j)$，即$(i-1,j)$对$f(i,j)$的贡献为$f(i-1,j)$,同理，若$(i,j-1)$没有障碍物时，$对f(i,j)$的贡献为$f(i,j-1)$。综上，状态转移方程为：
+$$ f(i,j)= \begin{cases} 0, & \text {u(i,j) = 0} \\ f(i-1,j)+f(i,j-1), & \text{u(i,j) != 0} \end{cases} $$
+复杂度分析：时间复杂度O(nm)，空间复杂度O(nm)
+```java
+public class Solution63 {
+    public int uniquePathsWithObstacles(int[][] obstacleGrid) {
+        int m = obstacleGrid[0].length;
+        int n = obstacleGrid.length;
+        int[] f = new int[m];
+        f[0] = obstacleGrid[0][0] == 0 ? 1 : 0;
+        for (int i = 0; i < n; i++){
+            for (int j = 0; j < m; j++){
+                if (obstacleGrid[i][j] == 1){
+                    f[j] = 0;
+                    continue;
+                }
+                if (j - 1 >= 0 && obstacleGrid[i][j-1] == 0){
+                    f[j] += f[j-1];
+                }
+            }
+        }
+        return f[m-1];
+    }
+}
+```
+
 ### 20.3.7.leedcode题目：[使用最小花费爬楼梯](https://leetcode-cn.com/problems/min-cost-climbing-stairs/)
 
 ### 20.3.8.leedcode题目：[编辑距离](https://leetcode-cn.com/problems/edit-distance/)
@@ -231,7 +285,7 @@ x.equalslgnoreCase(y) --> true
 
 ### 20.2.6.leedcode题目：[最长公共前缀](https://leetcode-cn.com/problems/longest-common-prefix/description/)
 
-### 20.2.7.leedcode题目：[反转字符串](https://leetcode-cn.com/problems/reverse-string
+### 20.2.7.leedcode题目：[反转字符串](https://leetcode-cn.com/problems/reverse-string)
 
 ### 20.2.8.leedcode题目：[反转字符串 II ](https://leetcode-cn.com/problems/reverse-string-ii/)
 
