@@ -1,0 +1,169 @@
+import org.apache.tools.ant.filters.ReplaceTokens
+
+plugins {
+    id 'com.jfrog.bintray' version "1.1"
+    id 'net.researchgate.release' version '2.6.0'
+}
+
+apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: 'java-library-distribution'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile(
+        "com.google.code.gson:gson:2.5",
+        "redis.clients:jedis:2.9.0",
+        //"org.apache.commons:commons-pool2:2.2",
+        "org.slf4j:slf4j-api:$slf4jVersion",
+        "org.msgpack:msgpack:0.6.12",
+    )
+    testCompile(
+        "junit:junit:4.11",
+        "org.apache.commons:commons-math:2.2",
+        "com.google.guava:guava:18.0",
+        "org.apache.commons:commons-lang3:3.0",
+        "io.dropwizard.metrics:metrics-core:3.2.3",
+        "org.slf4j:slf4j-simple:$slf4jVersion",
+    )
+}
+
+// NO TOUCHING! REQUIRED BY STORM
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
+group = "com.baqend"
+
+distTar.compression "GZIP"
+
+wrapper {
+    gradleVersion = '5.1.1'
+}
+
+task javadocJar(type: Jar) {
+    classifier = 'javadoc'
+    from javadoc
+}
+
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+task redisBloomFilterLatency(type: JavaExec) {
+    classpath = sourceSets.test.runtimeClasspath
+    main = 'performance.RedisBloomFilterThroughput'
+}
+
+task redisMigrationLatency(type: JavaExec) {
+    classpath = sourceSets.test.runtimeClasspath
+    main = 'performance.BloomFilterMigrationThroughput'
+}
+
+test {
+    dependsOn 'startRedis'
+    finalizedBy 'stopRedis'
+    ignoreFailures = project.hasProperty("test.ignoreFailures")? project["test.ignoreFailures"]: false
+}
+
+artifacts {
+    archives javadocJar, sourcesJar
+}
+
+release {
+    preTagCommitMessage = "[ci skip] pre tag commit:"
+    tagCommitMessage = "creating tag:"
+    newVersionCommitMessage = "[ci skip] new version commit:"
+    buildTasks = ['assemble']
+    git {
+        requireBranch = 'master'
+        pushToRemote = 'origin'
+        pushToCurrentBranch = false
+    }
+}
+
+afterReleaseBuild.dependsOn bintrayUpload
+
+bintray {
+    user = project.properties.get('bintray_user')
+    key = project.properties.get('bintray_api_key')
+
+    configurations = ['archives'] //When uploading configuration files
+    dryRun = false //Whether to run this as dry-run, without deploying
+    publish = true //If version should be auto published after an upload
+    pkg {
+        repo = 'maven'
+        userOrg = 'baqend' //An optional organization name when the repo belongs to one of the user's orgs
+        name = 'Orestes-Bloomfilter'
+        desc = 'Library of different Bloom filters in Java with optional Redis-backing, counting and many hashing options'
+        websiteUrl = 'https://github.com/Baqend/Orestes-Bloomfilter'
+        issueTrackerUrl = 'https://github.com/Baqend/Orestes-Bloomfilter/issues'
+        vcsUrl = 'git@github.com:Baqend/Orestes-Bloomfilter.git'
+        licenses = ['MIT']
+        labels = ['bloomfilter', 'redis', 'memory', 'counting bloomfilter']
+        publicDownloadNumbers = true
+    }
+}
+
+task startRedis() {
+    //redis master port 6385
+    //redis slave ports 6386 6387
+    //redis sentinel ports 16385 16386 16387
+    //redis standalone ports 6379 6380
+
+    doLast {
+        //redis currently does not support a docker setup with docker networks
+        //https://github.com/antirez/redis/issues/2527
+        copy { from 'conf' into "$buildDir/node1" filter(ReplaceTokens, tokens:[redis_port:"6385", sentinel_port:"16385", master_port:"6385"]) fileMode 0777 }
+        copy { from 'conf' into "$buildDir/node2" filter(ReplaceTokens, tokens:[redis_port:"6386", sentinel_port:"16386", master_port:"6385"]) fileMode 0777 }
+        copy { from 'conf' into "$buildDir/node3" filter(ReplaceTokens, tokens:[redis_port:"6387", sentinel_port:"16387", master_port:"6385"]) fileMode 0777 }
+        copy { from 'conf' into "$buildDir/master" filter(ReplaceTokens, tokens:[redis_port:"6379", master_port:"6379"]) fileMode 0777 }
+        copy { from 'conf' into "$buildDir/slave" filter(ReplaceTokens, tokens:[redis_port:"6380", master_port:"6379"]) fileMode 0777 }
+
+        //sh "docker network create bf-cluster"
+        sh "docker run -d -v $buildDir/node1/redis.conf:/redis.conf --name=redis-node1 --net=host redis:$redisVersion redis-server /redis.conf"
+        sh "docker run -d -v $buildDir/node2/slave.conf:/redis.conf --name=redis-node2 --net=host redis:$redisVersion redis-server /redis.conf"
+        sh "docker run -d -v $buildDir/node3/slave.conf:/redis.conf --name=redis-node3 --net=host redis:$redisVersion redis-server /redis.conf"
+
+        sh "docker run -d -v $buildDir/node1/sentinel.conf:/redis.conf --name=redis-sentinel1 --net=host redis:$redisVersion redis-server /redis.conf --sentinel"
+        sh "docker run -d -v $buildDir/node2/sentinel.conf:/redis.conf --name=redis-sentinel2 --net=host redis:$redisVersion redis-server /redis.conf --sentinel"
+        sh "docker run -d -v $buildDir/node3/sentinel.conf:/redis.conf --name=redis-sentinel3 --net=host redis:$redisVersion redis-server /redis.conf --sentinel"
+
+        //sh "docker network create bf-standalone"
+        sh "docker run -d -v $buildDir/master/redis.conf:/redis.conf --name=redis-master --net=host redis:$redisVersion redis-server /redis.conf"
+        sh "docker run -d -v $buildDir/slave/slave.conf:/redis.conf --name=redis-slave --net=host redis:$redisVersion redis-server /redis.conf"
+    }
+}
+
+task stopRedis() {
+    
+    doLast {
+        try {
+            sh "docker rm -f redis-sentinel1 redis-sentinel2 redis-sentinel3 redis-node1 redis-node2 redis-node3 redis-master redis-slave"
+        } catch (ignore) {}
+        try {
+            //sh "docker network rm bf-cluster bf-standalone"
+        } catch (ignore) {}
+    }
+}
+
+def sh(command, workingDir = buildDir, returnOutput = false) {
+    println "> $command"
+
+    def process = new ProcessBuilder(command.split(" "))
+            .directory(file(workingDir))
+            .redirectError(ProcessBuilder.Redirect.INHERIT)
+            .redirectOutput(returnOutput? ProcessBuilder.Redirect.PIPE: ProcessBuilder.Redirect.INHERIT)
+            .start()
+
+    def code = process.waitFor()
+    if (code != 0)
+        throw new GradleScriptException("$command failed with status code " + code, null);
+
+    if (returnOutput)
+        return process.text
+}
+

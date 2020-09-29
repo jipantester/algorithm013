@@ -1,0 +1,14 @@
+/.gradle/
+/.idea/
+/bin/
+/build/
+/out/
+/dist/*SNAPSHOT*
+/doc
+.DS_Store
+/src/main/java/META-INF
+*.iml
+.classpath
+.project
+.settings/
+*.csv
