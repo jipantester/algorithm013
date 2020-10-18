@@ -1,3 +1,38 @@
+### 毕业总结
+
+## 数据结构&算法
+### 数据结构
+一维：
+基础：数组array(string),链表linked list
+高级：栈stack，队列queue，双端队列deque，集合set，映射map（hash or map），etc
+二维：
+基础：树tree，图graph
+高级：二叉搜索树binary search tree（red-black tree，AVL），堆heap，并查集disjoint set，字典树Trie，etc
+特殊：
+位运算 Bitwise，布隆过滤器 BloomFilter
+LRU Cache
+### 算法
+if-else，switch --> branch
+for,while loop --> Iteration
+递归 Recursion（Divide & Conquer,Backtrace)
+搜索 Search:深度优先搜索 Depth first search，广度优先搜索Br eadth first search，A*，etc
+动态规划 Dynamic Programming
+二分查找 Binary Search
+贪心 Greedy
+数学 Math，几何 Geometry
+### 思想
+化繁为简
+人肉递归低效、很累
+找到最近最简方法，将其拆解成可重复解决的问题
+数学归纳法思维 本质：寻找重复性 ---> 计算机指令集
+### 学习要点
+深厚基本功，过遍数
+最大的误区：只做一遍
+五毒神掌
+刻意联系 - 练习缺陷弱点地方、不舒服、枯燥
+反馈 - 看题解、看国际版的高票回答
+
+
 
 ### 期末串讲
 [Big O Cheat Sheet](https://www.bigocheatsheet.com/)
